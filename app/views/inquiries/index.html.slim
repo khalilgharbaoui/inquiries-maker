@@ -1,0 +1,63 @@
+h1 Listing inquiries
+
+table
+  thead
+    tr
+      th Kind
+      th Is moving request
+      th Is cleaning request
+      th Client salutation
+      th Client sex
+      th Client first name
+      th Client last name
+      th Client email
+      th Client mobile
+      th Client street and number
+      th Client postal code
+      th Client city
+      th Client property size
+      th Moving date
+      th Cleaning date
+      th Moving street and number
+      th Moving postal code
+      th Moving city
+      th Authorization token
+      th Status
+      th Flow status
+      th Continue url
+      th
+      th
+      th
+
+  tbody
+    - @inquiries.each do |inquiry|
+      tr
+        td = inquiry.kind
+        td = inquiry.is_moving_request
+        td = inquiry.is_cleaning_request
+        td = inquiry.client_salutation
+        td = inquiry.client_sex
+        td = inquiry.client_first_name
+        td = inquiry.client_last_name
+        td = inquiry.client_email
+        td = inquiry.client_mobile
+        td = inquiry.client_street_and_number
+        td = inquiry.client_postal_code
+        td = inquiry.client_city
+        td = inquiry.client_property_size
+        td = inquiry.moving_date
+        td = inquiry.cleaning_date
+        td = inquiry.moving_street_and_number
+        td = inquiry.moving_postal_code
+        td = inquiry.moving_city
+        td = inquiry.authorization_token
+        td = inquiry.status
+        td = inquiry.flow_status
+        td = inquiry.continue_url
+        td = link_to 'Show', inquiry
+        td = link_to 'Edit', edit_inquiry_path(inquiry)
+        td = link_to 'Destroy', inquiry, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Inquiry', new_inquiry_path

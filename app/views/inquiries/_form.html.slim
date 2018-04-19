@@ -1,0 +1,75 @@
+= form_for @inquiry do |f|
+  - if @inquiry.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@inquiry.errors.count, "error")} prohibited this inquiry from being saved:"
+      ul
+        - @inquiry.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :kind
+    = f.text_field :kind
+  .field
+    = f.label :is_moving_request
+    = f.check_box :is_moving_request
+  .field
+    = f.label :is_cleaning_request
+    = f.check_box :is_cleaning_request
+  .field
+    = f.label :client_salutation
+    = f.text_field :client_salutation
+  .field
+    = f.label :client_sex
+    = f.text_field :client_sex
+  .field
+    = f.label :client_first_name
+    = f.text_field :client_first_name
+  .field
+    = f.label :client_last_name
+    = f.text_field :client_last_name
+  .field
+    = f.label :client_email
+    = f.text_field :client_email
+  .field
+    = f.label :client_mobile
+    = f.text_field :client_mobile
+  .field
+    = f.label :client_street_and_number
+    = f.text_field :client_street_and_number
+  .field
+    = f.label :client_postal_code
+    = f.text_field :client_postal_code
+  .field
+    = f.label :client_city
+    = f.text_field :client_city
+  .field
+    = f.label :client_property_size
+    = f.text_field :client_property_size
+  .field
+    = f.label :moving_date
+    = f.date_select :moving_date
+  .field
+    = f.label :cleaning_date
+    = f.date_select :cleaning_date
+  .field
+    = f.label :moving_street_and_number
+    = f.text_field :moving_street_and_number
+  .field
+    = f.label :moving_postal_code
+    = f.text_field :moving_postal_code
+  .field
+    = f.label :moving_city
+    = f.text_field :moving_city
+  .field
+    = f.label :authorization_token
+    = f.text_field :authorization_token
+  .field
+    = f.label :status
+    = f.text_field :status
+  .field
+    = f.label :flow_status
+    = f.text_field :flow_status
+  .field
+    = f.label :continue_url
+    = f.text_field :continue_url
+  .actions = f.submit
