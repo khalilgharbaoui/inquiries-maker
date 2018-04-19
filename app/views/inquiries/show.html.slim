@@ -1,0 +1,72 @@
+p#notice = notice
+
+p
+  strong Kind:
+  = @inquiry.kind
+p
+  strong Is moving request:
+  = @inquiry.is_moving_request
+p
+  strong Is cleaning request:
+  = @inquiry.is_cleaning_request
+p
+  strong Client salutation:
+  = @inquiry.client_salutation
+p
+  strong Client sex:
+  = @inquiry.client_sex
+p
+  strong Client first name:
+  = @inquiry.client_first_name
+p
+  strong Client last name:
+  = @inquiry.client_last_name
+p
+  strong Client email:
+  = @inquiry.client_email
+p
+  strong Client mobile:
+  = @inquiry.client_mobile
+p
+  strong Client street and number:
+  = @inquiry.client_street_and_number
+p
+  strong Client postal code:
+  = @inquiry.client_postal_code
+p
+  strong Client city:
+  = @inquiry.client_city
+p
+  strong Client property size:
+  = @inquiry.client_property_size
+p
+  strong Moving date:
+  = @inquiry.moving_date
+p
+  strong Cleaning date:
+  = @inquiry.cleaning_date
+p
+  strong Moving street and number:
+  = @inquiry.moving_street_and_number
+p
+  strong Moving postal code:
+  = @inquiry.moving_postal_code
+p
+  strong Moving city:
+  = @inquiry.moving_city
+p
+  strong Authorization token:
+  = @inquiry.authorization_token
+p
+  strong Status:
+  = @inquiry.status
+p
+  strong Flow status:
+  = @inquiry.flow_status
+p
+  strong Continue url:
+  = @inquiry.continue_url
+
+=> link_to 'Edit', edit_inquiry_path(@inquiry)
+'|
+=< link_to 'Back', inquiries_path
