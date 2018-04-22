@@ -1,0 +1,2 @@
+class CleaningInquiry < ApplicationRecord
+end

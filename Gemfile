@@ -44,6 +44,8 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
+  gem 'seed_migration'
+  gem 'seed_dump'
 end
 group :development, :test do
   gem 'factory_bot_rails'

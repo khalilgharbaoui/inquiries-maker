@@ -1,0 +1,2 @@
+class CombinedInquiry < ApplicationRecord
+end

@@ -1,0 +1,51 @@
+h1 Listing combined_inquiries
+
+table
+  thead
+    tr
+      th Partner token
+      th Locale
+      th Client first name
+      th Client last name
+      th Client salutation
+      th Client email
+      th Client mobile
+      th Client street and number
+      th Client postal code
+      th Client property size
+      th Is moving request
+      th Is cleaning request
+      th Moving street and number
+      th Moving postal code
+      th Moving date
+      th Cleaning date
+      th
+      th
+      th
+
+  tbody
+    - @combined_inquiries.each do |combined_inquiry|
+      tr
+        td = combined_inquiry.partner_token
+        td = combined_inquiry.locale
+        td = combined_inquiry.client_first_name
+        td = combined_inquiry.client_last_name
+        td = combined_inquiry.client_salutation
+        td = combined_inquiry.client_email
+        td = combined_inquiry.client_mobile
+        td = combined_inquiry.client_street_and_number
+        td = combined_inquiry.client_postal_code
+        td = combined_inquiry.client_property_size
+        td = combined_inquiry.is_moving_request
+        td = combined_inquiry.is_cleaning_request
+        td = combined_inquiry.moving_street_and_number
+        td = combined_inquiry.moving_postal_code
+        td = combined_inquiry.moving_date
+        td = combined_inquiry.cleaning_date
+        td = link_to 'Show', combined_inquiry
+        td = link_to 'Edit', edit_combined_inquiry_path(combined_inquiry)
+        td = link_to 'Destroy', combined_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Combined inquiry', new_combined_inquiry_path
