@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  root to: "inquiries#index"
-  resources :inquiries
+  resources :combined_inquiries
+  resources :cleaning_inquiries
+  root to: "moving_inquiries#index"
+  resources :moving_inquiries
 end

@@ -1,0 +1,45 @@
+h1 Listing cleaning_inquiries
+
+table
+  thead
+    tr
+      th Partner token
+      th Locale
+      th Client first name
+      th Client last name
+      th Client salutation
+      th Client email
+      th Client mobile
+      th Client street and number
+      th Client postal code
+      th Client property size
+      th Is moving request
+      th Is cleaning request
+      th Cleaning date
+      th
+      th
+      th
+
+  tbody
+    - @cleaning_inquiries.each do |cleaning_inquiry|
+      tr
+        td = cleaning_inquiry.partner_token
+        td = cleaning_inquiry.locale
+        td = cleaning_inquiry.client_first_name
+        td = cleaning_inquiry.client_last_name
+        td = cleaning_inquiry.client_salutation
+        td = cleaning_inquiry.client_email
+        td = cleaning_inquiry.client_mobile
+        td = cleaning_inquiry.client_street_and_number
+        td = cleaning_inquiry.client_postal_code
+        td = cleaning_inquiry.client_property_size
+        td = cleaning_inquiry.is_moving_request
+        td = cleaning_inquiry.is_cleaning_request
+        td = cleaning_inquiry.cleaning_date
+        td = link_to 'Show', cleaning_inquiry
+        td = link_to 'Edit', edit_cleaning_inquiry_path(cleaning_inquiry)
+        td = link_to 'Destroy', cleaning_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Cleaning inquiry', new_cleaning_inquiry_path

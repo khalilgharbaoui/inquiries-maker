@@ -1,0 +1,49 @@
+h1 Listing moving_inquiries
+
+table
+  thead
+    tr
+      th Partner token
+      th Locale
+      th Client first name
+      th Client last name
+      th Client salutation
+      th Client email
+      th Client mobile
+      th Client street and number
+      th Client postal code
+      th Client property size
+      th Is moving request
+      th Is cleaning request
+      th Moving street and number
+      th Moving postal code
+      th Moving date
+      th
+      th
+      th
+
+  tbody
+    - @moving_inquiries.each do |moving_inquiry|
+      tr
+        td = moving_inquiry.partner_token
+        td = moving_inquiry.locale
+        td = moving_inquiry.client_first_name
+        td = moving_inquiry.client_last_name
+        td = moving_inquiry.client_salutation
+        td = moving_inquiry.client_email
+        td = moving_inquiry.client_mobile
+        td = moving_inquiry.client_street_and_number
+        td = moving_inquiry.client_postal_code
+        td = moving_inquiry.client_property_size
+        td = moving_inquiry.is_moving_request
+        td = moving_inquiry.is_cleaning_request
+        td = moving_inquiry.moving_street_and_number
+        td = moving_inquiry.moving_postal_code
+        td = moving_inquiry.moving_date
+        td = link_to 'Show', moving_inquiry
+        td = link_to 'Edit', edit_moving_inquiry_path(moving_inquiry)
+        td = link_to 'Destroy', moving_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Moving inquiry', new_moving_inquiry_path

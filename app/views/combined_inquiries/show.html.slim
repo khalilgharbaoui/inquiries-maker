@@ -1,0 +1,54 @@
+p#notice = notice
+
+p
+  strong Partner token:
+  = @combined_inquiry.partner_token
+p
+  strong Locale:
+  = @combined_inquiry.locale
+p
+  strong Client first name:
+  = @combined_inquiry.client_first_name
+p
+  strong Client last name:
+  = @combined_inquiry.client_last_name
+p
+  strong Client salutation:
+  = @combined_inquiry.client_salutation
+p
+  strong Client email:
+  = @combined_inquiry.client_email
+p
+  strong Client mobile:
+  = @combined_inquiry.client_mobile
+p
+  strong Client street and number:
+  = @combined_inquiry.client_street_and_number
+p
+  strong Client postal code:
+  = @combined_inquiry.client_postal_code
+p
+  strong Client property size:
+  = @combined_inquiry.client_property_size
+p
+  strong Is moving request:
+  = @combined_inquiry.is_moving_request
+p
+  strong Is cleaning request:
+  = @combined_inquiry.is_cleaning_request
+p
+  strong Moving street and number:
+  = @combined_inquiry.moving_street_and_number
+p
+  strong Moving postal code:
+  = @combined_inquiry.moving_postal_code
+p
+  strong Moving date:
+  = @combined_inquiry.moving_date
+p
+  strong Cleaning date:
+  = @combined_inquiry.cleaning_date
+
+=> link_to 'Edit', edit_combined_inquiry_path(@combined_inquiry)
+'|
+=< link_to 'Back', combined_inquiries_path

@@ -1,2 +1,0 @@
-json.extract! inquiry, :id, :kind, :is_moving_request, :is_cleaning_request, :client_salutation, :client_sex, :client_first_name, :client_last_name, :client_email, :client_mobile, :client_street_and_number, :client_postal_code, :client_city, :client_property_size, :moving_date, :cleaning_date, :moving_street_and_number, :moving_postal_code, :moving_city, :authorization_token, :status, :flow_status, :continue_url, :created_at, :updated_at
-json.url inquiry_url(inquiry, format: :json)
