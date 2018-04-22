@@ -123,6 +123,9 @@ RSpec.describe MovingInquiry, type: :model do
   end
 
   context "client_first_name & client_last_name" do
+    it "is valid when filled with strings" do
+      expect(@inquiry.client_first_name.class && @inquiry.client_last_name.class).to equal(String)
+    end
     it "is not valid when empty" do
       inquiry2 = build(:moving_inquiry, client_first_name: "  ", client_last_name: "  ")
       expect(inquiry2).to_not be_valid
@@ -130,6 +133,68 @@ RSpec.describe MovingInquiry, type: :model do
     it "is not valid when nil" do
       inquiry2 = build(:moving_inquiry, client_first_name: nil, client_last_name: nil)
       expect(inquiry2).to_not be_valid
+    end
+  end
+
+  context "client_email" do
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_email: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_email: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "should be a valid formated email adress" do
+       client_email = ValidEmail2::Address.new(@inquiry.client_email)
+      expect(client_email.valid?).to be_truthy
+    end
+    it "should not be a unvalidly formated email adress" do
+       client_email = ValidEmail2::Address.new("😎@😌.com")
+      expect(client_email.valid?).to be_falsy
+    end
+    it "should have a valid mx" do
+      client_email = ValidEmail2::Address.new(@inquiry.client_email)
+      expect(client_email.valid_mx?).to be_truthy
+    end
+    it "should not be subaddressed" do
+      client_email = ValidEmail2::Address.new(@inquiry.client_email)
+      expect(client_email.subaddressed?).to be_falsy
+    end
+    it "should not be disposable" do
+      client_email = ValidEmail2::Address.new(@inquiry.client_email)
+      expect(client_email.disposable?).to be_falsy
+    end
+    it "should really not be disposable" do
+      inquiry2 = build(:moving_inquiry, client_email: "dick@75hosting.com")
+      expect(inquiry2).to_not be_valid
+    end
+    it "can be subadressed" do
+      inquiry2 = build(:moving_inquiry, client_email: "t.r.a.i+n.i.n.g@eduk8.me")
+      expect(inquiry2).to be_valid
+    end
+    it "is of class <ValidEmail2::Address> if passed to it" do
+      client_email = ValidEmail2::Address.new(@inquiry.client_email)
+      expect(client_email.class).to equal(ValidEmail2::Address)
+    end
+    it "should be of class <String> if used trough default ways" do
+      inquiry2_email = build(:moving_inquiry).client_email
+      expect(inquiry2_email.class).to_not equal(ValidEmail2::Address)
+      expect(inquiry2_email.class).to equal(String)
+    end
+  end
+
+  context "client_mobile" do
+    xit "should not be empty" do
+
+    end
+
+    xit "should not be nil" do
+
+    end
+
+    xit "should have the right prefix/format" do
+
     end
   end
   # xit "is not valid without a description"
