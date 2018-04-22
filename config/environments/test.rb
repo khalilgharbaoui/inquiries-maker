@@ -43,4 +43,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+
+  #Faker gem configuration
+  Faker::Config.locale = 'de-CH'
 end

@@ -1,15 +1,16 @@
 FactoryBot.define do
   factory :moving_inquiry do
     partner_token "MyString"
-    locale "de"
-    client_salutation "loo"
-    client_first_name "MyString"
-    client_last_name "MyString"
-    client_email "MyString"
-    client_mobile "MyString"
-    client_street_and_number "MyString"
-    client_postal_code "MyString"
-    client_property_size "MyString"
+    locale { Faker::SwissLocals.locale }
+    client_salutation "Mr"
+    # client_salutation { Faker::salutations.de || Faker::salutations.en || Faker::salutations.fr}
+    client_first_name { Faker::Name.first_name }
+    client_last_name { Faker::Name.first_name }
+    client_email { Faker::Internet.email }
+    client_mobile { Faker::PhoneNumber.phone_number }
+    client_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
+    client_postal_code { Faker::Address.postcode }
+    client_property_size "Size_1"
     is_moving_request false
     is_cleaning_request false
     moving_street_and_number "MyString"
