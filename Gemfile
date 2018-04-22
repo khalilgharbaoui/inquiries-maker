@@ -56,5 +56,6 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rubocop'
+  gem "nyan-cat-formatter"
   gem 'fuubar'
 end
