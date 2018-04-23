@@ -1,4 +1,5 @@
 class MovingInquiry < ApplicationRecord
+
   validates :locale, :is_moving_request, :is_cleaning_request,
             :client_salutation, :client_first_name, :client_last_name, :client_email, exclusion: { in: [nil] }
 
@@ -15,4 +16,6 @@ class MovingInquiry < ApplicationRecord
   validates :is_cleaning_request, inclusion: { in: [true, false] }
   validates :is_cleaning_request, inclusion: { in: [false] }
   validates :client_email, presence: true, 'valid_email_2/email':  { mx: true, disposable: true, disallow_subaddressing: false}
+
+  validates :client_mobile, phone: {possible: true, allow_blank: false, types: [:fixed_or_mobile,:fixed_line, :mobile]}
 end
