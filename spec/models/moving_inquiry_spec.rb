@@ -185,16 +185,33 @@ RSpec.describe MovingInquiry, type: :model do
   end
 
   context "client_mobile" do
-    xit "should not be empty" do
-
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_mobile: "  ")
+      expect(inquiry2).to_not be_valid
     end
-
-    xit "should not be nil" do
-
+    it "is not be valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_mobile: nil)
+      expect(inquiry2).to_not be_valid
     end
-
-    xit "should have the right prefix/format" do
-
+    it "should have the right country code" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.valid_for_country? 'CH').to be_truthy
+    end
+    it "should not have the CN country code" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.invalid_for_country? 'CN').to be_truthy
+    end
+    it "should be a valid phone number" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.valid?).to be_truthy
+    end
+    it "should have the right country_code prefix" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.country_code).to be_in(%w[41])
+    end
+    it "should be a fixed or mobile number" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
     end
   end
   # xit "is not valid without a description"

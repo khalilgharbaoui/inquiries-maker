@@ -9,10 +9,14 @@ FactoryBot.define do
 
     client_first_name { Faker::Name.first_name }
     client_last_name { Faker::Name.last_name }
+
     client_email { Faker::Internet.email }
     client_mobile { Faker::PhoneNumber.phone_number }
+
     client_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
+
     client_postal_code { Faker::Address.postcode }
+
     client_property_size "Size_1"
     moving_street_and_number "MyString"
     moving_postal_code "MyString"
