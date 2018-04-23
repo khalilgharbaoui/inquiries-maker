@@ -12,14 +12,13 @@ FactoryBot.define do
 
     client_email { Faker::Internet.email }
     client_mobile { Faker::PhoneNumber.phone_number }
-
     client_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
 
     client_postal_code { Faker::Address.postcode }
+    client_property_size ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].sample
 
-    client_property_size "Size_1"
-    moving_street_and_number "MyString"
-    moving_postal_code "MyString"
-    moving_date "2018-04-21"
+    moving_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
+    moving_postal_code { Faker::Address.postcode }
+    moving_date Faker::Date.backward(days = 90)
   end
 end

@@ -16,6 +16,7 @@ gem 'mysql2', '~> 0.5.1'
 gem 'slim-rails'
 gem "valid_email2"
 gem "phonelib"
+gem 'validates_zipcode'
 
 group :development do
   gem 'web-console', '>= 3.3.0'

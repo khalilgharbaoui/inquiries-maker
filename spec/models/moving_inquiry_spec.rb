@@ -205,16 +205,88 @@ RSpec.describe MovingInquiry, type: :model do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.valid?).to be_truthy
     end
-    it "should have the right country_code prefix" do
+    it "should have the '41' country_code prefix" do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.country_code).to be_in(%w[41])
     end
     it "should be a fixed or mobile number" do
       phone = Phonelib.parse(@inquiry.client_mobile)
+      p phone.international
       expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
+
     end
   end
-  # xit "is not valid without a description"
-  # xit "is not valid without a start_date"
-  # xit "is not valid without a end_date"
+
+  context "client_postal_code" do
+    it "is valid when filled with strings" do
+      expect(@inquiry.client_postal_code.class).to equal(String)
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_postal_code: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_postal_code: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid with 4 numbers" do
+      inquiry2 = build(:moving_inquiry)
+      expect(inquiry2.client_postal_code.size).to equal(4)
+    end
+    it "is between 1xxx and 9xxx" do
+      expect(@inquiry.client_postal_code.to_i).to be_between(1000, 9999)
+    end
+    it 'it is a valid CH zipcode' do
+     expect(ValidatesZipcode.valid?(@inquiry.client_postal_code, 'CH')).to be_truthy
+   end
+    it 'it shoulde not have an invalid zipcode' do
+     expect(ValidatesZipcode.valid?(@inquiry.client_postal_code, 'CN')).to be_falsy
+   end
+  end
+  context "moving_postal_code" do
+    it "is valid when filled with strings" do
+      expect(@inquiry.moving_postal_code.class).to equal(String)
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, moving_postal_code: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, moving_postal_code: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid with 4 numbers" do
+      inquiry2 = build(:moving_inquiry)
+      expect(inquiry2.moving_postal_code.size).to equal(4)
+    end
+    it "is between 1xxx and 9xxx" do
+      expect(@inquiry.moving_postal_code.to_i).to be_between(1000, 9999)
+    end
+    it 'it is a valid CH zipcode' do
+     expect(ValidatesZipcode.valid?(@inquiry.moving_postal_code, 'CH')).to be_truthy
+   end
+    it 'it shoulde not have an invalid zipcode' do
+     expect(ValidatesZipcode.valid?(@inquiry.moving_postal_code, 'CN')).to be_falsy
+   end
+  end
+
+  context "client_property_size" do
+    it `is within ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"]` do
+      expect(@inquiry.client_property_size).to be_in(%w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8])
+    end
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_property_size: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_property_size: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with strings" do
+      expect(@inquiry.client_property_size.class).to equal(String)
+    end
+    it "is valid when in right size" do
+      expect(@inquiry).to be_valid
+    end
+  end
 end
