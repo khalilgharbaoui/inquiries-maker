@@ -61,11 +61,13 @@ ActiveRecord::Schema.define(version: 2018_04_21_223558) do
     t.string "client_mobile"
     t.string "client_street_and_number"
     t.string "client_postal_code"
+    t.string "client_city"
     t.string "client_property_size"
     t.boolean "is_moving_request", default: true, null: false
     t.boolean "is_cleaning_request", default: false, null: false
     t.string "moving_street_and_number"
     t.string "moving_postal_code"
+    t.string "moving_city"
     t.date "moving_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
