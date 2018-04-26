@@ -15,10 +15,12 @@ FactoryBot.define do
     client_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
 
     client_postal_code { Faker::Address.postcode }
+    client_city { Faker::Address.city }
     client_property_size ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].sample
 
     moving_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
     moving_postal_code { Faker::Address.postcode }
-    moving_date Faker::Date.backward(days = 90)
+    moving_city { Faker::Address.city }
+    moving_date Faker::Date.forward(days = 90)
   end
 end

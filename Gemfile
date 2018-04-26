@@ -61,4 +61,5 @@ group :development, :test do
   gem 'rubocop'
   gem "nyan-cat-formatter"
   gem 'fuubar'
+  gem "binding_of_caller"
 end
