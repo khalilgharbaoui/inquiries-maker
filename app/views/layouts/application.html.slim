@@ -8,6 +8,9 @@ html
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     == csrf_meta_tags
+    / Load Google Maps and call googleMapInitialize when it's done
+    script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?libraries=places&callback=googleMapInitialize&key=AIzaSyCriMly4dUzmacQBKe00_0jt_oeFSHM0vo"]
+
   body
     header
       == render 'layouts/navigation'

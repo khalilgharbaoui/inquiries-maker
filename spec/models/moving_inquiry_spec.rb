@@ -6,7 +6,7 @@ RSpec.describe MovingInquiry, type: :model do
   end
 
   context "request type" do
-    it "should not have is_moving_request set nil" do
+    it "should not have is_moving_request set to nil" do
       expect(@inquiry.is_moving_request).to_not be_nil
     end
     it "should have is_moving_request set to true" do
@@ -211,9 +211,7 @@ RSpec.describe MovingInquiry, type: :model do
     end
     it "should be a fixed or mobile number" do
       phone = Phonelib.parse(@inquiry.client_mobile)
-      p phone.international
       expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
-
     end
   end
 
@@ -242,7 +240,64 @@ RSpec.describe MovingInquiry, type: :model do
     it 'it shoulde not have an invalid zipcode' do
      expect(ValidatesZipcode.valid?(@inquiry.client_postal_code, 'CN')).to be_falsy
    end
+   it 'its error messages should be "Zipcode is invalid" when NOT valid' do
+     # Arrange
+     # stub / mock / build
+     inquiry2 = build(:moving_inquiry, client_postal_code: '33333')
+     # Act
+     # do something with the method under test
+     inquiry2.valid?
+     # Assert
+     # assert…. test.. test.
+     expect(inquiry2.errors.messages[:client_postal_code]).to include 'Zipcode is invalid'
+   end
+   it 'its error messages should be empty when valid' do
+     # Arrange
+     # stub / mock / build
+     inquiry2 = build(:moving_inquiry, client_postal_code: '3000')
+     # Act
+     # do something with the method under test
+     inquiry2.valid?
+     # Assert
+     # assert…. test.. test.
+     expect(inquiry2.errors.messages[:client_postal_code]).to_not include 'Zipcode is invalid'
+     expect(inquiry2.errors.messages[:client_postal_code]).to be_empty
+   end
   end
+  context "client_property_size" do
+    it `is within ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"]` do
+      expect(@inquiry.client_property_size).to be_in(%w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8])
+    end
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_property_size: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_property_size: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with strings" do
+      expect(@inquiry.client_property_size.class).to equal(String)
+    end
+    it "is valid when in right size" do
+      inquiry2 = build(:moving_inquiry, client_property_size: "size_8")
+      expect(inquiry2).to be_valid
+    end
+  end
+  context "client_city" do
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_city: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_city: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with strings" do
+      expect(@inquiry.client_city.class).to equal(String)
+    end
+  end
+
   context "moving_postal_code" do
     it "is valid when filled with strings" do
       expect(@inquiry.moving_postal_code.class).to equal(String)
@@ -268,25 +323,43 @@ RSpec.describe MovingInquiry, type: :model do
     it 'it shoulde not have an invalid zipcode' do
      expect(ValidatesZipcode.valid?(@inquiry.moving_postal_code, 'CN')).to be_falsy
    end
+   it 'its error messages should be "Zipcode is invalid" when NOT valid' do
+     # Arrange
+     # stub / mock / build
+     inquiry2 = build(:moving_inquiry, moving_postal_code: '33333')
+     # Act
+     # do something with the method under test
+     inquiry2.valid?
+     # Assert
+     # assert…. test.. test.
+     expect(inquiry2.errors.messages[:moving_postal_code]).to include 'Zipcode is invalid'
+   end
+   it 'its error messages should be empty when valid' do
+     # Arrange
+     # stub / mock / build
+     inquiry2 = build(:moving_inquiry, moving_postal_code: '3000')
+     # Act
+     # do something with the method under test
+     inquiry2.valid?
+     # Assert
+     # assert…. test.. test.
+     expect(inquiry2.errors.messages[:moving_postal_code]).to_not include 'Zipcode is invalid'
+     expect(inquiry2.errors.messages[:moving_postal_code]).to be_empty
+   end
   end
 
-  context "client_property_size" do
-    it `is within ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"]` do
-      expect(@inquiry.client_property_size).to be_in(%w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8])
-    end
+  context "moving_city" do
     it "is not valid when nil" do
-      inquiry2 = build(:moving_inquiry, client_property_size: nil)
+      inquiry2 = build(:moving_inquiry, moving_city: nil)
       expect(inquiry2).to_not be_valid
     end
     it "is not valid when empty" do
-      inquiry2 = build(:moving_inquiry, client_property_size: "  ")
+      inquiry2 = build(:moving_inquiry, moving_city: "  ")
       expect(inquiry2).to_not be_valid
     end
     it "is valid when filled with strings" do
-      expect(@inquiry.client_property_size.class).to equal(String)
-    end
-    it "is valid when in right size" do
-      expect(@inquiry).to be_valid
+      expect(@inquiry.moving_city.class).to equal(String)
     end
   end
+
 end
