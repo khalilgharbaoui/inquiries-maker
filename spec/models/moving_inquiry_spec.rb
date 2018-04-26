@@ -196,6 +196,7 @@ RSpec.describe MovingInquiry, type: :model do
     it "should have the right country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.valid_for_country? 'CH').to be_truthy
+      p phone
     end
     it "should not have the CN country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
@@ -361,5 +362,25 @@ RSpec.describe MovingInquiry, type: :model do
       expect(@inquiry.moving_city.class).to equal(String)
     end
   end
-
+  context "moving_date" do
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, moving_date: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, moving_date: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with a string" do
+      expect(@inquiry.moving_date.class).to equal(Date)
+    end
+    it "is format iso8601" do
+      expect(@inquiry.moving_date.to_formatted_s(:iso8601)).to be_truthy
+      expect(@inquiry.moving_date.to_formatted_s(:db)).to be_truthy
+    end
+    it "is valid" do
+      inquiry2 = build(:moving_inquiry, moving_date: '2017-10-10')
+      expect(inquiry2).to be_valid
+    end
+  end
 end
