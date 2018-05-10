@@ -87,3 +87,5 @@ pickle-email-*.html
 /config/master.key
 #credentials
 #config/credentials.yml.enc
+
+/dev.notes.md
