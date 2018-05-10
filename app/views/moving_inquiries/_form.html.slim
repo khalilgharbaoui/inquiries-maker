@@ -6,11 +6,10 @@
         - @moving_inquiry.errors.full_messages.each do |message|
           li = message
   .field
-    = f.label :partner_token
-    = f.text_field :partner_token
+    = f.hidden_field :partner_token
   .field
     = f.label :locale
-    = f.text_field :locale
+    = f.text_field :locale, value: locale
   .field
     = f.label :client_first_name
     = f.text_field :client_first_name
@@ -55,7 +54,7 @@
     .field
       = f.label :moving_city
       = f.text_field :moving_city, class: "rails-address-autocomplete-field-city", placeholder: ' ', id: "moving_city", placeholder: ' '
-  .field
-    = f.label :moving_date
-    = f.date_select :moving_date
-    .actions = f.submit
+    .field
+      = f.label :moving_date
+      = f.date_select :moving_date
+  .actions = f.submit
