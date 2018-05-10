@@ -409,25 +409,56 @@ RSpec.describe MovingInquiry, type: :model do
     it "is valid when filled with a string" do
       expect(@inquiry.client_street_and_number.class).to equal(String)
     end
-
-      it "it has to have a size greater than 5" do
-        inquiry2 = build(:moving_inquiry)
-        expect(inquiry2.client_street_and_number.size).to be > 5
-      end
-      it "it can not be valid with less than 5 in lenght" do
-        inquiry2 = build(:moving_inquiry, client_street_and_number: "aa 3")
-        expect(inquiry2).to_not be_valid
-      end
-      it "it is valid with 5 charachter or more" do
-        inquiry2 = build(:moving_inquiry)
-        expect(inquiry2).to be_valid
-      end
-      it "it has some digits in it" do
-        expect(@inquiry.client_street_and_number).to have_digits
-      end
-      it "it validated that it contains numbers" do
-        inquiry2 = build(:moving_inquiry, client_street_and_number: "onlylettersstreet")
-        expect(inquiry2).to_not be_valid
-      end
+    it "it has to have a size greater than 2" do
+      inquiry2 = build(:moving_inquiry)
+      expect(inquiry2.client_street_and_number.size).to be > 2
+    end
+    it "it can not be valid with less than 3 in lenght" do
+      inquiry2 = build(:moving_inquiry, client_street_and_number: "a3")
+      expect(inquiry2).to_not be_valid
+    end
+    it "it is valid with 2 charachter or more" do
+      inquiry2 = build(:moving_inquiry, client_street_and_number: "abc 4")
+      expect(inquiry2).to be_valid
+    end
+    it "it has some digits in it" do
+      expect(@inquiry.client_street_and_number).to have_digits
+    end
+    it "it validated that it contains numbers" do
+      inquiry2 = build(:moving_inquiry, client_street_and_number: "onlylettersstreet")
+      expect(inquiry2).to_not be_valid
+    end
+  end
+  context "moving_street_and_number" do
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, moving_street_and_number: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, moving_street_and_number: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with a string" do
+      expect(@inquiry.moving_street_and_number.class).to equal(String)
+    end
+    it "it has to have a size greater than 2" do
+      inquiry2 = build(:moving_inquiry)
+      expect(inquiry2.moving_street_and_number.size).to be > 2
+    end
+    it "it can not be valid with less than 3 in lenght" do
+      inquiry2 = build(:moving_inquiry, moving_street_and_number: "a3")
+      expect(inquiry2).to_not be_valid
+    end
+    it "it is valid with 3 charachter or more" do
+      inquiry2 = build(:moving_inquiry, moving_street_and_number: "abc 4")
+      expect(inquiry2).to be_valid
+    end
+    it "it has some digits in it" do
+      expect(@inquiry.moving_street_and_number).to have_digits
+    end
+    it "it validates that it contains numbers" do
+      inquiry2 = build(:moving_inquiry, moving_street_and_number: "onlylettersstreet")
+      expect(inquiry2).to_not be_valid
+    end
   end
 end
