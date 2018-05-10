@@ -196,7 +196,7 @@ RSpec.describe MovingInquiry, type: :model do
     it "should have the right country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.valid_for_country? 'CH').to be_truthy
-      p phone
+      # p phone
     end
     it "should not have the CN country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
@@ -214,6 +214,19 @@ RSpec.describe MovingInquiry, type: :model do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
     end
+
+    it "can take a pager" do
+      pager_number = '+41740000000'
+      iquery2 = build(:moving_inquiry, client_mobile: pager_number)
+      phone = Phonelib.parse(iquery2.client_mobile)
+      expect(phone.type).to be_in([:pager])
+    end
+
+    it "test fixtures is not a pager" do
+      phone = Phonelib.parse(@inquiry.client_mobile)
+      expect(phone.type).to_not be_in([:pager])
+    end
+
   end
 
   context "client_postal_code" do
@@ -382,5 +395,41 @@ RSpec.describe MovingInquiry, type: :model do
       inquiry2 = build(:moving_inquiry, moving_date: '2017-10-10')
       expect(inquiry2).to be_valid
     end
+  end
+  context "client_street_and_number" do
+    it "is not valid when nil" do
+      inquiry2 = build(:moving_inquiry, client_street_and_number: nil)
+      expect(inquiry2).to_not be_valid
+    end
+    it "is not valid when empty" do
+      inquiry2 = build(:moving_inquiry, client_street_and_number: "  ")
+      expect(inquiry2).to_not be_valid
+    end
+    it "is valid when filled with a string" do
+      expect(@inquiry.client_street_and_number.class).to equal(String)
+    end
+    it "has at least a letter and a number" do
+      expect(@inquiry.client_street_and_number).to match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
+    end
+    # it "is format iso8601" do
+    #   expect(@inquiry.client_street_and_number.to_formatted_s(:iso8601)).to be_truthy
+    #   expect(@inquiry.client_street_and_number.to_formatted_s(:db)).to be_truthy
+    # end
+    # it "is valid" do
+    #   inquiry2 = build(:moving_inquiry, client_street_and_number: '2017-10-10')
+    #   expect(inquiry2).to be_valid
+    # end
+      it "it has to have a size greater than 5" do
+        inquiry2 = build(:moving_inquiry)
+        expect(inquiry2.client_street_and_number.size).to be > 5
+      end
+      it "it can not be valid with less than 5 in lenght" do
+        inquiry2 = build(:moving_inquiry, client_street_and_number: "aa 3")
+        expect(inquiry2).to_not be_valid
+      end
+      it "it is valid with 5 charachter or more" do
+        inquiry2 = build(:moving_inquiry)
+        expect(inquiry2).to be_valid
+      end
   end
 end
