@@ -16,7 +16,7 @@ FactoryBot.define do
 
     client_postal_code { Faker::Address.postcode }
     client_city { Faker::Address.city }
-    client_property_size ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].sample
+    client_property_size ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first
 
     moving_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
     moving_postal_code { Faker::Address.postcode }
