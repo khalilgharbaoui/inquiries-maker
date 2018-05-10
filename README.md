@@ -1,7 +1,10 @@
 Inquiries Maker
 ================
+
 ![](Screen Shot 2018-05-10 at 18.23.59.png)
-Problems? Issues?
+
+
+Issues?
 -----------
 
 No issues yet.
