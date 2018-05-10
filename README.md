@@ -1,7 +1,7 @@
 Inquiries Maker
 ================
 
-![](Screen Shot 2018-05-10 at 18.23.59.png)
+![](https://github.com/khalilgharbaoui/inquiries-maker/raw/master/Screen%20Shot%202018-05-10%20at%2018.23.59.png)
 
 
 Issues?
