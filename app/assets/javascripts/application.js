@@ -16,17 +16,20 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-//= require rails_address_autocomplete
+//= require jquery-ui
 
+  window.googleMapInitialize = function(){
+      // Advanced usage with google options
+      $('.rails-address-autocomplete').rails_address_autocomplete({
+          // type: ['restaurant'],
+          componentRestrictions: { country: 'ch' }
 
+      });
+      console.log( "CALLED! 👊 ready!" );
+
+  };
 // This function is call when Google Maps is loaded
-window.googleMapInitialize = function(){
-    // Advanced usage with google options
-    $('.rails-address-autocomplete').rails_address_autocomplete({
-        // type: ['restaurant'],
-        componentRestrictions: { country: 'ch' }
-    });
-};
+
 
 // $('.rails-address-autocomplete').on('change:address:data_changed', function(event, data){
 // 	console.log("LOG: " + data);

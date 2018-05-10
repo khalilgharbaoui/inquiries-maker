@@ -12,11 +12,13 @@ table
       th Client mobile
       th Client street and number
       th Client postal code
+      th Client postal city
       th Client property size
       th Is moving request
       th Is cleaning request
       th Moving street and number
       th Moving postal code
+      th Moving city
       th Moving date
       th
       th
@@ -34,11 +36,13 @@ table
         td = moving_inquiry.client_mobile
         td = moving_inquiry.client_street_and_number
         td = moving_inquiry.client_postal_code
+        td = moving_inquiry.client_city
         td = moving_inquiry.client_property_size
         td = moving_inquiry.is_moving_request
         td = moving_inquiry.is_cleaning_request
         td = moving_inquiry.moving_street_and_number
         td = moving_inquiry.moving_postal_code
+        td = moving_inquiry.moving_city
         td = moving_inquiry.moving_date
         td = link_to 'Show', moving_inquiry
         td = link_to 'Edit', edit_moving_inquiry_path(moving_inquiry)

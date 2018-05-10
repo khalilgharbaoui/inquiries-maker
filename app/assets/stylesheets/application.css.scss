@@ -12,4 +12,11 @@
  *
  *= require_tree .
  *= require_self
+ *= require jquery-ui
  */
+
+ .ui-autocomplete{
+   height: 200px;
+   overflow-y: scroll;
+   overflow-x: hidden;
+ }
