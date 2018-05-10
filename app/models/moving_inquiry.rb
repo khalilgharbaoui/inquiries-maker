@@ -21,5 +21,8 @@ class MovingInquiry < ApplicationRecord
 
   validates :client_postal_code, :moving_postal_code, zipcode: { country_code: :ch }
   validates_format_of :moving_date, with: /\d{4}\-\d{2}\-\d{2}/, message: "^Date must be in the following format: yyyy-mm-yy"
+
   validates :client_street_and_number, length: { minimum: 5 }
+  validates :client_street_and_number, format: { with: /\d+/,
+  message: "Must contain a home number" }
 end
