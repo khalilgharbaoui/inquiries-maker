@@ -18,6 +18,7 @@ gem "valid_email2"
 gem "phonelib"
 gem 'validates_zipcode'
 gem 'jquery-ui-rails'
+gem 'rails-i18n'
 
 group :development do
   gem 'web-console', '>= 3.3.0'
