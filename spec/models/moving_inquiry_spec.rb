@@ -396,6 +396,7 @@ RSpec.describe MovingInquiry, type: :model do
       expect(inquiry2).to be_valid
     end
   end
+
   context "client_street_and_number" do
     it "is not valid when nil" do
       inquiry2 = build(:moving_inquiry, client_street_and_number: nil)
@@ -408,17 +409,7 @@ RSpec.describe MovingInquiry, type: :model do
     it "is valid when filled with a string" do
       expect(@inquiry.client_street_and_number.class).to equal(String)
     end
-    it "has at least a letter and a number" do
-      expect(@inquiry.client_street_and_number).to match(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/)
-    end
-    # it "is format iso8601" do
-    #   expect(@inquiry.client_street_and_number.to_formatted_s(:iso8601)).to be_truthy
-    #   expect(@inquiry.client_street_and_number.to_formatted_s(:db)).to be_truthy
-    # end
-    # it "is valid" do
-    #   inquiry2 = build(:moving_inquiry, client_street_and_number: '2017-10-10')
-    #   expect(inquiry2).to be_valid
-    # end
+
       it "it has to have a size greater than 5" do
         inquiry2 = build(:moving_inquiry)
         expect(inquiry2.client_street_and_number.size).to be > 5
@@ -430,6 +421,13 @@ RSpec.describe MovingInquiry, type: :model do
       it "it is valid with 5 charachter or more" do
         inquiry2 = build(:moving_inquiry)
         expect(inquiry2).to be_valid
+      end
+      it "it has some digits in it" do
+        expect(@inquiry.client_street_and_number).to have_digits
+      end
+      it "it validated that it contains numbers" do
+        inquiry2 = build(:moving_inquiry, client_street_and_number: "onlylettersstreet")
+        expect(inquiry2).to_not be_valid
       end
   end
 end
