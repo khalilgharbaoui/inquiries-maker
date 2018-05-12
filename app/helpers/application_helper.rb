@@ -16,7 +16,7 @@ module ApplicationHelper
       end
     else
       content_tag(:div, class: "field") do
-        f.hidden_field :locale, value: params[:locale] ||= I18n.locale
+        f.hidden_field :locale, value: I18n.locale
       end
     end
   end
