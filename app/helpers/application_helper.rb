@@ -1,9 +1,9 @@
 module ApplicationHelper
   # found here: https://dhampik.com/blog/rails-routes-tricks-with-locales
   def lang_switcher
-    content_tag(:ul, class: 'lang-switcher clearfix') do
+    content_tag(:div, class: 'lang-switcher clearfix') do
       I18n.available_locales.each do |loc|
-        concat content_tag(:li, (link_to loc, params.permit(:locale).merge(locale: loc)), class: (I18n.locale == loc ? "active" : ""))
+        concat content_tag(:span, (link_to loc, params.permit(:locale).merge(locale: loc)), class: (I18n.locale == loc ? "active" : "")) + content_tag(:span,"  ")
       end
     end
   end
