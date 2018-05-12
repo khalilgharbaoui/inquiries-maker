@@ -12,7 +12,7 @@ module ApplicationHelper
     if inquiry.persisted?
       content_tag(:div, class: "field") do
         f.label :locale
-        f.text_field :locale
+        f.text_field :locale, disable
       end
     else
       content_tag(:div, class: "field") do
