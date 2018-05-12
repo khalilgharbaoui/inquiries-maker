@@ -1,3 +1,4 @@
+= lang_switcher
 = form_for @moving_inquiry do |f|
   - if @moving_inquiry.errors.any?
     #error_explanation
@@ -7,9 +8,7 @@
           li = message
   .field
     = f.hidden_field :partner_token
-  .field
-    = f.label :locale
-    = f.text_field :locale, value: locale
+  = locale_field(@moving_inquiry, f)
   .field
     = f.label :client_first_name
     = f.text_field :client_first_name
@@ -28,13 +27,13 @@
   .rails-address-autocomplete
     .field
       = f.label :client_street_and_number
-      = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ' '
+      = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ''
     .field
       = f.label :client_postal_code
-      = f.text_field :client_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "client_postal_code", placeholder: ' '
+      = f.text_field :client_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "client_postal_code", placeholder: ''
     .field
       = f.label :client_city
-      = f.text_field :client_city, class: "rails-address-autocomplete-field-city", placeholder: ' ', id: "client_city", placeholder: ' '
+      = f.text_field :client_city, class: "rails-address-autocomplete-field-city", placeholder: '', id: "client_city"
   .field
     = f.label :client_property_size
     = f.text_field :client_property_size
@@ -47,13 +46,13 @@
   .rails-address-autocomplete
     .field
       = f.label :moving_street_and_number
-      = f.text_field :moving_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ' '
+      = f.text_field :moving_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ''
     .field
       = f.label :moving_postal_code
-      = f.text_field :moving_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "moving_postal_code", placeholder: ' '
+      = f.text_field :moving_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "moving_postal_code", placeholder: ''
     .field
       = f.label :moving_city
-      = f.text_field :moving_city, class: "rails-address-autocomplete-field-city", placeholder: ' ', id: "moving_city", placeholder: ' '
+      = f.text_field :moving_city, class: "rails-address-autocomplete-field-city", placeholder: '', id: "moving_city"
     .field
       = f.label :moving_date
       = f.date_select :moving_date
