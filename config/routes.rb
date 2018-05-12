@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  root to: "moving_inquiries#index"
   resources :combined_inquiries
   resources :cleaning_inquiries
-  scope "(:locale)", locale: /en|de|fr/ do
-    root to: "moving_inquiries#index"
-  end
   resources :moving_inquiries
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+    resources :moving_inquiries, only: [:new]
+  end
 end
