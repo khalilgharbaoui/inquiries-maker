@@ -28,10 +28,11 @@ class MovingInquiriesController < ApplicationController
 
     respond_to do |format|
       if @moving_inquiry.save
-        format.html { redirect_to @moving_inquiry, notice: 'Moving inquiry was successfully created.' }
+        format.html { redirect_to moving_inquiry_path, notice: 'Moving inquiry was successfully created.' }
         format.json { render :show, status: :created, location: @moving_inquiry }
       else
-        format.html { render :new }
+        format.html { render :new}
+        # format.html { url_for(action: :new, locale: I18n.locale)}
         format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
       end
     end
@@ -42,7 +43,7 @@ class MovingInquiriesController < ApplicationController
   def update
     respond_to do |format|
       if @moving_inquiry.update(moving_inquiry_params)
-        format.html { redirect_to @moving_inquiry, notice: 'Moving inquiry was successfully updated.' }
+        format.html { redirect_to moving_inquiry_path, notice: 'Moving inquiry was successfully updated.' }
         format.json { render :show, status: :ok, location: @moving_inquiry }
       else
         format.html { render :edit }
