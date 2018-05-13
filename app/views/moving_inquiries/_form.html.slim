@@ -1,5 +1,7 @@
-= lang_switcher
-= form_for @moving_inquiry do |f|
+- edit ||= false
+= form_lang_switcher(edit ? 'edit' : 'new')
+
+= form_for @moving_inquiry, url: :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}", method: :"#{edit ? 'put' : 'post'}", local: true do |f|
   - if @moving_inquiry.errors.any?
     #error_explanation
       h2 = "#{pluralize(@moving_inquiry.errors.count, "error")} prohibited this moving_inquiry from being saved:"
