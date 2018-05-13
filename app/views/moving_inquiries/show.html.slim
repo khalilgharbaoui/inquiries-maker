@@ -1,3 +1,4 @@
+= general_lang_switcher
 p#notice = notice
 
 p
@@ -52,6 +53,6 @@ p
   strong Moving date:
   = @moving_inquiry.moving_date
 
-=> link_to 'Edit', edit_moving_inquiry_path(@moving_inquiry)
+=> link_to 'Edit', url_for(action: :edit, id: @moving_inquiry.id, locale: I18n.locale)
 '|
 =< link_to 'Back', moving_inquiries_path

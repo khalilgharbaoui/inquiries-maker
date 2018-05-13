@@ -1,3 +1,4 @@
+= general_lang_switcher
 h1 Listing moving_inquiries
 
 table
@@ -44,10 +45,10 @@ table
         td = moving_inquiry.moving_postal_code
         td = moving_inquiry.moving_city
         td = moving_inquiry.moving_date
-        td = link_to 'Show', moving_inquiry
-        td = link_to 'Edit', edit_moving_inquiry_path(moving_inquiry)
-        td = link_to 'Destroy', moving_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to 'Show', url_for(action: :show, id: moving_inquiry.id, locale: I18n.locale)
+        td = link_to 'Edit', url_for(action: :edit, id: moving_inquiry.id, locale: I18n.locale)
+        td = link_to 'Destroy', url_for(action: :destroy, id: moving_inquiry.id, locale: I18n.locale), data: { confirm: 'Are you sure?' }, method: :delete
 
 br
 
-= link_to 'New Moving inquiry', new_moving_inquiry_path
+= link_to 'New Moving inquiry', url_for(action: :new, locale: I18n.locale)

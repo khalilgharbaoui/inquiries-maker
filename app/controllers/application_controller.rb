@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   before_action :set_locale
   def set_locale
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    I18n.locale = extract_from_params_or_language_header || I18n.default_locale
+    I18n.locale = extract_from_params_or_language_header
     logger.debug "* Locale set to '#{I18n.locale}'"
   end
   # def default_url_options
