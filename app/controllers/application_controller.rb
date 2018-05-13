@@ -30,10 +30,9 @@ class ApplicationController < ActionController::Base
     extract_from_params || extract_from_language_header
   end
   def extract_from_params
-    params[:locale] if %w[de fr en].include?(params[:locale])
+    params[:locale]
   end
   def extract_from_language_header
-    header = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-    header if %w[de fr en].include?(header)
+    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
   end
 end
