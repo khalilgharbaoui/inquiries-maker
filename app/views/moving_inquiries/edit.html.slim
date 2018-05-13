@@ -1,8 +1,7 @@
 h1 Editing moving_inquiry
 
-== render 'form'
+== render partial: 'moving_inquiries/form', locals: {edit: true}
 
-=> link_to 'Show', @moving_inquiry
+=> link_to 'Show', url_for(action: :show, id: @moving_inquiry)
 '|
 =< link_to 'Back', moving_inquiries_path
-
