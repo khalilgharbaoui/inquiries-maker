@@ -5,17 +5,16 @@ html
     title
       = content_for?(:title) ? yield(:title) : 'Inquiries Maker'
     meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Inquiries Maker'}"
-    - if current_page?('/moving_inquiries/new') || current_page?('/cleaning_inquiries/new') || current_page?('/combined_inquiries/new') || current_page?('/moving_inquiries/edit') || current_page?('/cleaning_inquiries/edit') || current_page?('/combined_inquiries/edit')
+    - if current_page?(action: :new || :edit)
       link[rel="dns-prefetch" href="//maps.googleapis.com/"]
     == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
     == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
     == csrf_meta_tags
-
   body
     header
-      == render 'layouts/navigation'
+      == render 'layouts/navigation' if user_signed_in?
     main[role="main"]
       == render 'layouts/messages'
       == yield
-    - if current_page?('/moving_inquiries/new') || current_page?('/cleaning_inquiries/new') || current_page?('/combined_inquiries/new') || current_page?('/moving_inquiries/edit') || current_page?('/cleaning_inquiries/edit') || current_page?('/combined_inquiries/edit')
+    - if current_page?(action: :new || :edit)
       script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"]
