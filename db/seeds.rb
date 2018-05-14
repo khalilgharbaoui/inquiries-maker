@@ -1,15 +1,6 @@
-# encoding: UTF-8
-# This file is auto-generated from the current content of the database. Instead
-# of editing this file, please use the migrations feature of Seed Migration to
-# incrementally modify your database, and then regenerate this seed file.
-#
-# If you need to create the database on another system, you should be using
-# db:seed, not running all the migrations from scratch. The latter is a flawed
-# and unsustainable approach (the more migrations you'll amass, the slower
-# it'll run and the greater likelihood for issues).
-#
-# It's strongly recommended to check this file into your version control system.
-
+User.create!([
+  {email: "kaygeee@gmail.com", encrypted_password: "$2a$11$Z8vMhGZMfd63yO5ba6mAquGagzt9ho.F287hWf/xxB74RAlxeAz1G", reset_password_token: nil, reset_password_sent_at: nil, remember_created_at: nil, sign_in_count: 1, current_sign_in_at: "2018-05-13 16:13:50", last_sign_in_at: "2018-05-13 16:13:50", current_sign_in_ip: "::1", last_sign_in_ip: "::1"}
+])
 MovingInquiry.create!([
   {partner_token: "MyString", locale: "de", client_first_name: "Raymundo", client_last_name: "Pouros", client_salutation: "Frau", client_email: "1@fake.com", client_mobile: "+41337871978", client_street_and_number: "Jarred Mission 7523", client_postal_code: "9594", client_city: "Brenzikofen", client_property_size: "size_7", is_moving_request: true, is_cleaning_request: false, moving_street_and_number: "Merle Mills 5727", moving_postal_code: "2177", moving_city: "Romanel-sur-Lausanne", moving_date: "2018-07-15"},
   {partner_token: "MyString", locale: "de", client_first_name: "Karlie", client_last_name: "Frami", client_salutation: "Mr", client_email: "2@fake.com", client_mobile: "0041229341315", client_street_and_number: "Carlie Shore 1636", client_postal_code: "3793", client_city: "Cama", client_property_size: "size_7", is_moving_request: true, is_cleaning_request: false, moving_street_and_number: "Rau Road 7033", moving_postal_code: "1721", moving_city: "Bettwiesen", moving_date: "2018-07-08"},
