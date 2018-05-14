@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery prepend: true
   before_action :set_locale
   def set_locale
     logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
