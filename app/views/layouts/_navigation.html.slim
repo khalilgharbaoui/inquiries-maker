@@ -1,11 +1,10 @@
-/ navigation styled for Bootstrap 4.0
-.container
-  nav.navbar.navbar-dark.bg-inverse
-    ul.nav.navbar-nav.clearfix
-      li.nav-item
-        button.navbar-toggler.hidden-sm-up.nav-link aria-controls="exCollapsingNavbar2" aria-expanded="false" aria-label=("Toggle navigation") data-target="#exCollapsingNavbar2" data-toggle="collapse" type="button"
-          | &#9776;
-    #exCollapsingNavbar2.collapse.navbar-toggleable-xs
-      = link_to "Rails bootstrap", root_url, class: 'navbar-brand'
-      ul.nav.navbar-nav
-        = render 'layouts/navigation_links'
+- if user_signed_in?
+  nav.navbar.navbar-expand-md.navbar-dark.bg-dark
+    .navbar-collapse.collapse.w-100.order-1.order-md-0.dual-collapse2
+      == render 'layouts/language_links'
+    .mx-auto.order-0
+      = link_to "Iquiries Maker", '/', class: 'navbar-brand mx-auto'
+      button.navbar-toggler data-target=".dual-collapse2" data-toggle="collapse" type="button"
+        span.navbar-toggler-icon
+    .navbar-collapse.collapse.w-100.order-3.dual-collapse2
+      == render 'layouts/navigation_links_for_auth'

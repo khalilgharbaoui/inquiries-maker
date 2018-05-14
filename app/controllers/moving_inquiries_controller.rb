@@ -1,10 +1,11 @@
 class MovingInquiriesController < ApplicationController
+  before_action :authenticate_user!, except: [:new,:create]
   before_action :set_moving_inquiry, only: [:show, :edit, :update, :destroy]
 
   # GET /moving_inquiries
   # GET /moving_inquiries.json
   def index
-    @moving_inquiries = MovingInquiry.all
+    @moving_inquiries = MovingInquiry.all if user_signed_in?
   end
 
   # GET /moving_inquiries/1
