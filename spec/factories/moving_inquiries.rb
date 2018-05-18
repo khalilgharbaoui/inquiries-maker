@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :moving_inquiry do
     partner_token "MyString"
+    #TODO: FIX THIS:
     locale { Faker::SwissLocals.locale }
     client_salutation { Faker::SwissLocals.random_salutations }
     # client_salutation { Faker::SwissLocals.salutations("fr") } # de en fr
