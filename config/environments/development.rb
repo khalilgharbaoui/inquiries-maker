@@ -77,5 +77,5 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   #Faker gem configuration
-  Faker::Config.locale = 'de-CH'
+  Faker::Config.locale = 'de'
 end
