@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
-    root to: "moving_inquiries#index"
+    root to: "moving_inquiries#new"
     devise_for :users, controllers: {
           sessions: 'users/sessions',
           registrations: "users/registrations"
