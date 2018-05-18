@@ -6,13 +6,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     flash[:alert] = 'Registrations are not open yet, but please check back soon'
-    redirect_to new_moving_inquiry_path
+    render "shared/empty"
   end
 
   # POST /resource
   def create
     flash[:alert] = 'Registrations are not open yet, but please check back soon'
-    redirect_to new_moving_inquiry_path
+    render "shared/empty"
   end
   # GET /resource/sign_up
   # def new
