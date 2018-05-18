@@ -46,5 +46,5 @@ Rails.application.configure do
 
 
   #Faker gem configuration
-  Faker::Config.locale = 'de-CH'
+  Faker::Config.locale = 'de'
 end
