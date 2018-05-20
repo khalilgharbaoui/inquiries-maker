@@ -78,6 +78,8 @@ pickle-email-*.html
 
 # Environment files that may contain sensitive data
 .env
+.env.production
+.env.development
 .powenv
 
 # tilde files are usually backup files from a text editor
