@@ -24,4 +24,13 @@ class MovingInquiry < ApplicationRecord
   validates :client_street_and_number, :moving_street_and_number, length: { minimum: 3 }
   validates :client_street_and_number, :moving_street_and_number, format: { with: /\d+/,
   message: "Must contain a home number" }
+
+  after_create :schedule_client_emails
+
+  private
+  def schedule_client_emails
+    # ClientMailer.client(self).deliver_later
+
+    MovingInquiryPostingJob.perform_later(self.id)
+  end
 end

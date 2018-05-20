@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'dotenv-rails', require: 'dotenv/rails-now'
 gem 'rails', '~> 5.2.0'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
@@ -20,6 +21,10 @@ gem 'validates_zipcode'
 gem 'jquery-ui-rails'
 gem 'rails-i18n'
 gem 'devise'
+gem 'sinatra', github: 'sinatra/sinatra'
+gem 'sidekiq', require: ['sidekiq', 'sidekiq/web']
+# gem 'sneakers', '~> 2.7.0'
+
 
 group :development do
   gem 'web-console', '>= 3.3.0'

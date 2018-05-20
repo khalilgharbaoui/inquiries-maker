@@ -1,5 +1,4 @@
 require_relative 'boot'
-
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems
@@ -8,6 +7,10 @@ Bundler.require(*Rails.groups)
 
 module InquiriesMaker
   class Application < Rails::Application
+    #ActiveJob using sneakers using RabitMQ
+    # config.active_job.queue_adapter = :sneakers
+    #ActiveJob using sneakers using RabitMQ
+    config.active_job.queue_adapter = :sidekiq
 
     config.generators do |g|
       g.test_framework :rspec,

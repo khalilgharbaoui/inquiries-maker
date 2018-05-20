@@ -13,7 +13,7 @@ development:
   encoding: utf8
   reconnect: false
   database: inquiries_maker_development
-  pool: 5
+  pool: 25
   username: inquiries_maker
   password:
   host: localhost
@@ -26,7 +26,7 @@ test:
   encoding: utf8
   reconnect: false
   database: inquiries_maker_test
-  pool: 5
+  pool: 25
   username: inquiries_maker
   password:
   host: localhost
@@ -36,7 +36,7 @@ production:
   encoding: utf8
   reconnect: false
   database: inquiries_maker_production
-  pool: 5
+  pool: 25
   username: inquiries_maker
   password:
   host: localhost
