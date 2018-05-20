@@ -19,6 +19,8 @@ class MovingInquiry < ApplicationRecord
 
   validates :client_mobile, phone: {possible: true, allow_blank: false, types: [:fixed_or_mobile,:fixed_line, :mobile]}
 
+  validates_with PhoneCountryCodeValidator, fields: [:client_mobile], country_codes: ["CH", :ch, Phonelib.default_country]
+
   validates :client_postal_code, :moving_postal_code, zipcode: { country_code: :ch }
   validates_format_of :moving_date, with: /\d{4}\-\d{2}\-\d{2}/, message: "^Date must be in the following format: yyyy-mm-yy"
   validates :client_street_and_number, :moving_street_and_number, length: { minimum: 3 }
