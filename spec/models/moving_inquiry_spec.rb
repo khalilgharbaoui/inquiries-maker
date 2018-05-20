@@ -202,6 +202,15 @@ RSpec.describe MovingInquiry, type: :model do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.invalid_for_country? 'CN').to be_truthy
     end
+    it "validates the phone country code with custom validator" do
+      expect(@inquiry).to validate_with(PhoneCountryCodeValidator).with_exact_options(fields: [:client_mobile], country_codes: ["CH", :ch, Phonelib.default_country])
+    end
+    it "should not validate the phone country code with custom validator when options are wrong" do
+      expect(@inquiry).to_not validate_with(PhoneCountryCodeValidator).with_exact_options(fields: [:client_mobile], country_codes: ["CN", :cn, Phonelib.default_country])
+    end
+    it "should not validate with custom validator when options are missing" do
+      expect(@inquiry).to_not validate_with(PhoneCountryCodeValidator).with_exact_options(fields:[],country_codes:["CH", :ch, Phonelib.default_country])
+    end
     it "should be a valid phone number" do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.valid?).to be_truthy
