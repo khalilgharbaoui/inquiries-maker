@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :moving_inquiry do
-    partner_token "MyString"
     #TODO: FIX THIS:
     locale { Faker::SwissLocals.locale }
     client_salutation { Faker::SwissLocals.random_salutations }
@@ -22,6 +21,6 @@ FactoryBot.define do
     moving_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
     moving_postal_code { Faker::Address.postcode }
     moving_city { Faker::Address.city }
-    moving_date {Faker::Date.forward(days = 90)}
+    moving_date {Faker::Date.forward(days = 365)}
   end
 end
