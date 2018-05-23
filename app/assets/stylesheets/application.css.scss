@@ -63,7 +63,6 @@ img {
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
-  @extend .container;
   margin-top: 30px; // accommodate the navbar
 }
 section {
@@ -107,7 +106,6 @@ div {
 }
 
 #error_explanation {
-  width: 450px;
   border: 2px solid red;
   padding: 7px 7px 0;
   margin-bottom: 20px;
@@ -131,4 +129,12 @@ div {
 
 label {
   display: block;
+}
+
+.translation_fallback {
+  background-color: yellow;
+}
+
+.translation_missing {
+  background-color: red;
 }
