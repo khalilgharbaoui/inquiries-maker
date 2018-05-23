@@ -49,6 +49,7 @@ group :development do
   gem 'spring-commands-rspec'
   gem 'seed_migration'
   gem 'seed_dump'
+  gem 'json-prettyprint'
 end
 
 group :test do
