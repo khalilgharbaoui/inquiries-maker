@@ -29,7 +29,7 @@ class MovingInquiriesController < ApplicationController
 
     respond_to do |format|
       if @moving_inquiry.save
-        format.html { redirect_to moving_inquiry_path, notice: 'Moving inquiry was successfully created.' }
+        format.html { redirect_to new_moving_inquiry_path, notice: 'Moving inquiry was successfully created.' }
         format.json { render :show, status: :created, location: @moving_inquiry }
       else
         format.html { render :new}
