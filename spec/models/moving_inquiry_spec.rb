@@ -63,8 +63,8 @@ RSpec.describe MovingInquiry, type: :model do
   end
 
   context "client_salutation" do
-    it "is within ['Mr','Mrs','Herr','Frau','M.','Mme']" do
-      expect(@inquiry.client_salutation).to be_in(%w[Mr Mrs Herr Frau M. Mme])
+    it "is within [mr ms]" do
+      expect(@inquiry.client_salutation).to be_in(%w[mr ms])
     end
     it "is not valid without a client_salutation" do
       inquiry2 = build(:moving_inquiry, client_salutation: nil)
@@ -195,8 +195,7 @@ RSpec.describe MovingInquiry, type: :model do
     end
     it "should have the right country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
-      expect(phone.valid_for_country? 'CH').to be_truthy
-      # p phone
+      expect(phone.valid_for_country? "CH").to be_truthy
     end
     it "should not have the CN country code" do
       phone = Phonelib.parse(@inquiry.client_mobile)
@@ -211,6 +210,9 @@ RSpec.describe MovingInquiry, type: :model do
     it "should not validate with custom validator when options are missing" do
       expect(@inquiry).to_not validate_with(PhoneCountryCodeValidator).with_exact_options(fields:[],country_codes:["CH", :ch, Phonelib.default_country])
     end
+    it "should validate prefix with custom validator" do
+      expect(@inquiry).to validate_with(PhonePrefixValidator).with_exact_options(fields:[:client_mobile])
+    end
     it "should be a valid phone number" do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.valid?).to be_truthy
@@ -219,9 +221,15 @@ RSpec.describe MovingInquiry, type: :model do
       phone = Phonelib.parse(@inquiry.client_mobile)
       expect(phone.country_code).to be_in(%w[41])
     end
-    it "should be a fixed or mobile number" do
+    # NOTE: only mobile numbers are allowed with +417 or 07 as begining.
+    #       which includes pagers but yet that is what they want.
+    # it "should be a fixed or mobile number" do
+    #   phone = Phonelib.parse(@inquiry.client_mobile)
+    #   expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
+    # end
+    it "should be only mobile number" do
       phone = Phonelib.parse(@inquiry.client_mobile)
-      expect(phone.type).to be_in([:fixed_line, :mobile, :fixed_or_mobile])
+      expect(phone.type).to be_in([:mobile])
     end
 
     it "can take a pager" do
@@ -236,6 +244,25 @@ RSpec.describe MovingInquiry, type: :model do
       expect(phone.type).to_not be_in([:pager])
     end
 
+    it 'starts with national extention "07"' do
+      phone = Phonelib.parse(@inquiry.client_mobile).national(false)
+      # possible_startings = "+417" || "07" || "007"
+      expect(phone).to start_with("07")
+    end
+    it 'starts with international extention "+417"' do
+      phone = Phonelib.parse(@inquiry.client_mobile).full_e164
+      # possible_startings = "+417" || "07" || "007"
+      expect(phone).to start_with("+417")
+    end
+    it 'starts with "+417"' do
+      phone = Phonelib.parse(@inquiry.client_mobile).e164
+      expect(phone).to start_with("+417")
+    end
+
+    it "should start with prefix +417 or 07 or 00417" do
+      mobile = @inquiry.client_mobile.to_s
+      expect(mobile).to match(/(\A07|\A.417|\A00417)/)
+    end
   end
 
   context "client_postal_code" do
