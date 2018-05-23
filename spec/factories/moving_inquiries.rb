@@ -2,8 +2,8 @@ FactoryBot.define do
   factory :moving_inquiry do
     #TODO: FIX THIS:
     locale { Faker::SwissLocals.locale }
-    client_salutation { Faker::SwissLocals.random_salutations }
-    # client_salutation { Faker::SwissLocals.salutations("fr") } # de en fr
+    # client_salutation { Faker::SwissLocals.random_salutations }
+    client_salutation { Faker::SwissLocals.salutations("de") } # de en fr
     is_moving_request true
     is_cleaning_request false
 
@@ -11,7 +11,7 @@ FactoryBot.define do
     client_last_name { Faker::Name.last_name }
 
     client_email { Faker::Internet.email }
-    client_mobile { Faker::PhoneNumber.phone_number }
+    client_mobile { Faker::PhoneNumber.cell_phone }
     client_street_and_number { Faker::Address.street_name + " " + Faker::Address.building_number}
 
     client_postal_code { Faker::Address.postcode }
