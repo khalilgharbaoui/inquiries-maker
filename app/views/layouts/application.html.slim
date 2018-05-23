@@ -13,8 +13,11 @@ html
   body
     header
       == render 'layouts/navigation' if user_signed_in?
-    main[role="main"]
-      == render 'layouts/messages'
-      == yield
+    .container-fluid
+      .row.flex-xl-nowrap
+        main[role="main" class="col-12 col-md-9 col-xl-8 py-md-3 pl-md-5"]
+          .container
+            == render 'layouts/messages'
+            == yield
     - if current_page?(action: :new || :edit)
       script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"]
