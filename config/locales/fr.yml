@@ -29,7 +29,7 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
+fr:
   hello: "Hello world"
   errors:
     messages:
@@ -37,16 +37,15 @@ en:
   moving_inquiries:
     form:
       client_salutations:
-        mr: Mr
-        ms: Ms
-      client_salutation: Formality
-      client_first_name: Last Name
-      client_last_name: First Name
+        mr: M.
+        ms: Mme
+      client_salutation: Bonjour!
+      client_first_name: Nom
+      client_last_name: Prenom
       client_email: Email
-      client_mobile: Mobile Phone Nr.
-      client_property_size: Number of rooms
-
-      submit: Request Offers Now!
+      client_mobile: Telefon
+      client_property_size: Nummero Chambre
+      submit: Demand
   activerecord:
     attributes:
       moving_inquiry:
