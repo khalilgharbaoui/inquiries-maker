@@ -91,3 +91,6 @@ pickle-email-*.html
 #config/credentials.yml.enc
 
 /dev.notes.md
+
+#redis dump
+dump.rdb
