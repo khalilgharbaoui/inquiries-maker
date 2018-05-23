@@ -1,5 +1,7 @@
 class ClientMailer < ApplicationMailer
-  def client(moving_inquiry)
+
+  def client(moving_inquiry_id)
+    moving_inquiry = MovingInquiry.find(moving_inquiry_id)
     @client = moving_inquiry
 
     mail to: "#{moving_inquiry.client_last_name} <#{moving_inquiry.client_email}>",
