@@ -2,10 +2,8 @@ class MovingInquiryPostingJob < ApplicationJob
   queue_as :default
 
   def perform(moving_inquiry_id)
-    # Do something later
-    moving_inquiry = MovingInquiry.find(moving_inquiry_id)
-    MovuConnector.post(moving_inquiry)
-    ClientMailer.client(moving_inquiry).deliver_later
+    MovuConnector.post(moving_inquiry_id)
+    # ClientMailer.client(moving_inquiry_id).deliver_later
 
     # return if user_signed_in?
 
