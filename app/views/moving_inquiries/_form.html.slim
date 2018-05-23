@@ -1,61 +1,72 @@
 - edit ||= false
-= form_lang_switcher(edit ? 'edit' : 'new')
-
-= form_for @moving_inquiry, url: :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}", method: :"#{edit ? 'put' : 'post'}", local: true do |f|
+.d-flex.align-content-stretch.flex-wrap style="max-width:620px!important;" = form_for @moving_inquiry, url: :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}", method: :"#{edit ? 'put' : 'post'}" ,local: true do |f|
   - if @moving_inquiry.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@moving_inquiry.errors.count, "error")} prohibited this moving_inquiry from being saved:"
-      ul
+    .row.justify-content-center
+      #error_explanation.align-self-end
+        h2 = "#{pluralize(@moving_inquiry.errors.count, "error")} prohibited this moving_inquiry from being saved:"
+        ul
         - @moving_inquiry.errors.full_messages.each do |message|
           li = message
-  .field
-    = f.hidden_field :partner_token
   = locale_field(@moving_inquiry, f)
-  .field
-    = f.label :client_first_name
-    = f.text_field :client_first_name
-  .field
-    = f.label :client_last_name
-    = f.text_field :client_last_name
-  .field
-    = f.label :client_salutation
-    = f.text_field :client_salutation
-  .field
-    = f.label :client_email
-    = f.text_field :client_email
-  .field
-    = f.label :client_mobile
-    = f.text_field :client_mobile
-  .rails-address-autocomplete
-    .field
+  .form-row.form-group
+    .field.col-4.col-sm-4.col-md-4.align-self-end.order-0
+      = f.label t(".client_salutation")
+      - [ 'mr', 'ms' ].each_with_index do |client_salutation, i|
+        .div class="form-check form-check-inline order-#{i}"
+          .form-check-input = f.radio_button(:client_salutation, client_salutation)
+          .form-check-label = t(".client_salutations.#{client_salutation}")
+          / t('.key in yml', name: thing_to_pass_as_name)
+    .field.col-4.col-sm-4.col-md-4.align-self-stretch.order-1
+    .field.col-4.col-sm-4.col-md-4.align-self-end.order-2 = form_lang_switcher(edit ? 'edit' : 'new')
+
+  .form-row.form-group
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-0
+      = f.label t(".client_first_name")
+      = f.text_field :client_first_name
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-1
+      = f.label t(".client_last_name")
+      = f.text_field :client_last_name
+  .form-row.form-group.align-self-end
+    .field.col-6.col-sm-6.col-md-4.align-self-start.order-0
+      = f.label t(".client_email")
+      = f.text_field :client_email
+    .field.col-6.col-sm-6.col-md-4.align-self-start.order-1
+      = f.label t(".client_mobile")
+      = f.text_field :client_mobile
+    .field.col-6.col-sm-6.col-md-4.align-self-start.order-2
+      = f.label t(".client_property_size")
+      = f.text_field :client_property_size
+
+  .rails-address-autocomplete.form-row.form-group
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-0
       = f.label :client_street_and_number
-      = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ''
-    .field
+      = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: '', autocomplete: :off
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-1
       = f.label :client_postal_code
       = f.text_field :client_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "client_postal_code", placeholder: ''
-    .field
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-2
       = f.label :client_city
       = f.text_field :client_city, class: "rails-address-autocomplete-field-city", placeholder: '', id: "client_city"
-  .field
-    = f.label :client_property_size
-    = f.text_field :client_property_size
-  .field
-    = f.label :is_moving_request
-    = f.check_box :is_moving_request
-  .field
-    = f.label :is_cleaning_request
-    = f.check_box :is_cleaning_request
-  .rails-address-autocomplete
-    .field
+    = f.hidden_field :is_moving_request
+    = f.hidden_field :is_cleaning_request
+
+  .rails-address-autocomplete.form-row.form-group
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-0
       = f.label :moving_street_and_number
       = f.text_field :moving_street_and_number, class: "rails-address-autocomplete-field-street", placeholder: ''
-    .field
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-1
       = f.label :moving_postal_code
       = f.text_field :moving_postal_code, class: "rails-address-autocomplete-field-zip_code", id: "moving_postal_code", placeholder: ''
-    .field
+    .field.col-6.col-sm-6.col-md-4.align-self-end.order-2
       = f.label :moving_city
       = f.text_field :moving_city, class: "rails-address-autocomplete-field-city", placeholder: '', id: "moving_city"
-    .field
-      = f.label :moving_date
+
+  .form-row.form-group
+    .field.col-3.col-sm-3.col-md-3.align-self-end.order-0
+    .field.col-9.col-sm-9.col-md-9.align-self-end.order-1
+      = f.label t(".moving_date")
       = f.date_select :moving_date
-  .actions = f.submit
+  br
+  .form-row.form-group
+    .actions.field.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
+      = f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block"
