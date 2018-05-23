@@ -11,8 +11,8 @@ module ApplicationHelper
   end
 
   def form_lang_switcher(action)
-    content_tag(:nav, :"aria-label" => 'language switch') do
-     content_tag(:ul, class: 'pagination pagination-sm justify-content-end') do
+    content_tag(:div) do
+     content_tag(:div, class: 'pagination pagination-sm') do
         I18n.available_locales.each do |loc|
           concat content_tag(:li, (link_to loc.upcase,
           url_for(action: :"#{action}", locale: loc), class: "page-link"), class: "page-item #{(I18n.locale == loc ? "active" : "")}").html_safe
