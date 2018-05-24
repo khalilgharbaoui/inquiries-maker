@@ -12,10 +12,6 @@ Rails.application.routes.draw do
     resources :moving_inquiries, except: [:create]
     # resources :cleaning_inquiries, except: [:create]
     # resources :combined_inquiries, except: [:create]
-
-
-    mount Sidekiq::Web => '/sidekiq'
-
   end
   get "*path", to: redirect("/#{I18n.locale}/%{path}", status: 302), constraints: {path: /(?!(#{I18n.available_locales.join("|")})\/).*/}, format: false
   get '*locale/*action/*path', to: redirect("/#{I18n.locale}/%{action}/%{path}", status: 302), constraints: {path: /(?!(#{I18n.available_locales.join("|")})\/).*/}, format: false
