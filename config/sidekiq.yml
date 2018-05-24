@@ -1,8 +1,0 @@
-:queues:
-  - ['high', 'mailers']
-  - ['mailers']
-  - ['medium_high']
-  - ['medium_low']
-  - ['low']
-  - ['default']
-:concurrency: <%= ENV['WORKERS'] || 4 %>
