@@ -21,9 +21,7 @@ gem 'validates_zipcode'
 gem 'jquery-ui-rails'
 gem 'rails-i18n'
 gem 'devise'
-gem 'sinatra', github: 'sinatra/sinatra'
-gem 'sidekiq', require: ['sidekiq', 'sidekiq/web']
-# gem 'sneakers', '~> 2.7.0'
+gem 'sneakers', '~> 2.7.0'
 
 
 group :development do
