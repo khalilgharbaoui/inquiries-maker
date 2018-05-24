@@ -1,4 +1,5 @@
 class MovingInquiry < ApplicationRecord
+  CH = Phonelib.default_country
   before_save PhoneNumberWrapper.new
   validates :locale, :is_moving_request, :is_cleaning_request,
             :client_salutation, :client_first_name, :client_last_name, :client_email, :client_mobile, :client_postal_code, :client_city, :moving_postal_code, :moving_city, :moving_date, :client_property_size, :client_street_and_number, :moving_street_and_number, exclusion: { in: [nil] }
@@ -20,9 +21,11 @@ class MovingInquiry < ApplicationRecord
 
   validates :client_mobile, phone: {possible: true, allow_blank: false, types: [:mobile]}
 
-  validates_with PhoneCountryCodeValidator, fields: [:client_mobile], country_codes: ["CH", :ch, Phonelib.default_country]
-  validates_with PhonePrefixValidator, fields: [:client_mobile]
-  validates_format_of :client_mobile, with: /(\A07|\A.417|\A00417)/
+  validates :client_mobile, phone: { countries: [CH], types: [:mobile], message: "only swiss mobiles"}
+
+  # validates_with PhoneCountryCodeValidator, fields: [:client_mobile], country_codes: ["CH", :ch, Phonelib.default_country]
+
+  validates_format_of :client_mobile, with: /(\A07|\A.417|\A00417)/,message: "number should start with 07, 00417 or +417"
 
   validates :client_postal_code, :moving_postal_code, zipcode: { country_code: :ch }
   validates_format_of :moving_date, with: /\d{4}\-\d{2}\-\d{2}/, message: "^Date must be in the following format: yyyy-mm-yy"
