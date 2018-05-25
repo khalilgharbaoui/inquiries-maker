@@ -34,7 +34,8 @@
       = f.text_field :client_mobile
     .field.col-6.col-sm-6.col-md-4.align-self-start.order-2
       = f.label t(".client_property_size")
-      = f.select(:client_property_size, options_for_select(MovingInquiry.client_property_sizes))
+      / = f.select(:client_property_size, options_for_select(MovingInquiry.client_property_sizes.values))
+      = f.select(:client_property_size, options_for_enum(@moving_inquiry, :client_property_size))
   .rails-address-autocomplete.form-row.form-group
     .field.col-6.col-sm-6.col-md-4.align-self-end.order-0
       = f.label t(".client_street_and_number")
