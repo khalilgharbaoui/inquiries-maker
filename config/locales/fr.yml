@@ -37,16 +37,39 @@ fr:
   moving_inquiries:
     form:
       client_salutations:
-        mr: M.
-        ms: Mme
-      client_salutation: Bonjour!
-      client_first_name: Nom
-      client_last_name: Prenom
+         mr: M.
+         ms: Mme
+      client_salutation: Salutation
+      client_first_name: Prénom
+      client_last_name: Nom
       client_email: Email
-      client_mobile: Telefon
-      client_property_size: Nummero Chambre
-      submit: Demand
+      client_mobile: Téléphone portable
+      client_property_size: Nombre de chambres
+      client_street_and_number: Rue et N°
+      client_postal_code: Code Postal
+      client_city: Ville
+      moving_street_and_number: Nouvel Rue et N°
+      moving_postal_code: Nouvel Code postal
+      moving_city: Nouvel Ville
+      moving_date: Date de déménagement
+      submit: Demandez des offres de déménagement!
   activerecord:
     attributes:
       moving_inquiry:
-        name: 'Name'
+        client_salutation: Bonjour!
+        client_salutations:
+          mr: M.
+          ms: Mme
+        client_first_name: Prénom
+        client_last_name: Nom
+        client_email: Email
+        client_mobile: Téléphone portable
+        client_property_size: Nombre de chambres
+        client_street_and_number: Rue et N°
+        client_postal_code: Code Postal
+        client_city: Ville
+        moving_street_and_number: Nouvel Rue et N°
+        moving_postal_code: Nouvel Code postal
+        moving_city: Nouvel Ville
+        moving_date: Date de déménagement
+        submit: Demandez des offres de déménagement!
