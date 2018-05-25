@@ -37,17 +37,39 @@ en:
   moving_inquiries:
     form:
       client_salutations:
-        mr: Mr
-        ms: Ms
+         mr: Mr
+         ms: Ms
       client_salutation: Formality
-      client_first_name: Last Name
-      client_last_name: First Name
+      client_first_name: Fist Name
+      client_last_name: Last Name
       client_email: Email
-      client_mobile: Mobile Phone Nr.
+      client_mobile: Mobile phone
       client_property_size: Number of rooms
-
-      submit: Request Offers Now!
+      client_street_and_number: Street and N°
+      client_postal_code: Postcode
+      client_city: City
+      moving_street_and_number: New street and N°
+      moving_postal_code: New Postcode
+      moving_city: New City
+      moving_date: Moving date
+      submit: Request moving offers now!
   activerecord:
     attributes:
       moving_inquiry:
-        name: 'Name'
+        client_salutation: Formality
+        client_salutations:
+           mr: Mr
+           ms: Ms
+        client_first_name: Fist Name
+        client_last_name: Last Name
+        client_email: Email
+        client_mobile: Mobile phone
+        client_property_size: Number of rooms
+        client_street_and_number: Street and N°
+        client_postal_code: Postcode
+        client_city: City
+        moving_street_and_number: New street and N°
+        moving_postal_code: New Postcode
+        moving_city: New City
+        moving_date: Moving date
+        submit: Request moving offers now!

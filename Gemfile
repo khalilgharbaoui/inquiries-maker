@@ -23,7 +23,6 @@ gem 'rails-i18n'
 gem 'devise'
 gem 'sneakers', '~> 2.7.0'
 
-
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
