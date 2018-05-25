@@ -73,3 +73,14 @@ fr:
         moving_city: Nouvel Ville
         moving_date: Date de déménagement
         submit: Demandez des offres de déménagement!
+    enums:
+      movinginquiry:
+        client_property_size:
+          size_1: "+1"
+          size_2: "+2"
+          size_3: "+3"
+          size_4: "+4"
+          size_5: "+5"
+          size_6: "+6"
+          size_7: "+7"
+          size_8: "+8"

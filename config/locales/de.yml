@@ -42,6 +42,17 @@ de:
         moving_city: Neue Ort
         moving_date: Umzugsdatum
         submit: Jetzt Offerten anfordern!
+    enums:
+      movinginquiry:
+        client_property_size:
+          size_1: "+1"
+          size_2: "+2"
+          size_3: "+3"
+          size_4: "+4"
+          size_5: "+5"
+          size_6: "+6"
+          size_7: "+7"
+          size_8: "+8"
   faker:
     locales:
       locale:           [de, en, fr]

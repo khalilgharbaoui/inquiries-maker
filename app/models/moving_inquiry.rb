@@ -1,5 +1,5 @@
 class MovingInquiry < ApplicationRecord
-  enum client_property_size: {:"1+" => "size_1", :"2+" => "size_2", :"3+" => "size_3", :"4+" => "size_4", :"5+" => "size_5", :"6+" => "size_6", :"7+" => "size_7", :"8+" => "size_8"}
+  enum client_property_size: {size_1: "size_1", size_2: "size_2", size_3: "size_3", size_4: "size_4", size_5: "size_5", size_6: "size_6", size_7: "size_7", size_8: "size_8"}
 
   CH = Phonelib.default_country
   before_save PhoneNumberWrapper.new
@@ -11,7 +11,7 @@ class MovingInquiry < ApplicationRecord
 
   validates :locale, inclusion: { in: %w[de en fr]}
   validates :client_salutation, inclusion: { in: %w[mr ms]}
-  validates :client_property_size, inclusion: { in: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8]}
+  validates :client_property_size, inclusion: { in: %w(size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8)}
 
   validates :is_moving_request, inclusion: { in: [true, false] }
   validates :is_moving_request, inclusion: { in: [true] }
@@ -27,7 +27,7 @@ class MovingInquiry < ApplicationRecord
 
   # validates_with PhoneCountryCodeValidator, fields: [:client_mobile], country_codes: ["CH", :ch, Phonelib.default_country]
 
-  validates_format_of :client_mobile, with: /(\A07|\A.417|\A00417)/,message: "number should start with 07, 00417 or +417"
+  validates_format_of :client_mobile, with: /(\A07|\A.417|\A00417)/,message: "07, 00417 orsize_ 417"
 
   validates :client_postal_code, :moving_postal_code, zipcode: { country_code: :ch }
   validates_format_of :moving_date, with: /\d{4}\-\d{2}\-\d{2}/, message: "^Date must be in the following format: yyyy-mm-yy"
