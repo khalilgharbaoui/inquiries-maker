@@ -12,7 +12,10 @@
 
 ActiveRecord::Schema.define(version: 2018_05_13_145658) do
 
-  create_table "cleaning_inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "cleaning_inquiries", force: :cascade do |t|
     t.string "partner_token"
     t.string "locale", default: "de", null: false
     t.string "client_first_name"
@@ -30,7 +33,7 @@ ActiveRecord::Schema.define(version: 2018_05_13_145658) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "combined_inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "combined_inquiries", force: :cascade do |t|
     t.string "partner_token"
     t.string "locale", default: "de", null: false
     t.string "client_first_name"
@@ -51,7 +54,7 @@ ActiveRecord::Schema.define(version: 2018_05_13_145658) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "moving_inquiries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "moving_inquiries", force: :cascade do |t|
     t.string "partner_token"
     t.string "locale", default: "de", null: false
     t.string "client_first_name"
@@ -73,13 +76,7 @@ ActiveRecord::Schema.define(version: 2018_05_13_145658) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "seed_migration_data_migrations", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "version"
-    t.integer "runtime"
-    t.datetime "migrated_on"
-  end
-
-  create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

@@ -6,10 +6,9 @@ User.create!([
 ])
 
 
-14.times do |i|
-  i = i+ 1 * rand(5)
-  FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first)
-end
+# 14.times do |i|
+#   i = i+ 1 * rand(5)
+#   FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first)
+# end
 # # ActiveRecord::Base.transaction do
 # # end
-SeedMigration::Migrator.bootstrap()
