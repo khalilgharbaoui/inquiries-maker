@@ -1,0 +1,34 @@
+# docker-compose.yml
+
+version: '3'
+services:
+  web:
+    depends_on:
+      - db
+      - broker
+    build: .
+    ports:
+      - "80:80"
+    environment:
+        env_file: .env
+
+  worker:
+    depends_on:
+      - broker
+      - db
+      - web
+    image: inquiries_maker_web
+    command: rake sneakers:run
+    environment:
+        env_file: .env
+    volumes:
+      - '.:/app'
+  broker:
+    depends_on:
+      - db
+    image: rabbitmq
+  db:
+    image: postgres
+    volumes:
+      - /inquiries_maker/db/dumps
+    # We're mounting this folder so we can backup/restore database dumps from our app folder.
