@@ -6,3 +6,5 @@ Screen*
 .byebug_history
 log/*
 tmp/*
+.env
+config/master.key
