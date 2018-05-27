@@ -1,8 +1,8 @@
 class MovingInquiry < ApplicationRecord
   enum client_property_size: {size_1: "size_1", size_2: "size_2", size_3: "size_3", size_4: "size_4", size_5: "size_5", size_6: "size_6", size_7: "size_7", size_8: "size_8"}
-
   CH = Phonelib.default_country
   before_save PhoneNumberWrapper.new
+
   validates :locale, :is_moving_request, :is_cleaning_request,
             :client_salutation, :client_first_name, :client_last_name, :client_email, :client_mobile, :client_postal_code, :client_city, :moving_postal_code, :moving_city, :moving_date, :client_property_size, :client_street_and_number, :moving_street_and_number, exclusion: { in: [nil] }
 
