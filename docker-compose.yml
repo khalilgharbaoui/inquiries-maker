@@ -10,19 +10,17 @@ services:
     ports:
       - "80:80"
     environment:
-        env_file: .env
+      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
 
   worker:
     depends_on:
       - broker
       - db
       - web
-    image: inquiries_maker_web
+    image: inquiries-maker_web
     command: rake sneakers:run
     environment:
-        env_file: .env
-    volumes:
-      - '.:/app'
+      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
   broker:
     depends_on:
       - db
@@ -30,5 +28,5 @@ services:
   db:
     image: postgres
     volumes:
-      - /inquiries_maker/db/dumps
+      - /inquiries-maker/db/dumps
     # We're mounting this folder so we can backup/restore database dumps from our app folder.
