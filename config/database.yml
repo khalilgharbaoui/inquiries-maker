@@ -72,3 +72,4 @@ production:
   database: inquiries_maker_production
   username: inquiries_maker
   password: <%= Rails.application.credentials.dig( Rails.env.to_sym, :inquiries_maker_database_password) %>
+  url: <%= Rails.application.credentials.dig( Rails.env.to_sym, :database_url) %>
