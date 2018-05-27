@@ -13,7 +13,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
-gem 'mysql2', '~> 0.5.1'
+gem 'pg'
 gem 'slim-rails'
 gem "valid_email2"
 gem "phonelib"
@@ -22,19 +22,34 @@ gem 'jquery-ui-rails'
 gem 'rails-i18n'
 gem 'devise'
 gem 'sneakers', '~> 2.7.0'
+gem 'json-prettyprint'
+gem 'faker'
+gem 'listen', '>= 3.0.5', '< 3.2'
+
+
+group :development, :test do
+  # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'factory_bot_rails'
+  gem 'pry-rails'
+  gem 'pry-rescue'
+  gem 'rspec-rails'
+  gem 'rubocop'
+  # gem "nyan-cat-formatter"
+  # gem 'fuubar'
+  gem "binding_of_caller"
+end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
-  gem 'capistrano', '~> 3.0.1'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails', '~> 1.1.0'
-  gem 'capistrano-rails-console'
-  gem 'capistrano-rvm', '~> 0.1.1'
-  gem 'foreman'
+  # gem 'capistrano', '~> 3.0.1'
+  # gem 'capistrano-bundler'
+  # gem 'capistrano-rails', '~> 1.1.0'
+  # gem 'capistrano-rails-console'
+  # gem 'capistrano-rvm', '~> 0.1.1'
+  # gem 'foreman'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
@@ -44,9 +59,7 @@ group :development do
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
-  gem 'seed_migration'
   gem 'seed_dump'
-  gem 'json-prettyprint'
 end
 
 group :test do
@@ -54,18 +67,4 @@ group :test do
   gem 'selenium-webdriver'
   gem 'chromedriver-helper'
   gem 'database_cleaner'
-  gem 'launchy'
-end
-
-group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'pry-rails'
-  gem 'pry-rescue'
-  gem 'rspec-rails'
-  gem 'rubocop'
-  gem "nyan-cat-formatter"
-  gem 'fuubar'
-  gem "binding_of_caller"
 end
