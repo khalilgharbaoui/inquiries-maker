@@ -71,4 +71,4 @@ production:
   <<: *default
   database: inquiries_maker_production
   username: inquiries_maker
-  password: <%= ENV['INQUIRIES_MAKER_DATABASE_PASSWORD'] %>
+  password: <%= Rails.application.credentials.dig( Rails.env.to_sym, :inquiries_maker_database_password) %>

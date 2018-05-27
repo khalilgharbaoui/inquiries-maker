@@ -4,7 +4,6 @@ require 'net/http'
 require 'openssl'
 require 'active_support/all'
 require 'json'
-require 'dotenv'
 require 'date'
 require 'json-prettyprint'
 
@@ -14,7 +13,7 @@ require 'json-prettyprint'
     exclusions = [:id, :created_at, :updated_at]
     credentials = {
       origin: 'thirdparty_partner',
-      partner_token: ENV["MOVU_PARTNER_TOKEN"]
+      partner_token: Rails.application.credentials.dig(Rails.env.to_sym,:movu_partner_token)
     }
     utm_params = {
       utm_campaign: 'umzug-offerte-schweiz',
@@ -34,7 +33,9 @@ require 'json-prettyprint'
   private
 
     def self.create_http_object(json)
-      constructed_url = ENV["MOVU_STAGING_URL"] + ENV["MOVU_API_PATH"]
+      movu_url = Rails.application.credentials.dig(Rails.env.to_sym, :movu_staging_url)
+      movu_path = Rails.application.credentials.dig(Rails.env.to_sym, :movu_api_path)
+      constructed_url = movu_url + movu_path
       uri = URI.parse(constructed_url)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true

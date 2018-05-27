@@ -1,7 +1,9 @@
 require 'sneakers'
 require 'sneakers/metrics/logging_metrics'
+amqp = Rails.application.credentials.dig(
+      Rails.env.to_sym, :rabbitmq_amqp_uri)
 Sneakers.configure  :heartbeat => 5,
-                    :amqp => ENV['RABBITMQ_AMQP_URI'],
+                    amqp: amqp,
                     :vhost => '/',
                     :exchange => 'sneakers',
                     :exchange_type => :direct,
@@ -17,7 +19,7 @@ Sneakers.configure  :heartbeat => 5,
 
 # Sneakers.configure({
 #
-#   amqp: "amqp://#{ENV["RABBITMQ_USER_AND_PASS"]}@127.0.0.1:5672",
+#   amqp: "amqp://gues:gues@127.0.0.1:5672",
 #
 #   vhost: "/",
 #
