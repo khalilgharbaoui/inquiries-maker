@@ -1,7 +1,7 @@
 require 'sneakers'
 require 'sneakers/metrics/logging_metrics'
 Sneakers.configure  :heartbeat => 5,
-                    :amqp => 'amqp://guest:guest@localhost:5672',
+                    :amqp => ENV['RABBITMQ_AMQP_URI'],
                     :vhost => '/',
                     :exchange => 'sneakers',
                     :exchange_type => :direct,
@@ -9,7 +9,7 @@ Sneakers.configure  :heartbeat => 5,
                     threads: 5,      # Threadpool size (good to match prefetch)
                     timeout_job_after: 60,   # Maximal seconds to wait for job
                     start_worker_delay: 0, # Delay between thread startup
-                    workers: 4, # Number of per-cpu processes to run
+                    workers: 1, # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
                     metrics: Sneakers::Metrics::LoggingMetrics.new
