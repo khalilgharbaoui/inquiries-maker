@@ -6,18 +6,17 @@ services:
     depends_on:
       - db
       - broker
-    build: .
+    image: kaygeee/inquiries-maker:latest
     ports:
       - "80:80"
     environment:
       - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
-
   worker:
     depends_on:
       - broker
       - db
       - web
-    image: inquiries-maker_web
+    image: kaygeee/inquiries-maker:latest
     command: rake sneakers:run
     environment:
       - RAILS_MASTER_KEY=$RAILS_MASTER_KEY

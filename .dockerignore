@@ -1,5 +1,4 @@
 .git*
-docker-compose*
 README.md
 Screen*
 .dockerignore
