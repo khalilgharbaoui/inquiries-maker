@@ -21,6 +21,7 @@ Rails.application.configure do
     config.public_file_server.headers = {
       'Cache-Control' => "public, max-age=#{2.days.to_i}"
     }
+
   else
     config.action_controller.perform_caching = false
 
@@ -78,4 +79,9 @@ Rails.application.configure do
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
   Faker::Config.locale = 'de'
+
+  logger           = ActiveSupport::Logger.new(STDOUT)
+  logger.formatter = config.log_formatter
+  config.log_tags  = [:subdomain, :uuid]
+  config.logger    = ActiveSupport::TaggedLogging.new(logger)
 end

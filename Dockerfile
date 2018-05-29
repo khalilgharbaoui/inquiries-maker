@@ -26,7 +26,8 @@ RUN cd app ; bundle exec rake assets:precompile
 
 # Set environment variables and their default values
 # These can be overridden when we run the container
-ENV PORT=80
+ENV LANG C.UTF-8
+ENV PORT=8000
 ENV RAILS_ENV=production
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
@@ -39,4 +40,4 @@ MAINTAINER Khalil Gharbaoui <kaygeee@gmail.com>
 
 # Set the default command to run, if we don't provide a command when we run
 # a container from this Images
-CMD ["rails", "server", "-b", "0.0.0.0"]
+CMD ["puma","-e","production"]
