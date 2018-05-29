@@ -94,3 +94,6 @@ pickle-email-*.html
 
 #redis dump
 dump.rdb
+#ssl certificated
+config/certs/ssl.crt
+config/certs/ssl.key

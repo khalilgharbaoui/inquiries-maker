@@ -7,3 +7,5 @@ log/*
 tmp/*
 .env
 config/master.key
+config/certs/ssl.crt
+config/certs/ssl.key
