@@ -2,30 +2,36 @@
 
 version: '3'
 services:
-  web:
+  db:
+    image: postgres:alpine
+    volumes:
+      - "~/web/inquiries-maker/data/:/var/lib/postgresql/data"
+    # We're mounting this folder so we can backup/restore database dumps from our app folder.
+  broker:
+    image: rabbitmq:alpine
     depends_on:
       - db
-      - broker
+  worker:
     image: kaygeee/inquiries-maker:latest
+    command: ["rake", "workers:run"]
+    environment:
+      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
+    depends_on:
+      - broker
+      - db
+  web:
+    image: kaygeee/inquiries-maker:latest
+    command:   ["puma", "-e", "production"]
     ports:
+      # HOST:CONTAINER
       - "8000:8000"
     environment:
       - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
-  worker:
-    depends_on:
-      - broker
-      - db
-      - web
-    image: kaygeee/inquiries-maker:latest
-    command: rake sneakers:run
-    environment:
-      - RAILS_MASTER_KEY=$RAILS_MASTER_KEY
-  broker:
-    depends_on:
-      - db
-    image: rabbitmq
-  db:
-    image: postgres
     volumes:
-      - /inquiries-maker/db/dumps
-    # We're mounting this folder so we can backup/restore database dumps from our app folder.
+      # HOST:CONTAINER:ro <=read only
+      - "~/web/inquiries-maker/certs/ssl.key:/app/config/certs/ssl.key"
+      - "~/web/inquiries-maker/certs/ssl.crt:/app/config/certs/ssl.crt"
+    depends_on:
+      - db
+      - broker
+      - worker
