@@ -34,5 +34,8 @@ module InquiriesMaker
     config.i18n.available_locales = [:de,:fr,:en]
     # default locale language code
     config.i18n.default_locale = :de
+
+    #allow embeding in i frame
+    config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
   end
 end
