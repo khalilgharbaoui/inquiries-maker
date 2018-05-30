@@ -16,10 +16,10 @@ environment 'development'
 # port ENV.fetch("PORT") { 3000 }
 
 
-bind 'tcp://0.0.0.0:9292'
+# bind 'tcp://0.0.0.0:9292'
 
-key = 'config/certs/ssl.key'
-crt = 'config/certs/ssl.crt'
+key = '/Users/KG/web/inquiries-maker/certs/ssl.key'
+crt = '/Users/KG/web/inquiries-maker/certs/ssl.crt'
 
 ssl_bind '0.0.0.0', '8000', {
   key: key,
