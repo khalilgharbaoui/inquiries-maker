@@ -84,4 +84,7 @@ Rails.application.configure do
   logger.formatter = config.log_formatter
   config.log_tags  = [:subdomain, :uuid]
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
+
+  config.force_ssl = false
+
 end
