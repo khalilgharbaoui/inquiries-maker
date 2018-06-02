@@ -1,3 +1,14 @@
 // Place all the styles related to the MovingInquiries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+.ui-autocomplete {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+main {
+  margin-top: 0px !important; // accommodate the navbar
+  margin-left: 1px; // accommodate the navbar
+}
