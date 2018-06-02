@@ -44,6 +44,21 @@ Getting Started
 
 Documentation and Support
 -------------------------
+```
+<div align="center" style="position: relative; height: 0; overflow: hidden;">
+   <iframe src="//0.0.0.0:8000" style="" name="Inquiries Maker Form" scrolling="no" width="100%" height="1500"
+      style="
+             position: absolute;
+             top:0;
+             left: 0;
+             width: 100%;
+             height: 100%;
+             max-width:100%;
+           " allowfullscreen="">
+  </iframe>
+</div>
+```
+
 
 Issues
 -------------
