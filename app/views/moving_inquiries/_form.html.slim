@@ -1,16 +1,7 @@
 - edit ||= false
-.col-md-7.m-auto
+.col-md-12.m-auto
   .form-width role="form" = form_for @moving_inquiry, url: :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}", method: :"#{edit ? 'put' : 'post'}" ,local: true do |f|
     = errors_for(@moving_inquiry)
-    / - if @moving_inquiry.errors.any?
-    /   .row
-    /     .justify-content-center
-    /       #error_explanation.align-self-end
-    /         h2 = "#{pluralize(@moving_inquiry.errors.count, "error")} prohibited this moving_inquiry from being saved:"
-    /         ul
-    /         - @moving_inquiry.errors.full_messages.each do |message|
-    /           li = message
-
     = locale_field(@moving_inquiry, f)
     = f.hidden_field :is_moving_request
     = f.hidden_field :is_cleaning_request
@@ -60,4 +51,4 @@
     .form-row.form-group
       .actions.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
         .m-auto
-          = f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block"
+          = f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block shadow"
