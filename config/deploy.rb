@@ -1,9 +1,9 @@
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'inquiries-maker'
+set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
-# set :deploy_to, '/var/www/my_app'
+set :deploy_to, '/home/deploy/inquiries-maker'
 # set :scm, :git
 
 # set :format, :pretty
@@ -15,7 +15,7 @@ set :repo_url, 'git@example.com:me/my_repo.git'
 
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 # set :keep_releases, 5
-
+append :linked_files, "config/master.key"
 namespace :deploy do
 
   desc 'Restart application'
