@@ -1,8 +1,15 @@
 # Load DSL and Setup Up Stages
 require 'capistrano/setup'
-
 # Includes default deployment tasks
 require 'capistrano/deploy'
+require "capistrano/scm/git"
+  install_plugin Capistrano::SCM::Git
+require 'capistrano/passenger'
+require 'capistrano/rails'
+require 'capistrano/rake'
+
+
+
 
 # Includes tasks from other gems included in your Gemfile
 #
@@ -15,7 +22,9 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/rails/tree/master/assets
 #   https://github.com/capistrano/rails/tree/master/migrations
 #
-# require 'capistrano/rvm'
+require 'capistrano/rvm'
+set :rvm_type, :user
+set :rvm_ruby_version, '2.5.1'
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
