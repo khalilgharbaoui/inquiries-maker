@@ -40,21 +40,24 @@ end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'better_errors'
-  gem 'capistrano', '~> 3.7', '>= 3.7.1'
-  gem 'capistrano-rails', '~> 1.2'
-  gem 'capistrano-passenger', '~> 0.2.0'
 
-  gem 'capistrano-bundler'
+  gem "capistrano", "~> 3.10", require: false
+  gem "capistrano-rails", "~> 1.4", require: false
+  gem 'capistrano-passenger'
+  gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails-console'
   gem 'capistrano-rvm'
-  # gem 'foreman'
+  gem 'capistrano-rake', require: false
+
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
+
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'terminal-notifier-guard'
+
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
