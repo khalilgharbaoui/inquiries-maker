@@ -6,6 +6,8 @@ require "capistrano/scm/git"
   install_plugin Capistrano::SCM::Git
 require 'capistrano/passenger'
 require 'capistrano/rails'
+require 'capistrano/rake'
+
 
 
 
