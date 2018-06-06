@@ -9,9 +9,9 @@ set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 # overwrite flags with the added -d to deamonize the Process of bundle
 set :deploy_to, '/home/inquiries-maker/web/app/'
-# set :format, :pretty
+set :format, :pretty
 # set :log_level, :debug
-set :pty, true
+# set :pty, true
 set :keep_releases, 5
 
 # Defaults to nil (no asset cleanup is performed)
@@ -60,7 +60,6 @@ namespace :deploy do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-            SSHKit.config.command_map.prefix[:rake].push("bundle exec")
             SSHKit.config.command_map.prefix[:rake].unshift("nohup")
             execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
         end
