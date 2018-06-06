@@ -60,12 +60,6 @@ namespace :deploy do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-            # execute :rake, 'workers:run'
-
-            # This here adds a prefix 'bundle exec' to the 'rake' command and
-            # adds a prefix 'nohup' to that while preserving the enviorment
-            # variables.
-
             SSHKit.config.command_map.prefix[:rake].push("bundle exec")
             SSHKit.config.command_map.prefix[:rake].unshift("nohup")
             execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
