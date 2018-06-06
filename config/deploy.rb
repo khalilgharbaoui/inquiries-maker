@@ -11,7 +11,7 @@ set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 set :deploy_to, '/home/inquiries-maker/web/app/'
 # set :format, :pretty
 # set :log_level, :debug
-# set :pty, true
+set :pty, true
 set :keep_releases, 5
 
 # Defaults to nil (no asset cleanup is performed)
@@ -65,6 +65,27 @@ namespace :deploy do
             execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
         end
       end
+    end
+  end
+  # TODO:
+  # task :stop_workers do
+  # end
+  task :start_broker do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      # service rabbitmq-server start
+      execute :service, "rabbitmq-server start"
+    end
+  end
+  task :stop_broker do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      # service rabbitmq-server start
+      execute :service, "rabbitmq-server stop"
+    end
+  end
+  task :restart_broker do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      # service rabbitmq-server start
+      execute :service, "rabbitmq-server restart"
     end
   end
   after :finishing, 'deploy:cleanup'
