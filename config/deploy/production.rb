@@ -1,4 +1,5 @@
 set :stage, :production
+set :branch, :master
 
 # Simple Role Syntax
 # ==================

@@ -7,15 +7,14 @@ set :rails_env, 'production'
 set :rvm_ruby_version, '2.5.1'
 set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
-# overwrite flags with the added -d to deamonize the Process of bundle
 set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
-set :keep_releases, 5
+set :keep_releases, 3
 
 # Defaults to nil (no asset cleanup is performed)
-set :keep_assets, 2
+set :keep_assets, 3
 
 # Defaults to :db role
 set :migration_role, :app
@@ -56,7 +55,35 @@ namespace :deploy do
     end
   end
 
-  task :start_workers do
+  desc "Check if HEAD is same as origin/#{fetch(:branch)}"
+  task :check_revision do
+    on roles(:app) do
+      unless `git rev-parse HEAD` == `git rev-parse origin/#{fetch(:branch)}`
+        puts "WARNING: HEAD is not the same as origin/#{fetch(:branch)}"
+        puts 'Run `git push` to sync changes.'
+        exit
+      end
+    end
+  end
+
+  before :starting, 'deploy:check_revision'
+  after :finishing, 'deploy:cleanup'
+  after :restart, 'workers:stop', 'workers:start'
+
+  # after :restart, :clear_cache do
+  #   on roles(:web), in: :groups, limit: 3, wait: 10 do
+  #     # Here we can do anything such as:
+  #     within release_path do
+  #       execute :rake, 'cache:clear'
+  #     end
+  #   end
+  # end
+end
+
+
+namespace :workers do
+  desc "Start workers..."
+  task :start do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
@@ -66,37 +93,49 @@ namespace :deploy do
       end
     end
   end
-  # TODO:
-  # task :stop_workers do
-  # end
-  task :start_broker do
+
+  desc "Kill workers by PID"
+  task :stop do
+    on roles(:app) do
+      execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=#{fetch(:rails_env)}')"
+    end
+  end
+end
+
+namespace :broker do
+  desc "Start RabbitMQ server..."
+  task :start do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      # service rabbitmq-server start
       sudo! :service, "rabbitmq-server start"
     end
   end
-  task :stop_broker do
+
+  desc "Stop RabbitMQ server..."
+  task :stop do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      # service rabbitmq-server start
       sudo! :service, "rabbitmq-server stop"
     end
   end
-  task :restart_broker do
+
+  desc "Restart RabbitMQ server..."
+  task :restart do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      # service rabbitmq-server start
       sudo! :service, "rabbitmq-server restart"
     end
   end
-  after :finishing, 'deploy:cleanup'
-  after :restart, 'deploy:start_workers'
+  desc "RabbitMQ server status..."
+  task :status do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      sudo! :service, "rabbitmq-server status | cat"
+    end
+  end
 end
 
-# TODO:
-# after :restart, :clear_cache do
-#   on roles(:web), in: :groups, limit: 3, wait: 10 do
-#     # Here we can do anything such as:
-#     within release_path do
-#       execute :rake, 'cache:clear'
-#     end
-#   end
-# end
+namespace :services do
+  desc "Check status of all running services"
+  task :status do
+    on roles(:app), in: :groups, limit: 3, wait: 10 do
+      sudo! :service, "--status-all"
+    end
+  end
+end
