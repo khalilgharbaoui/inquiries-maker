@@ -14,8 +14,10 @@ Sneakers.configure  :heartbeat => 5,
                     workers: 1, # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
-                    metrics: Sneakers::Metrics::LoggingMetrics.new
-
+                    metrics: Sneakers::Metrics::LoggingMetrics.new,
+                    daemonize: false        # Send to background
+                    # log: 'sneakers.log',     # Log file
+                    # pid_path: 'sneakers.pid' # Pid file
 
 # Sneakers.configure({
 #
