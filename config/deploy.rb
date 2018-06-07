@@ -72,19 +72,19 @@ namespace :deploy do
   task :start_broker do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       # service rabbitmq-server start
-      execute :service, "rabbitmq-server start"
+      sudo! :service, "rabbitmq-server start"
     end
   end
   task :stop_broker do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       # service rabbitmq-server start
-      execute :service, "rabbitmq-server stop"
+      sudo! :service, "rabbitmq-server stop"
     end
   end
   task :restart_broker do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       # service rabbitmq-server start
-      execute :service, "rabbitmq-server restart"
+      sudo! :service, "rabbitmq-server restart"
     end
   end
   after :finishing, 'deploy:cleanup'
