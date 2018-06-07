@@ -49,6 +49,7 @@ group :development do
   gem 'capistrano-rails-console'
   gem 'capistrano-rvm'
   gem 'capistrano-rake', require: false
+  gem 'capistrano-sudo', require: false
 
   gem 'guard-bundler'
   gem 'guard-rails'

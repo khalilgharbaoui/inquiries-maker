@@ -7,8 +7,8 @@ require "capistrano/scm/git"
 require 'capistrano/passenger'
 require 'capistrano/rails'
 require 'capistrano/rake'
-
-
+require 'capistrano/rvm'
+require 'capistrano/sudo'
 
 
 # Includes tasks from other gems included in your Gemfile
@@ -22,9 +22,9 @@ require 'capistrano/rake'
 #   https://github.com/capistrano/rails/tree/master/assets
 #   https://github.com/capistrano/rails/tree/master/migrations
 #
-require 'capistrano/rvm'
 set :rvm_type, :user
 set :rvm_ruby_version, '2.5.1'
+
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
 # require 'capistrano/bundler'
