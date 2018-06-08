@@ -81,7 +81,6 @@ namespace :deploy do
   # end
 end
 
-
 namespace :workers do
   desc "Start workers..."
   task :start do
@@ -99,6 +98,15 @@ namespace :workers do
   task :stop do
     on roles(:app) do
       execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=#{fetch(:rails_env)}')"
+    end
+  end
+
+  desc "show workers logs..."
+  task :logs do
+    on roles(:app) do
+      within release_path do
+        execute :tail, "-f #{deploy_to}rake.out"
+      end
     end
   end
 end
@@ -124,6 +132,7 @@ namespace :broker do
       sudo! :service, "rabbitmq-server restart"
     end
   end
+
   desc "RabbitMQ server status..."
   task :status do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
@@ -137,6 +146,35 @@ namespace :services do
   task :status do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       sudo! :service, "--status-all"
+    end
+  end
+end
+
+namespace :logs do
+  desc "Ouput the tail from remote log"
+  task :tail do
+    on roles(:app) do
+      within current_path do
+        execute :tail, "-f log/#{fetch(:rails_env) || 'production'}.log"
+      end
+    end
+  end
+
+  desc "Ouputs the full remote log"
+  task :full do
+    on roles(:app) do
+      within current_path do
+        puts(capture :cat, "log/#{fetch(:rails_env) || 'production'}.log")
+      end
+    end
+  end
+
+  desc "Ouput the last 100 lines of tail from remote log"
+  task :last do
+    on roles(:app) do
+      within current_path do
+        puts(capture :tail, "-n 100 log/#{fetch(:rails_env) || 'production'}.log")
+      end
     end
   end
 end

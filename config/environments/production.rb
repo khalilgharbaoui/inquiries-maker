@@ -54,7 +54,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [ :subdomain, :uuid, :remote_ip]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -99,10 +99,11 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-    logger           = ActiveSupport::Logger.new(STDOUT)
-    logger.formatter = config.log_formatter
-    config.log_tags  = [:subdomain, :uuid]
-    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+    # logger           = ActiveSupport::Logger.new(STDOUT)
+    # logger           = ActiveSupport::Logger.new
+    # logger.formatter = config.log_formatter
+    # config.log_tags  = [:subdomain, :uuid]
+    # config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
