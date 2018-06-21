@@ -22,7 +22,7 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
       th scope="col" Moving date
       th scope="col"
       th scope="col"
-      / th scope="col"
+      th scope="col"
   tbody
     - @moving_inquiries.each do |moving_inquiry|
       tr
@@ -46,5 +46,5 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
         td = moving_inquiry.moving_date
         td = link_to 'Show', url_for(action: :show, id: moving_inquiry.id, locale: I18n.locale)
         td = link_to 'Edit', url_for(action: :edit, id: moving_inquiry.id, locale: I18n.locale)
-        / td = link_to 'Destroy', url_for(action: :destroy, id: moving_inquiry.id, locale: I18n.locale), data: { confirm: 'Are you sure?' }, method: :delete
+        td = link_to 'Destroy', url_for(action: :destroy, id: moving_inquiry.id, locale: I18n.locale), data: { confirm: 'Are you sure?' }, method: :delete
 = link_to 'New Moving inquiry', url_for(action: :new, locale: I18n.locale)
