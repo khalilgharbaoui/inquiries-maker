@@ -1,4 +1,6 @@
 class MovingInquiry < ApplicationRecord
+  has_many :received_inquiry_responses, -> { where(:"#{self.class.name.underscore}_id" => !nil && true) }, dependent: :destroy
+
   enum client_property_size: {size_1: "size_1", size_2: "size_2", size_3: "size_3", size_4: "size_4", size_5: "size_5", size_6: "size_6", size_7: "size_7", size_8: "size_8"}
   CH = Phonelib.default_country
   before_save PhoneNumberWrapper.new
@@ -31,16 +33,19 @@ class MovingInquiry < ApplicationRecord
 
   validates :client_postal_code, :moving_postal_code, zipcode: { country_code: :ch }
   validates_format_of :moving_date, with: /\d{4}\-\d{2}\-\d{2}/, message: "^Date must be in the following format: yyyy-mm-yy"
+  validates :moving_date,inclusion: { in: ->(date){ (Date.tomorrow..Date.tomorrow + 5.years) }}
   validates :client_street_and_number, :moving_street_and_number, length: { minimum: 3 }
   validates :client_street_and_number, :moving_street_and_number, format: { with: /\d+/,
   message: "Must contain a home number" }
 
-  after_create :schedule_client_emails
+  after_create :schedule_inquiry_delivery
 
-  private
-  def schedule_client_emails
-    # ClientMailer.client(self).deliver_later
 
-    MovingInquiryPostingJob.perform_later(self.id)
+  def schedule_inquiry_delivery
+    InquiryDeliverJob.perform_later(self)
   end
+
+  # def schedule_client_emails
+  #   # ClientMailer.client(self).deliver_later
+  # end
 end

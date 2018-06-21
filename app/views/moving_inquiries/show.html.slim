@@ -55,3 +55,7 @@ p
 => link_to 'Edit', url_for(action: :edit, id: @moving_inquiry.id, locale: I18n.locale)
 '|
 =< link_to 'Back', moving_inquiries_path
+
+br
+
+= render "shared/received_inquiry_responses", locals: {inquiry: @moving_inquiry}

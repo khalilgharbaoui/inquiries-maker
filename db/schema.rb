@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_05_13_145658) do
+ActiveRecord::Schema.define(version: 2018_06_09_112915) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,19 @@ ActiveRecord::Schema.define(version: 2018_05_13_145658) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "received_inquiry_responses", force: :cascade do |t|
+    t.bigint "moving_inquiry_id"
+    t.bigint "cleaning_inquiry_id"
+    t.bigint "combined_inquiry_id"
+    t.jsonb "response_body", default: {}, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cleaning_inquiry_id"], name: "index_received_inquiry_responses_on_cleaning_inquiry_id"
+    t.index ["combined_inquiry_id"], name: "index_received_inquiry_responses_on_combined_inquiry_id"
+    t.index ["moving_inquiry_id"], name: "index_received_inquiry_responses_on_moving_inquiry_id"
+    t.index ["response_body"], name: "index_received_inquiry_responses_on_response_body"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -93,4 +106,7 @@ ActiveRecord::Schema.define(version: 2018_05_13_145658) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "received_inquiry_responses", "cleaning_inquiries"
+  add_foreign_key "received_inquiry_responses", "combined_inquiries"
+  add_foreign_key "received_inquiry_responses", "moving_inquiries"
 end
