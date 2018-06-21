@@ -42,9 +42,9 @@ require 'json-prettyprint'
       # ReceivedCleaningIquiryResponse
       # ReceivedCleaningInquiryResponse
       # etc...
-      # but the name FILTER DOES NOT QUITE FIT.
+      # But the name FILTER DOES NOT QUITE FIT.
       # And the responsibilty is not inside the Received inquiry response itself
-      # it does too much.
+      # It does too much.
       # this feels like a duck but how to name it?
       ReceivedInquiryResponse.create!(
         :"#{@inquiry.class.name.underscore}_id" =>  @inquiry.id,
