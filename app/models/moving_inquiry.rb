@@ -67,10 +67,6 @@ class MovingInquiry < ApplicationRecord
   after_create :schedule_inquiry_delivery
 
   def schedule_inquiry_delivery
-    InquiryDeliverJob.perform_later(self)
+    InquiryDeliveryJob.perform_later(self)
   end
-
-  # def schedule_client_emails
-  #   # ClientMailer.client(self).deliver_later
-  # end
 end
