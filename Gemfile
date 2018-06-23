@@ -24,6 +24,9 @@ gem 'sneakers', '~> 2.7.0'
 gem 'json-prettyprint'
 gem 'faker'
 gem 'listen', '>= 3.0.5', '< 3.2'
+# emails
+gem 'inky-rb', require: 'inky'
+gem 'premailer-rails'
 
 
 group :development, :test do
@@ -59,10 +62,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'terminal-notifier-guard'
 
+  gem 'rails_email_preview'
+
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  gem 'rb-fchange', require: false
+  gem 'rb-fsevent', require: false
+  gem 'rb-inotify', require: false
   gem 'spring-commands-rspec'
   gem 'seed_dump'
 end
