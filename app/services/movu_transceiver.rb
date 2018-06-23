@@ -12,7 +12,6 @@ require 'json-prettyprint'
     @response = nil
   end
 
-
   def post
     exclusions = [:id, :created_at, :updated_at]
     credentials = {
