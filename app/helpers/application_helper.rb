@@ -1,8 +1,8 @@
 module ApplicationHelper
-  # found here: https://dhampik.com/blog/rails-routes-tricks-with-locales
-
 
   def general_lang_switcher
+    # https://dhampik.com/blog/rails-routes-tricks-with-locales
+
     content_tag(:ul, class: 'general-lang-switcher navbar-nav mr-auto') do
       I18n.available_locales.each do |loc|
         concat content_tag(:li, (link_to loc.upcase, params.permit(:locale).merge(locale: loc), class: "nav-link"), class: "nav-item #{(I18n.locale == loc ? "active" : "")}").html_safe
@@ -56,6 +56,28 @@ module ApplicationHelper
           end
         end)
       end
+    end
+  end
+
+  def show_received_inquiry_response(inquiry)
+    find_received_inquiry_response_body(inquiry)
+  end
+
+  def show_received_inquiry_response_continue_url(inquiry)
+    find_received_inquiry_response_body(inquiry)[:continue_url]
+  end
+
+  def find_received_inquiry_response_body(inquiry)
+    responses = ReceivedInquiryResponse.where(:"#{inquiry.class.name.underscore}_id" => inquiry.id)
+    responses.each do |response|
+      return response.response_body.transform_keys!(&:to_sym)
+    end
+  end
+
+  def find_all_received_inquiry_responses
+    responses = ReceivedInquiryResponse.all
+    responses.each do |response|
+      return response.response_body.transform_keys!(&:to_sym)
     end
   end
 end
