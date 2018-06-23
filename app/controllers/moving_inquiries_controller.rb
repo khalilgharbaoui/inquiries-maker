@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class MovingInquiriesController < ApplicationController
-  before_action :authenticate_user!, except: [:new,:create]
-  before_action :set_moving_inquiry, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, except: %i[new create]
+  before_action :set_moving_inquiry, only: %i[show edit update destroy]
 
   # GET /moving_inquiries
   # GET /moving_inquiries.json
@@ -10,8 +12,7 @@ class MovingInquiriesController < ApplicationController
 
   # GET /moving_inquiries/1
   # GET /moving_inquiries/1.json
-  def show
-  end
+  def show; end
 
   # GET /moving_inquiries/new
   def new
@@ -19,8 +20,7 @@ class MovingInquiriesController < ApplicationController
   end
 
   # GET /moving_inquiries/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /moving_inquiries
   # POST /moving_inquiries.json
@@ -32,7 +32,7 @@ class MovingInquiriesController < ApplicationController
         format.html { redirect_to new_moving_inquiry_path, notice: 'Moving inquiry was successfully created.' }
         format.json { render :show, status: :created, location: @moving_inquiry }
       else
-        format.html { render :new}
+        format.html { render :new }
         # format.html { url_for(action: :new, locale: I18n.locale)}
         format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
       end
@@ -64,13 +64,14 @@ class MovingInquiriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_moving_inquiry
-      @moving_inquiry = MovingInquiry.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def moving_inquiry_params
-      params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryHelper::COMMON_PARAMS)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_moving_inquiry
+    @moving_inquiry = MovingInquiry.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def moving_inquiry_params
+    params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryHelper::COMMON_PARAMS)
+  end
 end
