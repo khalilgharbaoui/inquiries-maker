@@ -1,0 +1,15 @@
+- if inquiry
+  br
+  h3 Received Inquiry Response 📩:
+  .row
+    .col-md-6.card
+      - show_received_inquiry_response(inquiry).each do |key, value|
+        div
+          - if value
+            b = "#{key}: "
+            = "#{value}"
+  br
+  = link_to 'Step 2', show_received_inquiry_response_continue_url(inquiry), class: 'btn btn-success btn-lg'
+  br
+  br
+  br
