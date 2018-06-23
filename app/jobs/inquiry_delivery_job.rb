@@ -1,4 +1,4 @@
-class InquiryMakingJob < ApplicationJob
+class InquiryDeliveryJob < ApplicationJob
   queue_as :default
 
   def perform(inquiry)
