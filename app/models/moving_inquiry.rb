@@ -2,12 +2,9 @@
 
 # Responsible for validating and schedualing InquiryDeliverJob after creation.
 class MovingInquiry < ApplicationRecord
+  has_one :received_inquiry_response, dependent: :destroy
+
   CH = Phonelib.default_country
-
-  has_many :received_inquiry_responses, lambda {
-    where(:"#{self.class.name.underscore}_id" => true)
-  }, dependent: :destroy
-
   enum client_property_size: {
     size_1: 'size_1', size_2: 'size_2', size_3: 'size_3', size_4: 'size_4',
     size_5: 'size_5', size_6: 'size_6', size_7: 'size_7', size_8: 'size_8'
@@ -64,7 +61,7 @@ class MovingInquiry < ApplicationRecord
   { with: /\d+/, message: 'Must contain a home number' }
 
   before_save PhoneNumberWrapper.new
-  after_create :schedule_inquiry_delivery
+  after_save :schedule_inquiry_delivery
 
   def schedule_inquiry_delivery
     InquiryDeliveryJob.perform_later(self)
