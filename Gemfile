@@ -14,8 +14,9 @@ gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
 gem 'pg'
 gem 'slim-rails'
-gem "valid_email2"
-gem "phonelib"
+gem 'redcarpet'
+gem 'valid_email2'
+gem 'phonelib'
 gem 'validates_zipcode'
 gem 'jquery-ui-rails'
 gem 'rails-i18n'
@@ -36,17 +37,17 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rubocop'
-  # gem "nyan-cat-formatter"
+  # gem 'nyan-cat-formatter'
   # gem 'fuubar'
-  gem "binding_of_caller"
+  gem 'binding_of_caller'
 end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'better_errors'
 
-  gem "capistrano", "~> 3.10", require: false
-  gem "capistrano-rails", "~> 1.4", require: false
+  gem 'capistrano', '~> 3.10', require: false
+  gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-passenger'
   gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails-console'
