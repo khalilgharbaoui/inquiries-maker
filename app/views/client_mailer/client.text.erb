@@ -1,1 +1,16 @@
-<%= @client.client_last_name %>
+<%= markdown t('.complete_your_inquiry.email_body.greeting', client_salutation: @client_salutation, client_last_name: @inquiry.client_last_name, client_first_name: @inquiry.client_first_name) -%>
+<%= markdown(t('.complete_your_inquiry.email_body.main.thank_you')) -%>
+<%= markdown(t('.complete_your_inquiry.email_body.main.not_complete', inquiry: @inquiry_name)) -%>
+<%= t('.complete_your_inquiry.title', inquiry: @inquiry_name) -%>
+
+>> <%= @continue_url %>
+
+<%= word_wrap(markdown(t('.complete_your_inquiry.email_body.partner_notice', partner_name: @partner)), line_width: 90) -%>
+<%= word_wrap(markdown(t('.complete_your_inquiry.email_body.foot')), line_width: 90) %>
+
+<%= t('.complete_your_inquiry.title', inquiry: @inquiry_name) -%>
+
+>> <%= @continue_url %>
+
+<%= @uos %>
+<%= @uos_url -%>
