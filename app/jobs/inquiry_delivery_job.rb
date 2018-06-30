@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InquiryDeliveryJob < ApplicationJob
   queue_as :default
 
