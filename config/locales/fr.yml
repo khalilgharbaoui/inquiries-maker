@@ -53,6 +53,37 @@ fr:
       moving_city: Nouvel Ville
       moving_date: Date de déménagement
       submit: Demandez des offres de déménagement!
+  client_mailer:
+      client:
+        inquiry:
+          moving_inquiry: déménagement
+          cleaning_inquiry: nettoyage
+          combined_inquiry: déménagement et nettoyage
+        complete_your_inquiry:
+           subject: Complétez votre demande s.v.p.! (%{inquiry})
+           title: |
+             Complétez votre demande! (%{inquiry})
+           email_body:
+             greeting: |
+               Cher %{client_salutation} %{client_last_name} %{client_first_name},
+             main:
+               thank_you: |
+                 Merci de nous avoir contacté,
+               not_complete: |
+                 __Mais votre demande des offres de %{inquiry} n'a *pas* encore été envoyée!__
+             button: |
+               ➜ Complétez votre demande!
+             partner_notice: "Vous serez ensuite contact\xE9 par notre *partenaire %{partner_name}* et directement par\
+               \ diff\xE9rentes entreprises de votre r\xE9gion, **qui vous propose cinq offres\
+               \ sans engagement**. Vous pouvez choisir la meilleure offre et entrer en contact\
+               \ avec l'entreprise respective."
+
+             foot: "__\u26A0\uFE0F Nous aimerions \xE9galement vous informer poliment de ne pas\
+               \ utiliser d'autres portails similaires, car la plupart des m\xEAmes soci\xE9\
+                t\xE9s se sont inscrites sur les diff\xE9rents portails. Les entreprises paient\
+                \ pour chaque demande. Pour cette raison, une autre demande serait inutilement\
+                \ injuste pour les autres soci\xE9t\xE9s.__\n"
+        greetings: Sincères salutations,
   activerecord:
     attributes:
       moving_inquiry:

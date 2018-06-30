@@ -1,34 +1,3 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 en:
   hello: "Hello world"
   errors:
@@ -53,6 +22,37 @@ en:
       moving_city: New City
       moving_date: Moving date
       submit: Request moving offers now!
+  client_mailer:
+    client:
+      inquiry:
+        moving_inquiry: moving inquiry
+        cleaning_inquiry: cleaning inquiry
+        combined_inquiry: moving and cleaning inquiries
+      complete_your_inquiry:
+         subject: Complete your %{inquiry} please!
+         title: |
+           Complete your %{inquiry}!
+         email_body:
+           greeting: |
+             Dear %{client_salutation} %{client_last_name} %{client_first_name},
+           main:
+             thank_you: |
+               Thank you for contacting us,
+             not_complete: |
+               __But your request has *not* been passed on and sent off yet!!__
+           button: |
+             ➜ Complete your %{inquiry}!
+           partner_notice: "You will then be contacted by our *partner %{partner_name}* and shortly after
+                **you will receive multiple moving quotes from different companies in your area.**
+                You can then take your time and compare the offers and calmly decide which one
+                is the most fitting for your moving or cleaning project. and then you can get
+                in contact with that specific company."
+           foot: "__⚠️ Please do NOT use any other swiss online moving portals to request more quotes,
+              most of the company that are registered on other portals have also registered them
+              self with us or with one of our partners. The companies pay for every single request
+              you make, and based on that it would be most unfair for some of them and totally
+              unnecessary for others.__"
+      greetings: Sincerely,
   activerecord:
     attributes:
       moving_inquiry:
