@@ -1,35 +1,7 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t 'hello'
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t('hello') %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   'true': 'foo'
-#
-# To learn more, please read the Rails Internationalization guide
-# available at http://guides.rubyonrails.org/i18n.html.
-
 fr:
+  only_swiss_mobiles: "Seulement les numéros mobiles suisses"
+  must_contain_a_home_number: "doit contenir un numéro de domicile!"
+  date_must_be_in_the_following_format: format YYYY-MM-DD
   hello: "Hello world"
   errors:
     messages:
@@ -51,6 +23,42 @@ fr:
       moving_street_and_number: Nouvel Rue et N°
       moving_postal_code: Nouvel Code postal
       moving_city: Nouvel Ville
+      moving_date: Date de déménagement
+      submit: Demandez des offres de déménagement!
+  cleaning_inquiries:
+    form:
+      client_salutations:
+         mr: M.
+         ms: Mme
+      client_salutation: Salutation
+      client_first_name: Prénom
+      client_last_name: Nom
+      client_email: Email
+      client_mobile: Téléphone portable
+      client_property_size: Nombre de chambres
+      client_street_and_number: Rue et N°
+      client_postal_code: Code Postal
+      client_city: Ville
+      cleaning_date: Date de nettoyage
+      submit: Demandez des offres de déménagement!
+  combined_inquiries:
+    form:
+      client_salutations:
+         mr: M.
+         ms: Mme
+      client_salutation: Salutation
+      client_first_name: Prénom
+      client_last_name: Nom
+      client_email: Email
+      client_mobile: Téléphone portable
+      client_property_size: Nombre de chambres
+      client_street_and_number: Rue et N°
+      client_postal_code: Code Postal
+      client_city: Ville
+      moving_street_and_number: Nouvel Rue et N°
+      moving_postal_code: Nouvel Code postal
+      moving_city: Nouvel Ville
+      cleaning_date: Date de nettoyage
       moving_date: Date de déménagement
       submit: Demandez des offres de déménagement!
   client_mailer:
@@ -104,14 +112,68 @@ fr:
         moving_city: Nouvel Ville
         moving_date: Date de déménagement
         submit: Demandez des offres de déménagement!
+      cleaning_inquiry:
+        client_salutation: Bonjour!
+        client_salutations:
+          mr: M.
+          ms: Mme
+        client_first_name: Prénom
+        client_last_name: Nom
+        client_email: Email
+        client_mobile: Téléphone portable
+        client_property_size: Nombre de chambres
+        client_street_and_number: Rue et N°
+        client_postal_code: Code Postal
+        client_city: Ville
+        cleaning_date: Date de nettoyage
+        submit: Demandez des offres de déménagement!
+      combined_inquiry:
+        client_salutation: Bonjour!
+        client_salutations:
+          mr: M.
+          ms: Mme
+        client_first_name: Prénom
+        client_last_name: Nom
+        client_email: Email
+        client_mobile: Téléphone portable
+        client_property_size: Nombre de chambres
+        client_street_and_number: Rue et N°
+        client_postal_code: Code Postal
+        client_city: Ville
+        moving_street_and_number: Nouvel Rue et N°
+        moving_postal_code: Nouvel Code postal
+        moving_city: Nouvel Ville
+        cleaning_date: Date de nettoyage
+        moving_date: Date de déménagement
+        submit: Demandez des offres de déménagement!
     enums:
       movinginquiry:
         client_property_size:
-          size_1: "+1"
-          size_2: "+2"
-          size_3: "+3"
-          size_4: "+4"
-          size_5: "+5"
-          size_6: "+6"
-          size_7: "+7"
-          size_8: "+8"
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
+      cleaninginquiry:
+        client_property_size:
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
+      combinedinquiry:
+        client_property_size:
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
