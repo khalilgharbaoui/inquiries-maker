@@ -28,6 +28,9 @@ p
   strong Client postal code:
   = @combined_inquiry.client_postal_code
 p
+  strong Client city:
+  = @combined_inquiry.client_city
+p
   strong Client property size:
   = @combined_inquiry.client_property_size
 p
@@ -43,12 +46,19 @@ p
   strong Moving postal code:
   = @combined_inquiry.moving_postal_code
 p
+  strong Moving city:
+  = @combined_inquiry.moving_city
+p
   strong Moving date:
   = @combined_inquiry.moving_date
 p
   strong Cleaning date:
   = @combined_inquiry.cleaning_date
 
-=> link_to 'Edit', edit_combined_inquiry_path(@combined_inquiry)
+=> link_to 'Edit', url_for(action: :edit, id: @combined_inquiry.id, locale: I18n.locale)
 '|
 =< link_to 'Back', combined_inquiries_path
+
+br
+
+= render "shared/received_inquiry_response", inquiry: @combined_inquiry

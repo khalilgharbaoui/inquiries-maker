@@ -1,8 +1,7 @@
 h1 Editing combined_inquiry
 
-== render 'form'
+== render partial: 'combined_inquiries/form', locals: {edit: true}
 
-=> link_to 'Show', @combined_inquiry
+=> link_to 'Show', url_for(action: :show, id: @combined_inquiry)
 '|
 =< link_to 'Back', combined_inquiries_path
-

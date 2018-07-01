@@ -1,57 +1,60 @@
-= form_for @combined_inquiry do |f|
-  - if @combined_inquiry.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@combined_inquiry.errors.count, "error")} prohibited this combined_inquiry from being saved:"
-      ul
-        - @combined_inquiry.errors.full_messages.each do |message|
-          li = message
-
-  .field
-    = f.label :partner_token
-    = f.text_field :partner_token
-  .field
-    = f.label :locale
-    = f.text_field :locale
-  .field
-    = f.label :client_first_name
-    = f.text_field :client_first_name
-  .field
-    = f.label :client_last_name
-    = f.text_field :client_last_name
-  .field
-    = f.label :client_salutation
-    = f.text_field :client_salutation
-  .field
-    = f.label :client_email
-    = f.text_field :client_email
-  .field
-    = f.label :client_mobile
-    = f.text_field :client_mobile
-  .field
-    = f.label :client_street_and_number
-    = f.text_field :client_street_and_number
-  .field
-    = f.label :client_postal_code
-    = f.text_field :client_postal_code
-  .field
-    = f.label :client_property_size
-    = f.text_field :client_property_size
-  .field
-    = f.label :is_moving_request
-    = f.check_box :is_moving_request
-  .field
-    = f.label :is_cleaning_request
-    = f.check_box :is_cleaning_request
-  .field
-    = f.label :moving_street_and_number
-    = f.text_field :moving_street_and_number
-  .field
-    = f.label :moving_postal_code
-    = f.text_field :moving_postal_code
-  .field
-    = f.label :moving_date
-    = f.date_select :moving_date
-  .field
-    = f.label :cleaning_date
-    = f.date_select :cleaning_date
-  .actions = f.submit
+- edit ||= false
+.col-md-12.m-auto
+  .form-width role="form" = form_for @combined_inquiry, url: :"#{edit ? 'combined_inquiry' : 'create_combined_inquiry'}", method: :"#{edit ? 'put' : 'post'}" ,local: true do |f|
+    = errors_for(@combined_inquiry)
+    = locale_field(@combined_inquiry, f)
+    = f.hidden_field :is_moving_request
+    = f.hidden_field :is_cleaning_request
+    .form-row.form-group
+      .col-6.col-sm-6.col-md-6
+        - [ 'mr', 'ms' ].each_with_index do |client_salutation, i|
+          .div class="form-check form-check-inline order-#{i}"
+            .form-check-input.mt-3 = f.radio_button(:client_salutation, client_salutation)
+            .form-check-label.mt-3 = t(".client_salutations.#{client_salutation}")
+      .col-6.col-sm-6.col-md-6
+        .float-right.mt-2 = form_lang_switcher(edit ? 'edit' : 'new')
+    .form-row.form-group.mb-2
+      .col-6.col-sm-6.col-md-6
+        = f.text_field :client_first_name, placeholder: t(".client_first_name"), class: "form-control"
+      .col-6.col-sm-6.col-md-6
+        = f.text_field :client_last_name, placeholder: t(".client_last_name"), class: "form-control"
+    .form-row.form-group
+      .col-6.col-sm-6.col-md-6
+        = f.text_field :client_email, placeholder: t(".client_email"), class: "form-control"
+      .col-6.col-sm-6.col-md-6
+        = f.text_field :client_mobile, placeholder: t(".client_mobile"), class: "form-control"
+    .form-row.form-group
+      .m-auto
+        .input-group-prepend
+          = f.label t(".client_property_size")+':', class: "input-group-text", for: "moving_inquiry_client_property_size"
+          = f.select :client_property_size, options_for_enum(@combined_inquiry, :client_property_size), class: "form-control"
+    .rails-address-autocomplete.form-row.form-group.mb-2
+      .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1
+        = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street form-control", placeholder: t(".client_street_and_number"), autocomplete: :off
+      .col-5.col-xs-5.col-sm-3.col-md-3.col-lg-3
+        = f.text_field :client_postal_code, class: "rails-address-autocomplete-field-zip_code form-control", id: "client_postal_code", placeholder: t(".client_postal_code")
+      .col-7.col-xs-7.col-sm-4.col-md-4.col-lg-4
+        = f.text_field :client_city, class: "rails-address-autocomplete-field-city form-control", placeholder: t(".client_city"), id: "client_city"
+    .rails-address-autocomplete.form-row.form-group.mb-2
+      .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1
+        = f.text_field :moving_street_and_number, class: "rails-address-autocomplete-field-street form-control", placeholder: t(".moving_street_and_number")
+      .col-5.col-xs-5.col-sm-3.col-md-3.col-lg-3
+        = f.text_field :moving_postal_code, class: "rails-address-autocomplete-field-zip_code form-control", id: "moving_postal_code", placeholder: t(".moving_postal_code")
+      .col-7.col-xs-7.col-sm-4.col-md-4.col-lg-4
+        = f.text_field :moving_city, class: "rails-address-autocomplete-field-city form-control", placeholder: t(".moving_city"), id: "moving_city"
+    .form-row.form-group.mt-3
+      .m-auto
+        = f.label t(".moving_date")+':', class: "input-group-text", for: "combined_inquiry_moving_date"
+    .form-row.form-group.mb-4
+      .m-auto
+        = f.date_select :moving_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
+    .form-row.form-group.mt-3
+      .m-auto
+        = f.label t(".cleaning_date")+':', class: "input-group-text", for: "combined_inquiry_cleaning_date"
+    .form-row.form-group.mb-4
+      .m-auto
+        = f.date_select :cleaning_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
+    .form-row.form-group
+      .actions.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
+        .m-auto
+          = f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block shadow"
