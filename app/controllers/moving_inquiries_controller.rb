@@ -29,12 +29,12 @@ class MovingInquiriesController < ApplicationController
 
     respond_to do |format|
       if @moving_inquiry.save
-        format.html { redirect_to new_moving_inquiry_path, notice: 'Moving inquiry was successfully created.' }
-        format.json { render :show, status: :created, location: @moving_inquiry }
+        format.html { redirect_to new_moving_inquiry_path, notice: t('.moving_inquiry_was_successfully_created') }
+        # format.json { render :show, status: :created, location: @moving_inquiry }
       else
         format.html { render :new }
         # format.html { url_for(action: :new, locale: I18n.locale)}
-        format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
+        # format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -44,11 +44,11 @@ class MovingInquiriesController < ApplicationController
   def update
     respond_to do |format|
       if @moving_inquiry.update(moving_inquiry_params)
-        format.html { redirect_to moving_inquiry_path, notice: 'Moving inquiry was successfully updated.' }
-        format.json { render :show, status: :ok, location: @moving_inquiry }
+        format.html { redirect_to moving_inquiry_path, notice: t('.moving_inquiry_was_successfully_updated') }
+        # format.json { render :show, status: :ok, location: @moving_inquiry }
       else
         format.html { render :edit }
-        format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
+        # format.json { render json: @moving_inquiry.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -58,8 +58,8 @@ class MovingInquiriesController < ApplicationController
   def destroy
     @moving_inquiry.destroy
     respond_to do |format|
-      format.html { redirect_to moving_inquiries_url, notice: 'Moving inquiry was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to moving_inquiries_url, notice: t('.moving_inquiry_was_successfully_destroyed') }
+      # format.json { head :no_content }
     end
   end
 
