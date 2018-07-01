@@ -1,51 +1,52 @@
-h1 Listing combined_inquiries
-
-table
-  thead
+h1 Listing cleaning_inquiries
+table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
+  thead.thead-dark
     tr
-      th Partner token
-      th Locale
-      th Client first name
-      th Client last name
-      th Client salutation
-      th Client email
-      th Client mobile
-      th Client street and number
-      th Client postal code
-      th Client property size
-      th Is moving request
-      th Is cleaning request
-      th Moving street and number
-      th Moving postal code
-      th Moving date
-      th Cleaning date
-      th
-      th
-      th
-
+      th scope="col" #
+      / th Partner token
+      / th Locale
+      th scope="col"
+      / th Client first name
+      th scope="col" last name
+      th scope="col" email
+      / th Client mobile
+      / th Client street and number
+      th scope="col" postal code
+      / th Client postal city
+      th scope="col" property size
+      th scope="col" moving request
+      th scope="col" cleaning request
+      / th Moving street and number
+      th scope="col" Moving postal code
+      / th Moving city
+      th scope="col" Moving date
+      th scope="col" Cleaning date
+      th scope="col"
+      th scope="col"
+      th scope="col"
   tbody
     - @combined_inquiries.each do |combined_inquiry|
       tr
-        td = combined_inquiry.partner_token
-        td = combined_inquiry.locale
-        td = combined_inquiry.client_first_name
-        td = combined_inquiry.client_last_name
+        th scope="row" = combined_inquiry.id
+        / td = combined_inquiry.partner_token
+        / td = combined_inquiry.locale
         td = combined_inquiry.client_salutation
+        / td = combined_inquiry.client_first_name
+        td = combined_inquiry.client_last_name
         td = combined_inquiry.client_email
-        td = combined_inquiry.client_mobile
-        td = combined_inquiry.client_street_and_number
+        / td = combined_inquiry.client_mobile
+        / td = combined_inquiry.client_street_and_number
         td = combined_inquiry.client_postal_code
+        / td = combined_inquiry.client_city
         td = combined_inquiry.client_property_size
         td = combined_inquiry.is_moving_request
         td = combined_inquiry.is_cleaning_request
-        td = combined_inquiry.moving_street_and_number
+        / td = combined_inquiry.moving_street_and_number
         td = combined_inquiry.moving_postal_code
+        / td = combined_inquiry.moving_city
         td = combined_inquiry.moving_date
         td = combined_inquiry.cleaning_date
-        td = link_to 'Show', combined_inquiry
-        td = link_to 'Edit', edit_combined_inquiry_path(combined_inquiry)
-        td = link_to 'Destroy', combined_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Combined inquiry', new_combined_inquiry_path
+        td = link_to 'Show', url_for(action: :show, id: combined_inquiry.id, locale: I18n.locale)
+        td = link_to 'Edit', url_for(action: :edit, id: combined_inquiry.id, locale: I18n.locale)
+        td = link_to 'Destroy', url_for(action: :destroy, id: combined_inquiry.id, locale: I18n.locale), data: { confirm: 'Are you sure?' }, method: :delete
+= link_to 'New Combined inquiry', url_for(action: :new, locale: I18n.locale)

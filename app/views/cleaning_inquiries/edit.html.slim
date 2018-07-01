@@ -1,8 +1,7 @@
 h1 Editing cleaning_inquiry
 
-== render 'form'
+== render partial: 'cleaning_inquiries/form', locals: {edit: true}
 
-=> link_to 'Show', @cleaning_inquiry
+=> link_to 'Show', url_for(action: :show, id: @cleaning_inquiry)
 '|
 =< link_to 'Back', cleaning_inquiries_path
-

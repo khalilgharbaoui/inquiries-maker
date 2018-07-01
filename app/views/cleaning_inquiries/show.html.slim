@@ -28,6 +28,9 @@ p
   strong Client postal code:
   = @cleaning_inquiry.client_postal_code
 p
+  strong Client city:
+  = @cleaning_inquiry.client_city
+p
   strong Client property size:
   = @cleaning_inquiry.client_property_size
 p
@@ -40,6 +43,10 @@ p
   strong Cleaning date:
   = @cleaning_inquiry.cleaning_date
 
-=> link_to 'Edit', edit_cleaning_inquiry_path(@cleaning_inquiry)
+=> link_to 'Edit', url_for(action: :edit, id: @cleaning_inquiry.id, locale: I18n.locale)
 '|
 =< link_to 'Back', cleaning_inquiries_path
+
+br
+
+= render "shared/received_inquiry_response", inquiry: @cleaning_inquiry

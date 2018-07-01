@@ -1,45 +1,42 @@
 h1 Listing cleaning_inquiries
-
-table
-  thead
+table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
+  thead.thead-dark
     tr
-      th Partner token
-      th Locale
-      th Client first name
-      th Client last name
-      th Client salutation
-      th Client email
-      th Client mobile
-      th Client street and number
-      th Client postal code
-      th Client property size
-      th Is moving request
-      th Is cleaning request
-      th Cleaning date
-      th
-      th
-      th
-
+      th scope="col" #
+      / th Partner token
+      / th Locale
+      th scope="col"
+      / th Client first name
+      th scope="col" last name
+      th scope="col" email
+      / th Client mobile
+      / th Client street and number
+      th scope="col" postal code
+      / th Client postal city
+      th scope="col" property size
+      th scope="col" moving request
+      th scope="col" cleaning request
+      th scope="col"
+      th scope="col"
+      th scope="col"
   tbody
     - @cleaning_inquiries.each do |cleaning_inquiry|
       tr
-        td = cleaning_inquiry.partner_token
-        td = cleaning_inquiry.locale
-        td = cleaning_inquiry.client_first_name
-        td = cleaning_inquiry.client_last_name
+        th scope="row" = cleaning_inquiry.id
+        / td = cleaning_inquiry.partner_token
+        / td = cleaning_inquiry.locale
         td = cleaning_inquiry.client_salutation
+        / td = cleaning_inquiry.client_first_name
+        td = cleaning_inquiry.client_last_name
         td = cleaning_inquiry.client_email
-        td = cleaning_inquiry.client_mobile
-        td = cleaning_inquiry.client_street_and_number
+        / td = cleaning_inquiry.client_mobile
+        / td = cleaning_inquiry.client_street_and_number
         td = cleaning_inquiry.client_postal_code
+        / td = cleaning_inquiry.client_city
         td = cleaning_inquiry.client_property_size
         td = cleaning_inquiry.is_moving_request
         td = cleaning_inquiry.is_cleaning_request
-        td = cleaning_inquiry.cleaning_date
-        td = link_to 'Show', cleaning_inquiry
-        td = link_to 'Edit', edit_cleaning_inquiry_path(cleaning_inquiry)
-        td = link_to 'Destroy', cleaning_inquiry, data: { confirm: 'Are you sure?' }, method: :delete
-
-br
-
-= link_to 'New Cleaning inquiry', new_cleaning_inquiry_path
+        td = link_to 'Show', url_for(action: :show, id: cleaning_inquiry.id, locale: I18n.locale)
+        td = link_to 'Edit', url_for(action: :edit, id: cleaning_inquiry.id, locale: I18n.locale)
+        td = link_to 'Destroy', url_for(action: :destroy, id: cleaning_inquiry.id, locale: I18n.locale), data: { confirm: 'Are you sure?' }, method: :delete
+= link_to 'New Cleaning inquiry', url_for(action: :new, locale: I18n.locale)
