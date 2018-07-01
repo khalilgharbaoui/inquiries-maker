@@ -1,6 +1,9 @@
 - edit ||= false
+- form_url = :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}"
+- form_method = :"#{edit ? 'put' : 'post'}"
+
 .col-md-12.m-auto
-  .form-width role="form" = form_for @moving_inquiry, url: :"#{edit ? 'moving_inquiry' : 'create_moving_inquiry'}", method: :"#{edit ? 'put' : 'post'}" ,local: true do |f|
+  .form-width role='form' = form_for @moving_inquiry, url: form_url, method: form_method, local: true do |f|
     = errors_for(@moving_inquiry)
     = locale_field(@moving_inquiry, f)
     = f.hidden_field :is_moving_request
@@ -15,40 +18,40 @@
         .float-right.mt-2 = form_lang_switcher(edit ? 'edit' : 'new')
     .form-row.form-group.mb-2
       .col-6.col-sm-6.col-md-6
-        = f.text_field :client_first_name, placeholder: t(".client_first_name"), class: "form-control"
+        = f.text_field :client_first_name, placeholder: t('.client_first_name'), class: 'form-control'
       .col-6.col-sm-6.col-md-6
-        = f.text_field :client_last_name, placeholder: t(".client_last_name"), class: "form-control"
+        = f.text_field :client_last_name, placeholder: t('.client_last_name'), class: 'form-control'
     .form-row.form-group
       .col-6.col-sm-6.col-md-6
-        = f.text_field :client_email, placeholder: t(".client_email"), class: "form-control"
+        = f.text_field :client_email, placeholder: t('.client_email'), class: 'form-control'
       .col-6.col-sm-6.col-md-6
-        = f.text_field :client_mobile, placeholder: t(".client_mobile"), class: "form-control"
+        = f.text_field :client_mobile, placeholder: t('.client_mobile'), class: 'form-control'
     .form-row.form-group
       .m-auto
         .input-group-prepend
-          = f.label t(".client_property_size")+':', class: "input-group-text", for: "moving_inquiry_client_property_size"
-          = f.select :client_property_size, options_for_enum(@moving_inquiry, :client_property_size), class: "form-control"
+          = f.label t('.client_property_size')+':', class: 'input-group-text', for: 'moving_inquiry_client_property_size'
+          = f.select :client_property_size, options_for_enum(@moving_inquiry, :client_property_size), class: 'form-control'
     .rails-address-autocomplete.form-row.form-group.mb-2
       .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1
-        = f.text_field :client_street_and_number, class: "rails-address-autocomplete-field-street form-control", placeholder: t(".client_street_and_number"), autocomplete: :off
+        = f.text_field :client_street_and_number, class: 'rails-address-autocomplete-field-street form-control', placeholder: t('.client_street_and_number'), autocomplete: :off
       .col-5.col-xs-5.col-sm-3.col-md-3.col-lg-3
-        = f.text_field :client_postal_code, class: "rails-address-autocomplete-field-zip_code form-control", id: "client_postal_code", placeholder: t(".client_postal_code")
+        = f.text_field :client_postal_code, class: 'rails-address-autocomplete-field-zip_code form-control', id: 'client_postal_code', placeholder: t('.client_postal_code')
       .col-7.col-xs-7.col-sm-4.col-md-4.col-lg-4
-        = f.text_field :client_city, class: "rails-address-autocomplete-field-city form-control", placeholder: t(".client_city"), id: "client_city"
+        = f.text_field :client_city, class: 'rails-address-autocomplete-field-city form-control', placeholder: t('.client_city'), id: 'client_city'
     .rails-address-autocomplete.form-row.form-group.mb-2
       .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1
-        = f.text_field :moving_street_and_number, class: "rails-address-autocomplete-field-street form-control", placeholder: t(".moving_street_and_number")
+        = f.text_field :moving_street_and_number, class: 'rails-address-autocomplete-field-street form-control', placeholder: t('.moving_street_and_number')
       .col-5.col-xs-5.col-sm-3.col-md-3.col-lg-3
-        = f.text_field :moving_postal_code, class: "rails-address-autocomplete-field-zip_code form-control", id: "moving_postal_code", placeholder: t(".moving_postal_code")
+        = f.text_field :moving_postal_code, class: 'rails-address-autocomplete-field-zip_code form-control', id: 'moving_postal_code', placeholder: t('.moving_postal_code')
       .col-7.col-xs-7.col-sm-4.col-md-4.col-lg-4
-        = f.text_field :moving_city, class: "rails-address-autocomplete-field-city form-control", placeholder: t(".moving_city"), id: "moving_city"
+        = f.text_field :moving_city, class: 'rails-address-autocomplete-field-city form-control', placeholder: t('.moving_city'), id: 'moving_city'
     .form-row.form-group.mt-3
       .m-auto
-        = f.label t(".moving_date")+':', class: "input-group-text", for: "moving_inquiry_moving_date"
+        = f.label t('.moving_date')+':', class: 'input-group-text', for: 'moving_inquiry_moving_date'
     .form-row.form-group.mb-4
       .m-auto
-        = f.date_select :moving_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, max: Date.tomorrow + 5.years, class: "form-control"
+        = f.date_select :moving_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, max: Date.tomorrow + 5.years, class: 'form-control'
     .form-row.form-group
       .actions.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
         .m-auto
-          = f.submit t(".submit"), class: "btn btn-primary btn-lg btn-block shadow"
+          = f.submit t('.submit'), class: 'btn btn-primary btn-lg btn-block shadow'
