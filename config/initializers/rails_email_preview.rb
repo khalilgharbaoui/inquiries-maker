@@ -28,6 +28,7 @@ Rails.application.config.to_prepare do
   # Set UI locale to something other than :en
   # RailsEmailPreview.locale = :de
 
+  #TODO: fix this so it does not kill Rspec🚸
   # Auto-load preview classes from:
-  RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
+  # RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
 end
