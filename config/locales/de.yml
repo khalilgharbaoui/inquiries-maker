@@ -80,7 +80,7 @@ de:
              not_complete: |
                __Aber Ihre Anfrage wurde noch *nicht* abgeschickt!__
            button: |
-             ➜ vervollständigen Sie Ihre %{inquiry}!
+             ➜ vervollständigen Sie Ihre Anfrage!
            partner_notice: "Sie werden dann von unserem *Partner %{partner_name}* und anschliessend\
             \ von verschiedenen Unternehmen aus Ihrer Region kontaktiert, **welche\
             \ Ihnen f\xFCnf unverbindliche Angebote unterbreiten**. Sie k\xF6nnen\
