@@ -40,7 +40,7 @@
         = f.label t(".cleaning_date")+':', class: "input-group-text", for: "combined_inquiry_cleaning_date"
     .form-row.form-group.mb-4
       .m-auto
-        = f.date_select :cleaning_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
+        = f.date_select :cleaning_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, max: Date.tomorrow + 5.years, class: "form-control"
     .form-row.form-group
       .actions.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
         .m-auto
