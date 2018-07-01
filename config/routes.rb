@@ -2,12 +2,13 @@
 
 Rails.application.routes.draw do
   scope ':locale', locale: /#{I18n.available_locales.join("|")}/ do
-    mount RailsEmailPreview::Engine, at: 'emails'
     root to: 'moving_inquiries#new'
     devise_for :users, controllers: {
       sessions: 'users/sessions',
-      registrations: 'users/registrations'
+      registrations: 'users/registrations',
     }
+    mount RailsEmailPreview::Engine, at: 'emails' if Rails.env == "development"
+
     post 'moving_inquiries/new', to: 'moving_inquiries#create', as: 'create_moving_inquiry'
     post "cleaning_inquiries/new", to: "cleaning_inquiries#create", as: 'create_cleaning_inquiry'
     post "combined_inquiries/new", to: "combined_inquiries#create", as: 'create_combined_inquiry'
