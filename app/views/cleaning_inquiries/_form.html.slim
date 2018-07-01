@@ -26,7 +26,7 @@
     .form-row.form-group
       .m-auto
         .input-group-prepend
-          = f.label t(".client_property_size")+':', class: "input-group-text", for: "moving_inquiry_client_property_size"
+          = f.label t(".client_property_size")+':', class: "input-group-text", for: "cleaning_inquiry_client_property_size"
           = f.select :client_property_size, options_for_enum(@cleaning_inquiry, :client_property_size), class: "form-control"
     .rails-address-autocomplete.form-row.form-group.mb-2
       .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1

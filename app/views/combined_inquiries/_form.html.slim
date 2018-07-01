@@ -26,7 +26,7 @@
     .form-row.form-group
       .m-auto
         .input-group-prepend
-          = f.label t(".client_property_size")+':', class: "input-group-text", for: "moving_inquiry_client_property_size"
+          = f.label t(".client_property_size")+':', class: "input-group-text", for: "combined_inquiry_client_property_size"
           = f.select :client_property_size, options_for_enum(@combined_inquiry, :client_property_size), class: "form-control"
     .rails-address-autocomplete.form-row.form-group.mb-2
       .col-12.col-xs-12.col-sm-5.col-md-5.col-lg-5.mb-1
@@ -44,16 +44,16 @@
         = f.text_field :moving_city, class: "rails-address-autocomplete-field-city form-control", placeholder: t(".moving_city"), id: "moving_city"
     .form-row.form-group.mt-3
       .m-auto
-        = f.label t(".moving_date")+':', class: "input-group-text", for: "combined_inquiry_moving_date"
-    .form-row.form-group.mb-4
-      .m-auto
-        = f.date_select :moving_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
-    .form-row.form-group.mt-3
-      .m-auto
         = f.label t(".cleaning_date")+':', class: "input-group-text", for: "combined_inquiry_cleaning_date"
     .form-row.form-group.mb-4
       .m-auto
         = f.date_select :cleaning_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
+    .form-row.form-group.mt-3
+      .m-auto
+        = f.label t(".moving_date")+':', class: "input-group-text", for: "combined_inquiry_moving_date"
+    .form-row.form-group.mb-4
+      .m-auto
+        = f.date_select :moving_date, default: Date.tomorrow, start_year: Date.tomorrow.year, min: Date.tomorrow, min: Date.tomorrow + 5.years, class: "form-control"
     .form-row.form-group
       .actions.col-12.col-sm-12.col-md-12.align-self-stretch.order-0
         .m-auto
