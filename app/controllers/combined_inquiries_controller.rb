@@ -71,6 +71,6 @@ class CombinedInquiriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def combined_inquiry_params
-    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_date, :cleaning_date, InquiryHelper::COMMON_PARAMS)
+    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, :cleaning_date, InquiryHelper::COMMON_PARAMS)
   end
 end
