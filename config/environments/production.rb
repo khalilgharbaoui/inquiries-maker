@@ -79,11 +79,10 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
     port: 587,
-    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_url)
-,
+    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_url),
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email)
+    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
     password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password)
   }
   # ActionMailer Config
