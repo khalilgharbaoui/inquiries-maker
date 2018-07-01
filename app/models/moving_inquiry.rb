@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Responsible for validating and schedualing InquiryDeliverJob after creation.
+# Responsible for validating and scheduling InquiryDeliverJob after creation.
 class MovingInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
 
@@ -39,7 +39,7 @@ class MovingInquiry < ApplicationRecord
   { possible: true, allow_blank: false, types: [:mobile] }
 
   validates :client_mobile, phone:
-  { countries: [CH], types: [:mobile], message: 'only swiss mobiles' }
+  { countries: [CH], types: [:mobile], message: I18n.t('.only_swiss_mobiles') }
 
   # validates_with PhoneCountryCodeValidator, fields:
   # [:client_mobile], country_codes:
@@ -52,13 +52,13 @@ class MovingInquiry < ApplicationRecord
   { country_code: :ch }
   validates :moving_date, format:
   { with: /\d{4}\-\d{2}\-\d{2}/,
-    message: '^Date must be in the following format: yyyy-mm-yy' }
+    message: I18n.t('.date_must_be_in_the_following_format') } # yyyy-mm-dd
   validates :moving_date, inclusion:
   { in: ->(_date) { (Date.tomorrow..Date.tomorrow + 5.years) } }
   validates :client_street_and_number, :moving_street_and_number, length:
   { minimum: 3 }
   validates :client_street_and_number, :moving_street_and_number, format:
-  { with: /\d+/, message: 'Must contain a home number' }
+  { with: /\d+/, message: I18n.t('.must_contain_a_home_number') }
 
   before_save PhoneNumberWrapper.new
   after_save :schedule_inquiry_delivery
