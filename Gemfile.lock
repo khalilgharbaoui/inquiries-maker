@@ -330,6 +330,8 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
+    rspec_boolean (0.0.6)
+      rspec (~> 3.3)
     rubocop (0.56.0)
       parallel (~> 1.10)
       parser (>= 2.5)
@@ -483,6 +485,7 @@ DEPENDENCIES
   rb-inotify
   redcarpet
   rspec-rails
+  rspec_boolean
   rubocop
   sass-rails (~> 5.0)
   seed_dump
