@@ -1,8 +1,8 @@
-FactoryBot.define do
-  factory :received_inquiry_response do
-    moving_inquiry nil
-    cleaning_inquiry nil
-    combined_inquiry nil
-    response ""
-  end
-end
+# FactoryBot.define do
+#   factory :received_inquiry_response do
+#     moving_inquiry nil
+#     cleaning_inquiry nil
+#     combined_inquiry nil
+#     response_body ""
+#   end
+# end

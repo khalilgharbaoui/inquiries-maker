@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2018_06_09_112915) do
     t.string "client_mobile"
     t.string "client_street_and_number"
     t.string "client_postal_code"
+    t.string "client_city"
     t.string "client_property_size"
     t.boolean "is_moving_request", default: false, null: false
     t.boolean "is_cleaning_request", default: true, null: false
@@ -44,6 +45,8 @@ ActiveRecord::Schema.define(version: 2018_06_09_112915) do
     t.string "client_street_and_number"
     t.string "client_postal_code"
     t.string "client_property_size"
+    t.string "client_city"
+    t.string "moving_city"
     t.boolean "is_moving_request", default: true, null: false
     t.boolean "is_cleaning_request", default: true, null: false
     t.string "moving_street_and_number"

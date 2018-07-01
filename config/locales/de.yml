@@ -22,6 +22,38 @@ de:
       moving_city: Neue Ort
       moving_date: Umzugsdatum
       submit: Jetzt Offerten anfordern!
+  client_mailer:
+    client:
+      inquiry:
+        moving_inquiry: Umzugsanfrage
+        cleaning_inquiry: Reinigung Anfrage
+        combined_inquiry: Umzug und Reiningung Anfragen
+      complete_your_inquiry:
+         subject: vervollständigen Sie Bitte Ihre %{inquiry}!
+         title: |
+           %{inquiry} vervollständigen!
+         email_body:
+           greeting: |
+             Sehr geehrter %{client_salutation} %{client_last_name} %{client_first_name},
+           main:
+             thank_you: |
+               Herzlichen Dank für Ihre Kontaktaufnahme,
+             not_complete: |
+               __Aber Ihre Anfrage wurde noch *nicht* abgeschickt!__
+           button: |
+             ➜ vervollständigen Sie Ihre %{inquiry}!
+           partner_notice: "Sie werden dann von unserem *Partner %{partner_name}* und anschliessend\
+            \ von verschiedenen Unternehmen aus Ihrer Region kontaktiert, **welche\
+            \ Ihnen f\xFCnf unverbindliche Angebote unterbreiten**. Sie k\xF6nnen\
+            \ sich so in aller Ruhe f\xFCr das beste Angebot entscheiden und sich\
+            \ mit der entsprechenden Firma in Verbindung setzen.\n"
+           foot: "__\u26A0\uFE0F Wir m\xF6chten Sie zudem h\xF6flichst darauf Hinweisen,\
+             \ keine weiteren \xE4hnlichen Portale mehr zu benutzen, da sich meist\
+             \ die gleichen Firmen auf den verschiedenen Portalen registriert haben.\
+             \ Die Firmen zahlen f\xFCr jede Anfrage. Aus diesem Grund w\xE4re eine\
+             \ weitere Anfrage zum einen unn\xF6tig zum anderen unfair gegen\xFCber\
+             \ den Firmen.__\n"
+      greetings: Freundliche Grüsse,
   activerecord:
     attributes:
       moving_inquiry:
