@@ -68,9 +68,9 @@ fr:
           cleaning_inquiry: nettoyage
           combined_inquiry: déménagement et nettoyage
         complete_your_inquiry:
-           subject: Complétez votre demande s.v.p.! (%{inquiry})
+           subject: Complétez votre demande de %{inquiry} s.v.p.!
            title: |
-             Complétez votre demande! (%{inquiry})
+             Complétez votre demande de %{inquiry}!
            email_body:
              greeting: |
                Cher %{client_salutation} %{client_last_name} %{client_first_name},

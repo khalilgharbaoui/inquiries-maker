@@ -80,7 +80,7 @@ en:
              not_complete: |
                __But your request has *not* been passed on and sent off yet!!__
            button: |
-             ➜ Complete your %{inquiry}!
+             ➜ Complete your request!
            partner_notice: "You will then be contacted by our *partner %{partner_name}* and shortly after
                 **you will receive multiple moving quotes from different companies in your area.**
                 You can then take your time and compare the offers and calmly decide which one
