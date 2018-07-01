@@ -73,11 +73,4 @@ module ApplicationHelper
       return response.response_body.transform_keys!(&:to_sym)
     end
   end
-
-  def find_all_received_inquiry_responses
-    responses = ReceivedInquiryResponse.all
-    responses.each do |response|
-      return response.response_body.transform_keys!(&:to_sym)
-    end
-  end
 end

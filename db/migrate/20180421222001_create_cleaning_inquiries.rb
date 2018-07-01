@@ -10,6 +10,7 @@ class CreateCleaningInquiries < ActiveRecord::Migration[5.2]
       t.string :client_mobile
       t.string :client_street_and_number
       t.string :client_postal_code
+      t.string :client_city
       t.string :client_property_size
       t.boolean :is_moving_request, null: false, default: false
       t.boolean :is_cleaning_request, null: false, default: true
