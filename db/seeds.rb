@@ -6,8 +6,18 @@ if Rails.env == "development"
   require 'faker'
   require 'factory_bot_rails'
   5.times do |i|
-    i = i+ 1 * rand(5)
+    i = i+ 3 * rand(999)
     FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first)
+  end
+
+  5.times do |i|
+    i = i+ 3 * rand(999)
+    FactoryBot.create(:cleaning_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first)
+  end
+
+  5.times do |i|
+    i = i+ 3 * rand(999)
+    FactoryBot.create(:combined_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first)
   end
 end
 # # ActiveRecord::Base.transaction do
