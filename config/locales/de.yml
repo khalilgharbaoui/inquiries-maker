@@ -1,4 +1,7 @@
 de:
+  must_contain_a_home_number: "muss eine Hausnummer enthalten"
+  only_swiss_mobiles: "Nur Schweizer Mobilfunknummern"
+  date_must_be_in_the_following_format: format YYYY-MM-DD
   hello: "Hello world"
   errors:
     messages:
@@ -20,6 +23,42 @@ de:
       moving_street_and_number: Neue Strasse und Nummer
       moving_postal_code: Neue PLZ
       moving_city: Neue Ort
+      moving_date: Umzugsdatum
+      submit: Jetzt Offerten anfordern!
+  cleaning_inquiries:
+    form:
+      client_salutations:
+         mr: Herr
+         ms: Frau
+      client_salutation: Anrede
+      client_first_name: Vorname
+      client_last_name: Name
+      client_email: E-Mail
+      client_mobile: Mobiltelefon
+      client_property_size: Anzahl Zimmer
+      client_street_and_number: Strasse und Nummer
+      client_postal_code: PLZ
+      client_city: Ort
+      cleaning_date: Reinigungsdatum
+      submit: Jetzt Offerten anfordern!
+  combined_inquiries:
+    form:
+      client_salutations:
+         mr: Herr
+         ms: Frau
+      client_salutation: Anrede
+      client_first_name: Vorname
+      client_last_name: Name
+      client_email: E-Mail
+      client_mobile: Mobiltelefon
+      client_property_size: Anzahl Zimmer
+      client_street_and_number: Strasse und Nummer
+      client_postal_code: PLZ
+      client_city: Ort
+      moving_street_and_number: Neue Strasse und Nummer
+      moving_postal_code: Neue PLZ
+      moving_city: Neue Ort
+      cleaning_date: Reinigungsdatum
       moving_date: Umzugsdatum
       submit: Jetzt Offerten anfordern!
   client_mailer:
@@ -74,17 +113,72 @@ de:
         moving_city: Neue Ort
         moving_date: Umzugsdatum
         submit: Jetzt Offerten anfordern!
+      cleaning_inquiry:
+        client_salutation: Anrede
+        client_salutations:
+          mr: Herr
+          ms: Frau
+        client_first_name: Vorname
+        client_last_name: Name
+        client_email: E-Mail
+        client_mobile: Mobiltelefon
+        client_property_size: Anzahl Zimmer
+        client_street_and_number: Strasse und N°
+        client_postal_code: PLZ
+        client_city: Ort
+        moving_date: Reinigingsdatum
+        submit: Jetzt Offerten anfordern!
+      combined_inquiry:
+        client_salutation: Anrede
+        client_salutations:
+          mr: Herr
+          ms: Frau
+        client_first_name: Vorname
+        client_last_name: Name
+        client_email: E-Mail
+        client_mobile: Mobiltelefon
+        client_property_size: Anzahl Zimmer
+        client_street_and_number: Strasse und N°
+        client_postal_code: PLZ
+        client_city: Ort
+        moving_street_and_number: Neue Strasse und N°
+        moving_postal_code: Neue PLZ
+        moving_city: Neue Ort
+        moving_date: Reinigingsdatum
+        moving_date: Umzugsdatum
+        submit: Jetzt Offerten anfordern!
     enums:
       movinginquiry:
         client_property_size:
-          size_1: "+1"
-          size_2: "+2"
-          size_3: "+3"
-          size_4: "+4"
-          size_5: "+5"
-          size_6: "+6"
-          size_7: "+7"
-          size_8: "+8"
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
+      cleaninginquiry:
+        client_property_size:
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
+      combinedinquiry:
+        client_property_size:
+          size_1: "1+"
+          size_2: "2+"
+          size_3: "3+"
+          size_4: "4+"
+          size_5: "5+"
+          size_6: "6+"
+          size_7: "7+"
+          size_8: "8+"
+
   faker:
     locales:
       locale:           [de, en, fr]
