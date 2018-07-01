@@ -10,8 +10,8 @@ Rails.application.routes.draw do
     mount RailsEmailPreview::Engine, at: 'emails' if Rails.env == "development"
 
     post 'moving_inquiries/new', to: 'moving_inquiries#create', as: 'create_moving_inquiry'
-    post "cleaning_inquiries/new", to: "cleaning_inquiries#create", as: 'create_cleaning_inquiry'
-    post "combined_inquiries/new", to: "combined_inquiries#create", as: 'create_combined_inquiry'
+    post 'cleaning_inquiries/new', to: 'cleaning_inquiries#create', as: 'create_cleaning_inquiry'
+    post 'combined_inquiries/new', to: 'combined_inquiries#create', as: 'create_combined_inquiry'
     resources :moving_inquiries, except: [:create]
     resources :cleaning_inquiries, except: [:create]
     resources :combined_inquiries, except: [:create]
