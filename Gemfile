@@ -24,6 +24,7 @@ gem 'devise'
 gem 'sneakers', '~> 2.7.0'
 gem 'json-prettyprint'
 gem 'faker'
+gem 'http_accept_language', '~> 2.0', '>= 2.0.5'
 gem 'listen', '>= 3.0.5', '< 3.2'
 # emails
 gem 'inky-rb', require: 'inky'
