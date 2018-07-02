@@ -54,6 +54,6 @@ class MovingInquiriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def moving_inquiry_params
-    params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryHelper::COMMON_PARAMS)
+    params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryConcern::COMMON_PARAMS)
   end
 end

@@ -53,6 +53,6 @@ class CombinedInquiriesController < ApplicationController
   end
 
   def combined_inquiry_params
-    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, :cleaning_date, InquiryHelper::COMMON_PARAMS)
+    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, :cleaning_date, InquiryConcern::COMMON_PARAMS)
   end
 end

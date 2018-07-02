@@ -54,6 +54,6 @@ class CleaningInquiriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cleaning_inquiry_params
-    params.require(:cleaning_inquiry).permit(:cleaning_date, InquiryHelper::COMMON_PARAMS)
+    params.require(:cleaning_inquiry).permit(:cleaning_date, InquiryConcern::COMMON_PARAMS)
   end
 end
