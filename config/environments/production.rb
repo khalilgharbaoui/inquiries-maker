@@ -77,13 +77,14 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   config.action_mailer.smtp_settings = {
+    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
     address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
-    port: 587,
-    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_url),
-    authentication: "plain",
-    enable_starttls_auto: true,
+    port: 465,
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
     password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password)
+    authentication: "plain",
+    enable_starttls_auto: true,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) }
