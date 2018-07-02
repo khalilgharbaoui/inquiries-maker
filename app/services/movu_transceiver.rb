@@ -60,8 +60,8 @@ require 'json-prettyprint'
   end
 
   def statistics(response, inquiry)
-    puts "Headers: "
-    puts JSON::PrettyPrint.prettify(response.to_json) if response
+    # puts "Headers: "
+    # puts JSON::PrettyPrint.prettify(response.to_json) if response
 
     puts "Status:"
     puts "Code: " + response.code  if response.code      # => '200'
@@ -88,7 +88,7 @@ require 'json-prettyprint'
       request["accept"] = "application/json"
       request["content-type"] = "application/json"
       request.body = json
-      puts json
+      # puts json
       http.request(request) #make the post
     end
 end
