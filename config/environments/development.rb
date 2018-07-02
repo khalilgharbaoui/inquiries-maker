@@ -58,7 +58,7 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
     port: 587,
-    domain: Rails.application.secrets.domain_name,
+    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
     authentication: :login,
     enable_starttls_auto: false,
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
