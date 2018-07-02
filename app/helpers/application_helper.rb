@@ -6,6 +6,7 @@ module ApplicationHelper
     content_tag(:ul, class: 'general-lang-switcher navbar-nav mr-auto') do
       I18n.available_locales.each do |loc|
         concat content_tag(:li, (link_to loc.upcase, params.permit(:locale).merge(locale: loc), class: "nav-link"), class: "nav-item #{(I18n.locale == loc ? "active" : "")}").html_safe
+        params[:locale] = I18n.locale
       end
     end
   end
@@ -14,8 +15,10 @@ module ApplicationHelper
     content_tag(:div) do
      content_tag(:div, class: 'pagination pagination-sm shadow') do
         I18n.available_locales.each do |loc|
+          # concat content_tag(:li, (link_to loc.upcase, params.permit(:locale).merge(locale: loc), class: "page-link"), class: "page-item #{(I18n.locale == loc ? "active" : "")}").html_safe
           concat content_tag(:li, (link_to loc.upcase,
-          url_for(action: :"#{action}", locale: loc), class: "page-link"), class: "page-item #{(I18n.locale == loc ? "active" : "")}").html_safe
+          url_for(action: :"#{action}", locale: loc), class: "page-link"), class: "page-item #{(I18n.locale == loc ? "active" : " ")}").html_safe
+          params[:locale] = I18n.locale if params[:locale] != loc
         end
       end
     end
