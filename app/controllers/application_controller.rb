@@ -28,9 +28,11 @@ class ApplicationController < ActionController::Base
   # end
   private
   def extract_from_params_or_language_header
+    I18n.locale == nil
     extract_from_params || extract_from_language_header
   end
   def extract_from_params
+    I18n.locale == nil
     params[:locale]
   end
   def extract_from_language_header
