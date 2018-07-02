@@ -1,2 +1,0 @@
-json.extract! combined_inquiry, :id, :partner_token, :locale, :client_first_name, :client_last_name, :client_salutation, :client_email, :client_mobile, :client_street_and_number, :client_postal_code, :client_property_size, :is_moving_request, :is_cleaning_request, :moving_street_and_number, :moving_postal_code, :moving_date, :cleaning_date, :created_at, :updated_at
-json.url combined_inquiry_url(combined_inquiry, format: :json)
