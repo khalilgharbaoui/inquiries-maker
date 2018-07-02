@@ -6,6 +6,7 @@ require 'active_support/all'
 require 'json'
 require 'date'
 require 'json-prettyprint'
+prepend InquiryTicketHelper
 
   def initialize(inquiry)
     @inquiry = inquiry
@@ -49,6 +50,7 @@ require 'json-prettyprint'
         :"#{@inquiry.class.name.underscore}_id" =>  @inquiry.id,
         :response_body => @response.body
       )
+      puts "✅ SENT AND RECEIVED ✅"
     elsif @response.code == "400"
       puts "validation error!"
       statistics(@response, @inquiry)
@@ -56,7 +58,7 @@ require 'json-prettyprint'
       puts "Exeption"
       statistics(@response, @inquiry)
     end
-    statistics(@response, @inquiry)
+    # statistics(@response, @inquiry)
   end
 
   def statistics(response, inquiry)
