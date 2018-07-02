@@ -31,9 +31,10 @@ module InquiriesMaker
     # -- all .rb files in that directory are automatically loaded after loading
     # the framework and any gems in your application.
     # Whitelist locales available for the application
-    config.i18n.available_locales = [:de,:fr,:en]
     # default locale language code
     config.i18n.default_locale = :de
+    config.i18n.enforce_available_locales = true
+    config.i18n.available_locales = [:de,:fr,:en]
 
     #allow embeding in i frame
     config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
