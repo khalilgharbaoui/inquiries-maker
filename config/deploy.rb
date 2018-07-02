@@ -11,10 +11,10 @@ set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
-set :keep_releases, 3
+set :keep_releases, 1
 
 # Defaults to nil (no asset cleanup is performed)
-set :keep_assets, 3
+set :keep_assets, 1
 
 # Defaults to :db role
 set :migration_role, :app
