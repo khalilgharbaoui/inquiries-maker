@@ -54,7 +54,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :subdomain, :uuid, :remote_ip]
+  config.log_tags = %i[subdomain uuid remote_ip]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -76,22 +76,23 @@ Rails.application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
+  # ActionMailer Config
+  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname) }
+  config.action_mailer.delivery_method = :smtp
+
+  # uos server configuration
   config.action_mailer.smtp_settings = {
-    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
     address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
     port: 587,
+    domain: Rails.application.secrets.domain_name,
+    authentication: :login,
+    enable_starttls_auto: false,
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
     password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
-    authentication: "plain",
-    enable_starttls_auto: true,
     openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
-  # ActionMailer Config
-  config.action_mailer.default_url_options = { :host => Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) }
-  config.action_mailer.delivery_method = :smtp
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
-
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
@@ -100,11 +101,11 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-    # logger           = ActiveSupport::Logger.new(STDOUT)
-    # logger           = ActiveSupport::Logger.new
-    # logger.formatter = config.log_formatter
-    # config.log_tags  = [:subdomain, :uuid]
-    # config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  # logger           = ActiveSupport::Logger.new(STDOUT)
+  # logger           = ActiveSupport::Logger.new
+  # logger.formatter = config.log_formatter
+  # config.log_tags  = [:subdomain, :uuid]
+  # config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false

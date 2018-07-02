@@ -50,29 +50,44 @@ Rails.application.configure do
   # number of complex assets.
   config.assets.debug = true
 
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    # domain: Rails.application.secrets.domain_name,
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_password)
-  }
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.action_mailer.delivery_method = :smtp
+
+  # uos server configuration
+  config.action_mailer.smtp_settings = {
+    address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
+    port: 587,
+    domain: Rails.application.secrets.domain_name,
+    authentication: :login,
+    enable_starttls_auto: false,
+    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
+    password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+  }
+
+  # gmail smtp configuration
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.gmail.com",
+  #   port: 587,
+  #   # domain: Rails.application.secrets.domain_name,
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username),
+  #   password: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_password)
+  # }
+
+  # mailcatcher configuration
   # config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
   config.action_mailer.perform_deliveries = true
-
-
   # Suppress logger output for asset requests.
   config.assets.quiet = true
 
   # Raises error for missing translations
-  # config.action_view.raise_on_missing_translations = true
+  config.action_view.raise_on_missing_translations = true
 
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
@@ -82,27 +97,26 @@ Rails.application.configure do
 
   logger           = ActiveSupport::Logger.new(STDOUT)
   logger.formatter = config.log_formatter
-  config.log_tags  = [:subdomain, :uuid]
+  config.log_tags  = %i[subdomain uuid]
   config.logger    = ActiveSupport::TaggedLogging.new(logger)
 
   config.force_ssl = false
-
 end
 
 require 'rails_email_preview'
 
 #= REP hooks and config
 RailsEmailPreview.setup do |config|
-#  # hook before rendering preview:
- config.before_render do |message, preview_class_name, mailer_action|
-   Premailer::Rails::Hook.delivering_email(message)
- end
-#
-#  # do not show Send Email button
- config.enable_send_email = true
-#
-#  # You can specify a controller for RailsEmailPreview::ApplicationController to inherit from:
-#  config.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
+  #  # hook before rendering preview:
+  config.before_render do |message, _preview_class_name, _mailer_action|
+    Premailer::Rails::Hook.delivering_email(message)
+  end
+  #
+  #  # do not show Send Email button
+  config.enable_send_email = true
+  #
+  #  # You can specify a controller for RailsEmailPreview::ApplicationController to inherit from:
+  #  config.parent_controller = 'Admin::ApplicationController' # default: '::ApplicationController'
 end
 
 #= REP + Comfortable Mexican Sofa integration
@@ -118,7 +132,7 @@ Rails.application.config.to_prepare do
   # Set UI locale to something other than :en
   # RailsEmailPreview.locale = :de
 
-  #TODO: fix this so it does not kill Rspec🚸
+  # TODO: fix this so it does not kill Rspec🚸
   # Auto-load preview classes from:
   # RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
 end
