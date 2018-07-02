@@ -81,10 +81,10 @@ Rails.application.configure do
     address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
     port: 465,
     user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password)
+    password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
     authentication: "plain",
     enable_starttls_auto: true,
-    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE,
+    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) }
