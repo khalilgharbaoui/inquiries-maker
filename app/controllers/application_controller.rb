@@ -1,11 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
-  before_action :set_locale
-  def set_locale
-    logger.debug "* Accept-Language: #{request.env['HTTP_ACCEPT_LANGUAGE']}"
-    I18n.locale = extract_from_params_or_language_header
-    logger.debug "* Locale set to '#{I18n.locale}'"
-  end
+  include LocaleFromBrowserConcern
+
+  # TODO: Add method to set admin locale to :en
   # def default_url_options
   #   { locale: I18n.locale }
   # end
@@ -20,22 +17,4 @@ class ApplicationController < ActionController::Base
   # else
   #    #Your logic
   # end
-  #
-  # if self.kind_of? ActiveAdmin::BaseController
-  #    I18n.locale = :en
-  # else
-  #  #Your logic
-  # end
-  private
-  def extract_from_params_or_language_header
-    I18n.locale == nil
-    extract_from_params || extract_from_language_header
-  end
-  def extract_from_params
-    I18n.locale == nil
-    params[:locale]
-  end
-  def extract_from_language_header
-    request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
-  end
 end
