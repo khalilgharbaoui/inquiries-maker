@@ -21,7 +21,7 @@ class CleaningInquiriesController < ApplicationController
 
     respond_to do |format|
       if @cleaning_inquiry.save
-        format.html { redirect_to cleaning_inquiry_path, notice: t('.cleaning_inquiry_was_successfully_created') }
+        format.html { redirect_to new_cleaning_inquiry_path, notice: t('.cleaning_inquiry_was_successfully_created') }
       else
         format.html { render :new }
       end
