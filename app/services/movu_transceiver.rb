@@ -6,7 +6,6 @@ require 'active_support/all'
 require 'json'
 require 'date'
 require 'json-prettyprint'
-prepend InquiryTicketHelper
 
   def initialize(inquiry)
     @inquiry = inquiry
@@ -17,7 +16,7 @@ prepend InquiryTicketHelper
     exclusions = [:id, :created_at, :updated_at]
     credentials = {
       origin: 'thirdparty_partner',
-      partner_token: Rails.application.credentials.dig(Rails.env.to_sym,:movu_partner_token)
+      partner_token: Rails.application.credentials.dig(Rails.env.to_sym,:partner_token)
     }
     utm_params = {
       utm_campaign: 'umzug-offerte-schweiz',
@@ -79,9 +78,9 @@ prepend InquiryTicketHelper
 
   private
     def create_http_object(json)
-      movu_url = Rails.application.credentials.dig(Rails.env.to_sym, :movu_staging_url)
-      movu_path = Rails.application.credentials.dig(Rails.env.to_sym, :movu_api_path)
-      constructed_url = movu_url + movu_path
+      partner_url = Rails.application.credentials.dig(Rails.env.to_sym, :partner_url)
+      partner_api_path = Rails.application.credentials.dig(Rails.env.to_sym, :partner_api_path)
+      constructed_url = partner_url + partner_api_path
       uri = URI.parse(constructed_url)
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
