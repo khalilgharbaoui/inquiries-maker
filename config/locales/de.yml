@@ -7,8 +7,8 @@ de:
     messages:
       invalid_zipcode: Postzal is nicht gültig
   moving_inquiries:
-      create:
-        moving_inquiry_was_successfully_created: "✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩"
+    create:
+      moving_inquiry_was_successfully_created: ✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩
     form:
       client_salutations:
          mr: Herr
