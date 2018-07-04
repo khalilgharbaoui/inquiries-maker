@@ -8,7 +8,7 @@ fr:
       invalid_zipcode: Zipcode is invalid
   moving_inquiries:
     create:
-      moving_inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
+      moving_inquiry_was_successfully_created: "✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩"
     form:
       client_salutations:
          mr: M.
