@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def show_received_inquiry_response_continue_url(inquiry)
-    find_received_inquiry_response_body(inquiry)
+    find_received_inquiry_response_body(inquiry)[:continue_url]
   end
 
   def find_received_inquiry_response_body(inquiry)
