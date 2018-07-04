@@ -5,7 +5,7 @@ module ApplicationHelper
 
     content_tag(:ul, class: 'general-lang-switcher navbar-nav mr-auto') do
       I18n.available_locales.each do |loc|
-        concat content_tag(:li, (link_to loc.upcase, params.permit(:locale).merge(locale: loc), class: "nav-link"), class: "nav-item #{(I18n.locale == loc ? "active" : "")}").html_safe
+        concat content_tag(:li, (link_to loc.upcase, url_for(action: :"#{action_name}", locale: loc), class: "nav-link"), class: "nav-item #{(I18n.locale == loc ? "active" : " ")}").html_safe
       end
     end
   end
@@ -63,7 +63,7 @@ module ApplicationHelper
   end
 
   def show_received_inquiry_response_continue_url(inquiry)
-    find_received_inquiry_response_body(inquiry)[:continue_url]
+    find_received_inquiry_response_body(inquiry)
   end
 
   def find_received_inquiry_response_body(inquiry)
