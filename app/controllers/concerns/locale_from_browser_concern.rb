@@ -20,7 +20,13 @@ module LocaleFromBrowserConcern
     from_browser_header = http_accept_language.compatible_language_from(I18n.available_locales)
     if cookies[:locale].nil? || !cookies[:locale] || session[:initialized].nil? || !session[:initialized]
       logger.debug "* Accept-Language: #{http_accept_language.user_preferred_languages}"
-      cookies[:locale] = from_browser_header
+      cookies.permanent[:locale] = {
+        value: from_browser_header,
+        expires: 2.year,
+        :secure => true,
+        :httponly => true
+      }
+
       params[:locale] = from_browser_header
       I18n.locale = from_browser_header
       logger.debug "* Initial ✅ I18n: '#{I18n.locale}', params: '#{params[:locale]}', cookies: '#{cookies[:locale]}'"
