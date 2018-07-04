@@ -12,7 +12,7 @@ en:
          mr: Mr
          ms: Ms
       client_salutation: Formality
-      client_first_name: Fist Name
+      client_first_name: First Name
       client_last_name: Last Name
       client_email: Email
       client_mobile: Mobile phone
@@ -31,7 +31,7 @@ en:
          mr: Mr
          ms: Ms
       client_salutation: Formality
-      client_first_name: Fist Name
+      client_first_name: First Name
       client_last_name: Last Name
       client_email: Email
       client_mobile: Mobile phone
@@ -47,7 +47,7 @@ en:
          mr: Mr
          ms: Ms
       client_salutation: Formality
-      client_first_name: Fist Name
+      client_first_name: First Name
       client_last_name: Last Name
       client_email: Email
       client_mobile: Mobile phone
@@ -99,7 +99,7 @@ en:
         client_salutations:
            mr: Mr
            ms: Ms
-        client_first_name: Fist Name
+        client_first_name: First Name
         client_last_name: Last Name
         client_email: Email
         client_mobile: Mobile phone
@@ -117,7 +117,7 @@ en:
         client_salutations:
            mr: Mr
            ms: Ms
-        client_first_name: Fist Name
+        client_first_name: First Name
         client_last_name: Last Name
         client_email: Email
         client_mobile: Mobile phone
@@ -132,7 +132,7 @@ en:
         client_salutations:
            mr: Mr
            ms: Ms
-        client_first_name: Fist Name
+        client_first_name: First Name
         client_last_name: Last Name
         client_email: Email
         client_mobile: Mobile phone
