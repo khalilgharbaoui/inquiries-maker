@@ -26,19 +26,17 @@ Getting Started
 - Template engine? [slim]
 - Test framework? [rspec]
 - Continuous testing? [guard]
-- Front-end framework? [bootstrap4]
+- Front-end & Admin framework? [bootstrap4]
 - Add support for sending email? [smtp]
-- Authentication? [ ]
+- Authentication? [devise]
 - Devise modules? [ ]
 - OmniAuth provider? [ ]
 - Authorization? [ ]
-- Use a form builder gem? [ ]
-- Set a locale? [en]
+- Set a locale? [de | fr | en]
 - Install page-view analytics? [ga]
-- Add a deployment mechanism? [capistrano3]
-- Set a robots.txt file to ban spiders? [true]
+- Add a deployment mechanism? [capistrano3 | docker]
+- Set a robots.txt file to ban spiders? [ ]
 - Create a GitHub repository? [true]
-- Add gem and file for environment variables? [foreman]
 - Improve error reporting with 'better_errors' during development? [true]
 - Use 'pry' as console replacement during development and test? [true]
 
@@ -46,7 +44,7 @@ Documentation and Support
 -------------------------
 ```
 <div align="center" style="position: relative; height: 0; overflow: hidden;">
-   <iframe src="//0.0.0.0:8000" style="" name="Inquiries Maker Form" scrolling="no" width="100%" height="1500"
+   <iframe src="//app-url-comes-here!.com" style="" name="Inquiries Maker Form" scrolling="no" width="100%" height="1500"
       style="
              position: absolute;
              top:0;
@@ -63,8 +61,10 @@ Documentation and Support
 Issues
 -------------
 
-Similar Projects
+Related Projects
 ----------------
+lead-extractor
+umzug-offerte-schweiz
 
 Contributing
 ------------
