@@ -1,7 +1,7 @@
 Inquiries Maker
 ================
 
-![](https://github.com/khalilgharbaoui/inquiries-maker/raw/master/inquiries-maker.png)
+![](https://github.com/khalilgharbaoui/inquiries-maker/raw/master/Inquiries-maker.png)
 
 
 Issues?
