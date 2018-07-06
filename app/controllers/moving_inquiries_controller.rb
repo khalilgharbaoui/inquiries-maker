@@ -3,6 +3,7 @@
 class MovingInquiriesController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_moving_inquiry, only: %i[show edit update destroy]
+  prepend ParentThankYouPageUrlMaker
 
   def index
     @moving_inquiries = MovingInquiry.all if user_signed_in?
@@ -21,7 +22,7 @@ class MovingInquiriesController < ApplicationController
 
     respond_to do |format|
       if @moving_inquiry.save
-        format.html { redirect_to new_moving_inquiry_path, notice: t('.moving_inquiry_was_successfully_created') }
+        format.html { redirect_to parent_thank_you_page }
       else
         format.html { render :new }
       end

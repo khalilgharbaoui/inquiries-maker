@@ -3,6 +3,7 @@
 class CleaningInquiriesController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_cleaning_inquiry, only: %i[show edit update destroy]
+  prepend ParentThankYouPageUrlMaker
 
   def index
     @cleaning_inquiries = CleaningInquiry.all if user_signed_in?
@@ -21,7 +22,7 @@ class CleaningInquiriesController < ApplicationController
 
     respond_to do |format|
       if @cleaning_inquiry.save
-        format.html { redirect_to new_cleaning_inquiry_path, notice: t('.cleaning_inquiry_was_successfully_created') }
+        format.html { redirect_to parent_thank_you_page }
       else
         format.html { render :new }
       end
