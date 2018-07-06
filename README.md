@@ -39,24 +39,79 @@ Getting Started
 - Create a GitHub repository? [true]
 - Improve error reporting with 'better_errors' during development? [true]
 - Use 'pry' as console replacement during development and test? [true]
+- Improve Admin styling... []
+- Add notifications to my Telegram [].
+- ReactJS snippet with the form in it connecting trough JSON to the main app []
 
-Documentation and Support
+
+Documentation and Support:
+
+The current forms on this application are not limited to it and can be embedded in
+any kind of application or website with or without JavaScript involvement.
+
+The form will be be full screen. But can be responsive to fit in a
+limited width container or for mobile view.
+
+Example of a  php short-code function for a WordPress web-application page.
 -------------------------
-```
-<div align="center" style="position: relative; height: 0; overflow: hidden;">
-   <iframe src="//app-url-comes-here!.com" style="" name="Inquiries Maker Form" scrolling="no" width="100%" height="1500"
-      style="
-             position: absolute;
-             top:0;
-             left: 0;
-             width: 100%;
-             height: 100%;
-             max-width:100%;
-           " allowfullscreen="">
-  </iframe>
-</div>
+Shortcode:
+`[uos_form src"moving"]`
+
+```PHP
+# theme/functions.php
+
+// Add Shortcode
+function get_uos_form( $atts ) {
+
+        // Attributes
+        $atts = shortcode_atts(
+                array(
+                        'src' => '',
+                ),
+                $atts,
+                'uos_form'
+        );
+        // form types
+        $inquiry_type = array(
+              'moving' => '//RAILS_APP_URL/moving_inquiries/new',
+              'cleaning' => '//RAILS_APP_URL/cleaning_inquiries/new',
+              'combined' => '//RAILS_APP_URL/combined_inquiries/new',
+          );
+
+        // Return custom iframe code
+        return '<iframe src="'. $inquiry_type[$atts['src']] . '" style="" name="Umzug Offerte Schweiz - Umzug Offerte Form" scrolling="no" width="100%" height="1500"
+                style="
+                       position: absolute;
+                       top:0;
+                       left: 0;
+                       width: 100%;
+                       height: 100%;
+                       max-width:100%;
+                     " allowfullscreen="">
+            </iframe>';
+
+}
+add_shortcode( 'uos_form', 'get_uos_form' );
 ```
 
+Example of a simple HTML iframe.
+
+```HTML
+<iframe src="//RAILS_APP_URL/combined_inquiries/new" style="" name="Umzug Offerte Schweiz - Umzug Offerte Form" scrolling="no" width="100%" height="1500"
+                style="
+                       position: absolute;
+                       top:0;
+                       left: 0;
+                       width: 100%;
+                       height: 100%;
+                       max-width:100%;
+                     " allowfullscreen="">
+</iframe>
+```
+
+Example of ReactJS snippet:
+
+Coming Soon....
 
 Issues
 -------------
