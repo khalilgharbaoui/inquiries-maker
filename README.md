@@ -45,6 +45,7 @@ Getting Started
 
 
 Documentation and Support:
+-------------------------
 
 The current forms on this application are not limited to it and can be embedded in
 any kind of application or website with or without JavaScript involvement.
@@ -53,7 +54,7 @@ The form will be be full screen. But can be responsive to fit in a
 limited width container or for mobile view.
 
 Example of a  php short-code function for a WordPress web-application page.
--------------------------
+
 Shortcode:
 `[uos_form src"moving"]`
 
