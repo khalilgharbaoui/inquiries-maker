@@ -1,4 +1,7 @@
 de:
+  thank_you_moving: "vielen-dank"
+  thank_you_cleaning: "vielen-dank-reinigung"
+  thank_you_combined: "vielen-dank-umzug-und-reiningung"
   must_contain_a_home_number: "muss eine Hausnummer enthalten"
   only_swiss_mobiles: "Nur Schweizer Mobilfunknummern"
   date_must_be_in_the_following_format: format YYYY-MM-DD

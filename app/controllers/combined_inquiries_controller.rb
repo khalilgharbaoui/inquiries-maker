@@ -3,6 +3,7 @@
 class CombinedInquiriesController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
   before_action :set_combined_inquiry, only: %i[show edit update destroy]
+  prepend ParentThankYouPageUrlMaker
 
   def index
     @combined_inquiries = CombinedInquiry.all if user_signed_in?
@@ -21,7 +22,7 @@ class CombinedInquiriesController < ApplicationController
 
     respond_to do |format|
       if @combined_inquiry.save
-        format.html { redirect_to new_combined_inquiry_path, notice: t('.combined_inquiry_was_successfully_created') }
+        format.html { redirect_to parent_thank_you_page }
       else
         format.html { render :new }
       end
