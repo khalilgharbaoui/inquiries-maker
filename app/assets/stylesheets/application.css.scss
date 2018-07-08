@@ -10,9 +10,15 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
+ *= require_tree .
  *= require jquery-ui
+ *
+ * we don't want the email stylishness to pollute out app style so we stub it out here.
+ * It will be imported in the mailer layout explicitly anyways. Premailer gem takes over from there.
+ *= stub foundation_emails
+ *= stub ./email_templates/_settings
+ *= stub ./email_templates/_template
  */
 
 // import the CSS framework
@@ -35,13 +41,49 @@ img {
     white-space: nowrap;
 }
 
-// THESE ARE EXAMPLES YOU CAN MODIFY
-// create your own classes
-// to make views framework-neutral
+// this is for the city auto complete in all forms.
+.ui-autocomplete {
+  height: 200px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+// this is for the moving date select fields.
+#moving_inquiry_moving_date_1i,
+#moving_inquiry_moving_date_2i,
+#moving_inquiry_moving_date_3i,
+#moving_inquiry_client_property_size{
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 38px;
+}
+
+// this is for the cleaning date select fields.
+#cleaning_inquiry_cleaning_date_1i,
+#cleaning_inquiry_cleaning_date_2i,
+#cleaning_inquiry_cleaning_date_3i,
+#cleaning_inquiry_client_property_size{
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  height: 38px;
+}
 
 
-// apply styles to HTML elements
-// to make views framework-neutral
+// general reset
 main {
   margin-top: 30px; // accommodate the navbar
 }
@@ -92,21 +134,7 @@ pre {
 label {
   display: block;
 }
-#moving_inquiry_moving_date_1i,
-#moving_inquiry_moving_date_2i,
-#moving_inquiry_moving_date_3i,
-#moving_inquiry_client_property_size{
-  padding: 0.375rem 0.75rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  color: #495057;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ced4da;
-  border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-  height: 38px;
-}
+
 
 .translation_fallback {
   background-color: yellow;
