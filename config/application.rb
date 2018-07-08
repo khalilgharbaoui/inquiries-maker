@@ -36,7 +36,7 @@ module InquiriesMaker
     config.i18n.enforce_available_locales = true
     config.i18n.available_locales = [:de,:fr,:en]
 
-    #allow embeding in i frame
-    config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
+    #allow the entire app to be embedded in an iframe
+    # config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
   end
 end
