@@ -2,6 +2,7 @@
 
 class MovingInquiriesController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
+  before_action :allow_iframe_requests!, only: %i[new create]
   before_action :set_moving_inquiry, only: %i[show edit update destroy]
   prepend ParentThankYouPageUrlMaker
 
@@ -47,6 +48,10 @@ class MovingInquiriesController < ApplicationController
   end
 
   private
+
+  def allow_iframe_requests!
+    response.headers.delete('X-Frame-Options')
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_moving_inquiry

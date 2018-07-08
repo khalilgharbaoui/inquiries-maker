@@ -2,6 +2,7 @@
 
 class CombinedInquiriesController < ApplicationController
   before_action :authenticate_user!, except: %i[new create]
+  before_action :allow_iframe_requests!, only: %i[new create]
   before_action :set_combined_inquiry, only: %i[show edit update destroy]
   prepend ParentThankYouPageUrlMaker
 
@@ -48,6 +49,10 @@ class CombinedInquiriesController < ApplicationController
   end
 
   private
+
+  def allow_iframe_requests!
+    response.headers.delete('X-Frame-Options')
+  end
 
   def set_combined_inquiry
     @combined_inquiry = CombinedInquiry.find(params[:id])
