@@ -8,6 +8,7 @@
     = locale_field(@combined_inquiry, f)
     = f.hidden_field :is_moving_request
     = f.hidden_field :is_cleaning_request
+    == render 'shared/hidden_form_metadata', f: f
     .form-row.form-group
       .col-6.col-sm-6.col-md-6
         - [ 'mr', 'ms' ].each_with_index do |client_salutation, i|

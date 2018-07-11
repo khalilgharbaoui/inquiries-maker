@@ -4,6 +4,7 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     tr
       th scope="col" #
       / th Partner token
+      th origin
       / th Locale
       th scope="col"
       / th Client first name
@@ -28,6 +29,7 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
       tr
         th scope="row" = moving_inquiry.id
         / td = moving_inquiry.partner_token
+        td = moving_inquiry.origin
         / td = moving_inquiry.locale
         td = moving_inquiry.client_salutation
         / td = moving_inquiry.client_first_name

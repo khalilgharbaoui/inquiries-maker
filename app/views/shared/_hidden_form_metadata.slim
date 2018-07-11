@@ -1,0 +1,18 @@
+= f.hidden_field :origin, id: "origin"
+= f.hidden_field :hostname, id: "hostname"
+= f.hidden_field :path, id: "path"
+= f.hidden_field :referrer, id: "referrer"
+= f.hidden_field :ip, id: "ip"
+javascript:
+  window.addEventListener('message', function(e) {
+    // console.log(e);
+      var hostname = e.data.hostname;
+      var path = e.data.path;
+      var referrer = e.data.referrer;
+      var ip = e.data.ip;
+      $("#origin").val(e.origin);
+      $("#hostname").val(hostname);
+      $("#path").val(path);
+      $("#referrer").val(referrer);
+      $("#ip").val(ip);
+  });
