@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_09_112915) do
+ActiveRecord::Schema.define(version: 2018_07_10_142237) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,6 +32,11 @@ ActiveRecord::Schema.define(version: 2018_06_09_112915) do
     t.date "cleaning_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "origin"
+    t.string "hostname"
+    t.string "path"
+    t.string "referrer"
+    t.string "ip"
   end
 
   create_table "combined_inquiries", force: :cascade do |t|
@@ -55,6 +60,11 @@ ActiveRecord::Schema.define(version: 2018_06_09_112915) do
     t.date "cleaning_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "origin"
+    t.string "hostname"
+    t.string "path"
+    t.string "referrer"
+    t.string "ip"
   end
 
   create_table "moving_inquiries", force: :cascade do |t|
@@ -77,6 +87,11 @@ ActiveRecord::Schema.define(version: 2018_06_09_112915) do
     t.date "moving_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "origin"
+    t.string "hostname"
+    t.string "path"
+    t.string "referrer"
+    t.string "ip"
   end
 
   create_table "received_inquiry_responses", force: :cascade do |t|
