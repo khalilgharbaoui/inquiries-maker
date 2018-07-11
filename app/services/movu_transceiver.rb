@@ -13,7 +13,7 @@ require 'json-prettyprint'
   end
 
   def post
-    exclusions = [:id, :created_at, :updated_at]
+    exclusions = [:id, :created_at, :updated_at, :origin, :hostname, :path, :referrer, :ip]
     credentials = {
       origin: 'thirdparty_partner',
       partner_token: Rails.application.credentials.dig(Rails.env.to_sym,:partner_token)
