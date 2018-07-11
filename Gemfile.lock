@@ -219,12 +219,12 @@ GEM
     net-ssh (5.0.1)
     nio4r (2.3.1)
     nio4r (2.3.1-java)
-    nokogiri (1.8.2)
+    nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.2-java)
-    nokogiri (1.8.2-x64-mingw32)
+    nokogiri (1.8.4-java)
+    nokogiri (1.8.4-x64-mingw32)
       mini_portile2 (~> 2.3.0)
-    nokogiri (1.8.2-x86-mingw32)
+    nokogiri (1.8.4-x86-mingw32)
       mini_portile2 (~> 2.3.0)
     notiffany (0.1.1)
       nenv (~> 0.1)
@@ -285,11 +285,6 @@ GEM
     rails-i18n (5.1.1)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
-    rails_email_preview (2.0.6)
-      rails (>= 4.2)
-      request_store
-      sass
-      turbolinks
     rails_layout (1.0.42)
     rails_locale_detection (2.3.0)
       http_accept_language (~> 2.0.5)
@@ -308,8 +303,6 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
-    request_store (1.4.1)
-      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -354,7 +347,7 @@ GEM
     sass-rails (5.0.7)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
-      sprockets (>= 3.7.2, < 4.0)
+      sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (>= 1.1, < 3)
     seed_dump (3.3.1)
@@ -394,7 +387,7 @@ GEM
     sprockets-rails (3.2.1)
       actionpack (>= 4.0)
       activesupport (>= 4.0)
-      sprockets (>= 3.7.2)
+      sprockets (>= 3.0.0)
     sshkit (1.16.1)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
@@ -450,7 +443,7 @@ DEPENDENCIES
   binding_of_caller
   bootsnap (>= 1.1.0)
   bootstrap (~> 4.0.0)
-  capistrano (~> 3.10)
+  capistrano (~> 3.11)
   capistrano-bundler (~> 1.3)
   capistrano-passenger
   capistrano-rails (~> 1.4)
@@ -482,7 +475,6 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.0)
   rails-i18n
-  rails_email_preview
   rails_layout
   rails_locale_detection
   rb-fchange

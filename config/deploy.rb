@@ -1,5 +1,6 @@
 # lock to capistrano version
 lock "~> 3.11.0"
+set :ssh_options, forward_agent: true, keys: ["config/deploy_id_rsa"] if File.exist?("config/deploy_id_rsa")
 # Include this if you want to be able to set up different deployment stages (i.e. beta, stage, etc.)
 # require 'capistrano/ext/multistage'
 set :application, 'inquiries-maker'
@@ -11,6 +12,8 @@ set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
 # set :log_level, :debug
 # set :pty, true
+set :bundle_jobs, 16
+
 set :keep_releases, 1
 
 # Defaults to nil (no asset cleanup is performed)
@@ -46,6 +49,8 @@ set :normalize_asset_timestamps, %w{public/images public/javascripts public/styl
 append :linked_files, "config/master.key", "config/database.yml", "config/certs/ssl.key", "config/certs/ssl.crt"
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
+
+set :passenger_restart_with_touch, true
 
 namespace :deploy do
   desc 'Restart application'
