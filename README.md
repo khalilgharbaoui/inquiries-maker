@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/khalilgharbaoui/inquiries-maker.svg?branch=master)](https://travis-ci.org/khalilgharbaoui/inquiries-maker)
 Inquiries Maker
 ================
 

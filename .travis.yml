@@ -1,0 +1,27 @@
+sudo: false
+language: ruby
+rvm:
+  - 2.5.1
+addons:
+  postgresql: '9.6' #compatible but 10.4 is better!
+cache:
+  - bundler
+before_install:
+  - gem update bundler
+before_script:
+  - psql -c 'create database inquiries_maker_test;' -U postgres
+  - cp config/database.travis.yml config/database.yml
+  - RAILS_ENV=test bundle exec rake db:create db:migrate
+script:
+  - bundle exec rspec --backtrace
+install:
+  - bundle install --jobs 16
+after_success:
+  - "openssl aes-256-cbc -k $DEPLOY_KEY -in config/deploy_id_rsa_enc_travis -d -a -out config/deploy_id_rsa"
+  - chmod 600 config/deploy_id_rsa
+  - eval "$(ssh-agent -s)"
+  - ssh-add config/deploy_id_rsa
+  - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
+env:
+  global:
+    secure: V0Ad6+BwFi945Z3+obIp72cTh8oYozR/oEr8IUJU7VRaK90pbQ+WDK5sqnUQ/IpC5rVD3XNascXf1STmD3D+wPuv4RYTTwmL2QFak8avWkEg898RgPYKpQjUWdKwJ5tAouxq3NIRzNnhCsSiRhiI5I7vD7lbmeW3rohNxz9zJCGlmzviQQP8OhiF8SyBQlq3fLzws7QFCyurie36M6+PZh9okk2AXjl+jDWqXNNS81mDCM2JOVPwzb5OEOEf8FY7S2rl43+izvV3bmA2p1Ug0rwU9sjJkNwtBAKnVV49M8fVlu3yIJY2TweYwXtsk/lGVFtLZmIY5A0Sd4RDgyfSyNnihTVFIxt+Dy7EXnDSUZOQ80mYkcCfqj/WNFdycWWPB5tA8kv9IPVt1SRpAXPqhGDUYvKHBqXS8Y44bt/BybLtFNHT/jpxC3dkJ5G9Ho2WgiTZniaSx2jVM2/J4H4OMM7CkBLwa0GEkTmvZZBM/OnXdGw1hJwwel/6ylIBaTwXlKhnaE/zK1BgzVbDoEzRCxkrNV+96Rhfw8uPOFYEgxOH4Q0BObEeBmvpSiNZfGUhEyyUFRTRh+/n880nDGD2wXQg55FjevYo+j6jfkkXpvilyqOS5jsowEsKTRbX2CDVU25VPDSf8+nbfyKxH+wsGGKu4T0BUBMs4XXvmSHYXtQ=

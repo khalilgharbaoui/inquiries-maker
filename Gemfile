@@ -48,7 +48,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'better_errors'
 
-  gem 'capistrano', '~> 3.10', require: false
+  gem "capistrano", "~> 3.11", require: false
   gem 'capistrano-rails', '~> 1.4', require: false
   gem 'capistrano-passenger'
   gem 'capistrano-bundler', '~> 1.3'
@@ -64,9 +64,6 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'terminal-notifier-guard'
-
-  gem 'rails_email_preview'
-
   gem 'rails_layout'
   gem 'rb-fchange', require: false
   gem 'rb-fsevent', require: false
