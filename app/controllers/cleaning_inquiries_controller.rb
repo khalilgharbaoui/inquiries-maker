@@ -23,7 +23,8 @@ class CleaningInquiriesController < ApplicationController
 
     respond_to do |format|
       if @cleaning_inquiry.save
-        format.html { redirect_to parent_thank_you_page }
+        flash[:notice] = t(".inquiry_was_successfully_created")
+        format.html { render partial: "shared/local_thank_you_page", locals: {url: parent_thank_you_page_url} }
       else
         format.html { render :new }
       end

@@ -11,7 +11,7 @@ fr:
       invalid_zipcode: Zipcode is invalid
   moving_inquiries:
     create:
-      moving_inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
+      inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
     form:
       client_salutations:
          mr: M.
@@ -31,6 +31,8 @@ fr:
       moving_date: Date de déménagement
       submit: Demandez des offres de déménagement!
   cleaning_inquiries:
+    create:
+      inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
     form:
       client_salutations:
          mr: M.
@@ -47,6 +49,8 @@ fr:
       cleaning_date: Date de nettoyage
       submit: Demandez des offres de déménagement!
   combined_inquiries:
+    create:
+      inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
     form:
       client_salutations:
          mr: M.
