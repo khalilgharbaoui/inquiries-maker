@@ -11,7 +11,7 @@ de:
       invalid_zipcode: Postzal is nicht gültig
   moving_inquiries:
     create:
-      moving_inquiry_was_successfully_created: ✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩
+      inquiry_was_successfully_created: ✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩
     form:
       client_salutations:
          mr: Herr
@@ -31,6 +31,8 @@ de:
       moving_date: Umzugsdatum
       submit: Jetzt Offerten anfordern!
   cleaning_inquiries:
+    create:
+      inquiry_was_successfully_created: ✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩
     form:
       client_salutations:
          mr: Herr
@@ -47,6 +49,8 @@ de:
       cleaning_date: Reinigungsdatum
       submit: Jetzt Offerten anfordern!
   combined_inquiries:
+    create:
+      inquiry_was_successfully_created: ✅ Danke, Bitte überprüfen Sie Ihre E-mail Inbox ✅ 👍 📩
     form:
       client_salutations:
          mr: Herr
