@@ -10,7 +10,7 @@ set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
-set :log_level, :error
+set :log_level, :debug
 # set :pty, true
 set :bundle_jobs, 16
 
