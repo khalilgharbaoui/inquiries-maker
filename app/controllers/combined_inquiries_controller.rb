@@ -7,7 +7,7 @@ class CombinedInquiriesController < ApplicationController
   prepend ParentThankYouPageUrlMaker
 
   def index
-    @combined_inquiries = CombinedInquiry.all if user_signed_in?
+    @combined_inquiries = CombinedInquiry.order("id DESC").all if user_signed_in?
   end
 
   def show; end

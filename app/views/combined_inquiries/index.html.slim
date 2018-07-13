@@ -4,8 +4,12 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     tr
       th scope="col" #
       / th Partner token
-      / th Locale
-      th scope="col"
+      th date
+      th time
+      th origin
+      th Locale
+      th received?
+      / th scope="col"
       / th Client first name
       th scope="col" last name
       th scope="col" email
@@ -28,9 +32,13 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     - @combined_inquiries.each do |combined_inquiry|
       tr
         th scope="row" = combined_inquiry.id
+        td = combined_inquiry.created_at.to_s(:swiss_date_format)
+        td = combined_inquiry.created_at.to_s(:custom_time)
+        td = combined_inquiry.origin
+        td = combined_inquiry.locale
+        td = find_received_inquiry_response_body(combined_inquiry).first || " ❌ "*4
         / td = combined_inquiry.partner_token
-        / td = combined_inquiry.locale
-        td = combined_inquiry.client_salutation
+        / td = combined_inquiry.client_salutation
         / td = combined_inquiry.client_first_name
         td = combined_inquiry.client_last_name
         td = combined_inquiry.client_email

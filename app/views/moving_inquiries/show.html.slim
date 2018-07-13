@@ -3,7 +3,16 @@ p#notice = notice
 p
   strong origin:
   = @moving_inquiry.origin
-
+p
+  strong path:
+  = @moving_inquiry.path
+p
+  strong referrer:
+  = @moving_inquiry.referrer
+p
+  strong ip:
+  = @moving_inquiry.ip
+p
   strong Partner token:
   = @moving_inquiry.partner_token
 p
@@ -61,4 +70,4 @@ p
 
 br
 
-= render "shared/received_inquiry_response", inquiry: @moving_inquiry
+== render "shared/received_inquiry_response", inquiry: @moving_inquiry
