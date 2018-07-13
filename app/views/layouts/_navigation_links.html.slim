@@ -1,1 +1,8 @@
-/ add navigation links to this file
+- if user_signed_in?
+  ul.navbar-nav.ml-auto
+    li.nav-item
+      = link_to 'MOVING', moving_inquiries_path, class: "nav-link"
+    li.nav-item
+      = link_to 'CLEANING', cleaning_inquiries_path, class: "nav-link"
+    li.nav-item
+      = link_to 'COMBINED', combined_inquiries_path, class: "nav-link"

@@ -7,7 +7,7 @@ class CleaningInquiriesController < ApplicationController
   prepend ParentThankYouPageUrlMaker
 
   def index
-    @cleaning_inquiries = CleaningInquiry.all if user_signed_in?
+    @cleaning_inquiries = CleaningInquiry.order("id DESC").all if user_signed_in?
   end
 
   def show; end

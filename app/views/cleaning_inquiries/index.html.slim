@@ -4,8 +4,12 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     tr
       th scope="col" #
       / th Partner token
-      / th Locale
-      th scope="col"
+      th date
+      th time
+      th origin
+      th Locale
+      th received?
+      / th scope="col"
       / th Client first name
       th scope="col" last name
       th scope="col" email
@@ -23,9 +27,13 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     - @cleaning_inquiries.each do |cleaning_inquiry|
       tr
         th scope="row" = cleaning_inquiry.id
+        td = cleaning_inquiry.created_at.to_s(:swiss_date_format)
+        td = cleaning_inquiry.created_at.to_s(:custom_time)
+        td = cleaning_inquiry.origin
+        td = cleaning_inquiry.locale
+        td = find_received_inquiry_response_body(cleaning_inquiry).first || " ❌ "*4
         / td = cleaning_inquiry.partner_token
-        / td = cleaning_inquiry.locale
-        td = cleaning_inquiry.client_salutation
+        / td = cleaning_inquiry.client_salutation
         / td = cleaning_inquiry.client_first_name
         td = cleaning_inquiry.client_last_name
         td = cleaning_inquiry.client_email

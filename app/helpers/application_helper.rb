@@ -62,11 +62,6 @@ module ApplicationHelper
     find_received_inquiry_response_body(inquiry)
   end
 
-  def show_received_inquiry_response_continue_url(inquiry)
-    # "find_received_inquiry_response_body(inquiry)[:continue_url]"
-    "http://"
-  end
-
   def find_received_inquiry_response_body(inquiry)
     responses = ReceivedInquiryResponse.where(:"#{inquiry.class.name.underscore}_id" => inquiry.id)
     responses.each do |response|

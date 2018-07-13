@@ -4,9 +4,12 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     tr
       th scope="col" #
       / th Partner token
+      th date
+      th time
       th origin
-      / th Locale
-      th scope="col"
+      th Locale
+      th received?
+      / th scope="col"
       / th Client first name
       th scope="col" last name
       th scope="col" email
@@ -15,8 +18,8 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
       th scope="col" postal code
       / th Client postal city
       th scope="col" property size
-      th scope="col" moving request
-      th scope="col" cleaning request
+      th scope="col" moving
+      th scope="col" cleaning
       / th Moving street and number
       th scope="col" Moving postal code
       / th Moving city
@@ -29,9 +32,12 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
       tr
         th scope="row" = moving_inquiry.id
         / td = moving_inquiry.partner_token
+        td = moving_inquiry.created_at.to_s(:swiss_date_format)
+        td = moving_inquiry.created_at.to_s(:custom_time)
         td = moving_inquiry.origin
-        / td = moving_inquiry.locale
-        td = moving_inquiry.client_salutation
+        td = moving_inquiry.locale
+        td = find_received_inquiry_response_body(moving_inquiry).first || " ❌ "*4
+        / td = moving_inquiry.client_salutation
         / td = moving_inquiry.client_first_name
         td = moving_inquiry.client_last_name
         td = moving_inquiry.client_email
