@@ -1,5 +1,13 @@
 module ApplicationHelper
 
+  def inquiry_received?(inquiry)
+    find_received_inquiry_response_body(inquiry).first || link_to_reschedule(inquiry)
+  end
+
+  def link_to_reschedule(inquiry)
+    link_to  "❌ Reschedule!?", {:action => "reschedule_inquiry", id: inquiry.id, locale: inquiry.locale}
+  end
+
   def general_lang_switcher
     # https://dhampik.com/blog/rails-routes-tricks-with-locales
 
