@@ -6,7 +6,7 @@ class ReceivedInquiryResponse < ApplicationRecord
   belongs_to :combined_inquiry, optional: true
   before_save ResponseBodyWrapper.new
   after_save :schedule_client_emails
-
+  after_save TelegramNotifier.notify(response_body)
   private
 
   def schedule_client_emails

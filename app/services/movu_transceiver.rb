@@ -6,6 +6,7 @@ require 'active_support/all'
 require 'json'
 require 'date'
 require 'json-prettyprint'
+require 'telegram_notifier'
 
   def initialize(inquiry)
     @inquiry = inquiry
@@ -50,12 +51,15 @@ require 'json-prettyprint'
         :response_body => @response.body
       )
       puts "✅ SENT AND RECEIVED ✅"
+      TelegramNotifier.notify(statistics(response, inquiry))
     elsif @response.code == "400"
       puts "validation error!"
       statistics(@response, @inquiry)
+      TelegramNotifier.notify(statistics(response, inquiry))
     else
       puts "Exeption"
       statistics(@response, @inquiry)
+      TelegramNotifier.notify(statistics(response, inquiry))
     end
     # statistics(@response, @inquiry)
   end
@@ -63,7 +67,6 @@ require 'json-prettyprint'
   def statistics(response, inquiry)
     # puts "Headers: "
     # puts JSON::PrettyPrint.prettify(response.to_json) if response
-
     puts "Status:"
     puts "Code: " + response.code  if response.code      # => '200'
     puts "Message: "+ response.message  if response.message  # => 'OK'
