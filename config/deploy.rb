@@ -72,8 +72,16 @@ namespace :deploy do
   end
 
   before :starting, 'deploy:check_revision'
-  after :started, 'deploy:cleanup'
+  before :starting, 'workers:stop'
+  before :starting, 'deploy:cleanup'
+
   after :started, 'workers:stop'
+  after :started, 'deploy:cleanup'
+
+  before :finishing, 'deploy:cleanup'
+  before :finishing, 'workers:stop'
+
+  after :finished, 'deploy:cleanup'
   after :finished, 'workers:start'
 
   # after :restart, :clear_cache do
@@ -102,7 +110,8 @@ namespace :workers do
   desc "Kill workers by PID"
   task :stop do
     on roles(:app) do
-      execute :kill, "-9 $(pgrep -f 'rake workers')"
+      execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=production')"
+      execute :kill, "-9 $(pgrep -f 'rake')"
     end
   end
 
