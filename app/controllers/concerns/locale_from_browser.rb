@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module LocaleFromBrowserConcern
+module LocaleFromBrowser
   # This makes the initial user preferred browser language stick from the first session onward now!
   # It's is now still possible to change the language using the language switcher helper,
   # for subsequent session. and even those stick after a reload now.
