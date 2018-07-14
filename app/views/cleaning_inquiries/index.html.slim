@@ -31,7 +31,7 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
         td = cleaning_inquiry.created_at.to_s(:custom_time)
         td = cleaning_inquiry.origin
         td = cleaning_inquiry.locale
-        td = find_received_inquiry_response_body(cleaning_inquiry).first || " ❌ "*4
+        td = inquiry_received?(cleaning_inquiry)
         / td = cleaning_inquiry.partner_token
         / td = cleaning_inquiry.client_salutation
         / td = cleaning_inquiry.client_first_name

@@ -36,7 +36,7 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
         td = combined_inquiry.created_at.to_s(:custom_time)
         td = combined_inquiry.origin
         td = combined_inquiry.locale
-        td = find_received_inquiry_response_body(combined_inquiry).first || " ❌ "*4
+        td = inquiry_received?(combined_inquiry)
         / td = combined_inquiry.partner_token
         / td = combined_inquiry.client_salutation
         / td = combined_inquiry.client_first_name
