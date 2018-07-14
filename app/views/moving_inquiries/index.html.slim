@@ -36,7 +36,8 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
         td = moving_inquiry.created_at.to_s(:custom_time)
         td = moving_inquiry.origin
         td = moving_inquiry.locale
-        td = find_received_inquiry_response_body(moving_inquiry).first || " ❌ "*4
+        td = inquiry_received?(moving_inquiry)
+
         / td = moving_inquiry.client_salutation
         / td = moving_inquiry.client_first_name
         td = moving_inquiry.client_last_name
