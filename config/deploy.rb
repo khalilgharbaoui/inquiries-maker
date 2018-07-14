@@ -78,11 +78,11 @@ namespace :deploy do
   after :started, 'workers:stop'
   after :started, 'deploy:cleanup'
 
-  before :finishing, 'deploy:cleanup'
   before :finishing, 'workers:stop'
+  before :finishing, 'deploy:cleanup'
 
+  after :finished, 'workers:stop'
   after :finished, 'deploy:cleanup'
-  after :finished, 'workers:start'
 
   # after :restart, :clear_cache do
   #   on roles(:web), in: :groups, limit: 3, wait: 10 do
