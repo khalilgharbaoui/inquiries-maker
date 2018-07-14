@@ -102,7 +102,7 @@ namespace :workers do
   desc "Kill workers by PID"
   task :stop do
     on roles(:app) do
-      execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=#{fetch(:rails_env)}')"
+      execute :kill, "-9 $(pgrep -f 'rake workers')"
     end
   end
 
