@@ -12,13 +12,10 @@ before_script:
 - psql -c 'create database inquiries_maker_test;' -U postgres
 - cp config/database.travis.yml config/database.yml
 - RAILS_ENV=test bundle exec rake db:create db:migrate
-- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-- chmod +x ./cc-test-reporter
-- ./cc-test-reporter before-build
 script:
 - bundle exec rspec
 after_script:
-- ./cc-test-reporter after-build --coverage-input-type simplecov --coverage-endpoint --exit-code $TRAVIS_TEST_RESULT
+- echo "Done Testing"
 install:
 - bundle install --jobs 16
 after_success:
