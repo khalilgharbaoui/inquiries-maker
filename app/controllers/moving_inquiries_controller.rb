@@ -5,6 +5,7 @@ class MovingInquiriesController < ApplicationController
   before_action :allow_iframe_requests!, only: %i[new create]
   before_action :set_moving_inquiry, only: %i[show edit update destroy]
   prepend ParentThankYouPageUrlMaker
+  include RescheduleInquiryDelivery
 
   def index
     @moving_inquiries = MovingInquiry.order("id DESC").all if user_signed_in?
@@ -61,6 +62,6 @@ class MovingInquiriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def moving_inquiry_params
-    params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryConcern::COMMON_PARAMS)
+    params.require(:moving_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, InquiryParams::COMMON_PARAMS)
   end
 end

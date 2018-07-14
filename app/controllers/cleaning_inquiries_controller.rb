@@ -5,6 +5,7 @@ class CleaningInquiriesController < ApplicationController
   before_action :allow_iframe_requests!, only: %i[new create]
   before_action :set_cleaning_inquiry, only: %i[show edit update destroy]
   prepend ParentThankYouPageUrlMaker
+  include RescheduleInquiryDelivery
 
   def index
     @cleaning_inquiries = CleaningInquiry.order("id DESC").all if user_signed_in?
@@ -61,6 +62,6 @@ class CleaningInquiriesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def cleaning_inquiry_params
-    params.require(:cleaning_inquiry).permit(:cleaning_date, InquiryConcern::COMMON_PARAMS)
+    params.require(:cleaning_inquiry).permit(:cleaning_date, InquiryParams::COMMON_PARAMS)
   end
 end

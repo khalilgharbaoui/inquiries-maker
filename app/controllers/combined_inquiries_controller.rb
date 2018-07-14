@@ -5,6 +5,7 @@ class CombinedInquiriesController < ApplicationController
   before_action :allow_iframe_requests!, only: %i[new create]
   before_action :set_combined_inquiry, only: %i[show edit update destroy]
   prepend ParentThankYouPageUrlMaker
+  include RescheduleInquiryDelivery
 
   def index
     @combined_inquiries = CombinedInquiry.order("id DESC").all if user_signed_in?
@@ -60,6 +61,6 @@ class CombinedInquiriesController < ApplicationController
   end
 
   def combined_inquiry_params
-    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, :cleaning_date, InquiryConcern::COMMON_PARAMS)
+    params.require(:combined_inquiry).permit(:moving_street_and_number, :moving_postal_code, :moving_city, :moving_date, :cleaning_date, InquiryParams::COMMON_PARAMS)
   end
 end
