@@ -72,7 +72,7 @@ namespace :deploy do
   end
 
   before :starting, 'deploy:check_revision'
-  after :finishing, 'deploy:cleanup'
+  after :started, 'deploy:cleanup'
   after :started, 'workers:stop'
   after :finished, 'workers:start'
 
