@@ -36,7 +36,6 @@ require 'telegram_notifier'
   def received
     #if response header is 200 meaning the server on the other side received my lead successfully. go ahead and save the response in my database. and with an association to the lead it self.
     if @response.code == "200"
-
       # TODO: ResponseFilter should filter and create object like:
       # ReceivedMovingInquiryResponse
       # ReceivedCleaningIquiryResponse
@@ -51,15 +50,12 @@ require 'telegram_notifier'
         :response_body => @response.body
       )
       puts "✅ SENT AND RECEIVED ✅"
-      TelegramNotifier.notify(statistics(response, inquiry))
     elsif @response.code == "400"
       puts "validation error!"
       statistics(@response, @inquiry)
-      TelegramNotifier.notify(statistics(response, inquiry))
     else
       puts "Exeption"
       statistics(@response, @inquiry)
-      TelegramNotifier.notify(statistics(response, inquiry))
     end
     # statistics(@response, @inquiry)
   end

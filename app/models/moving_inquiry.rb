@@ -62,7 +62,6 @@ class MovingInquiry < ApplicationRecord
 
   before_save PhoneNumberWrapper.new
   after_save :schedule_inquiry_delivery
-  after_save TelegramNotifier.notify(self)
 
   def schedule_inquiry_delivery
     InquiryDeliveryJob.perform_later(self)
