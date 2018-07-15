@@ -73,16 +73,11 @@ namespace :deploy do
 
   before :starting, 'deploy:check_revision'
   before :starting, 'workers:stop'
-  before :starting, 'deploy:cleanup'
 
   after :started, 'workers:stop'
-  after :started, 'deploy:cleanup'
 
   before :finishing, 'workers:stop'
   before :finishing, 'deploy:cleanup'
-
-  after :finished, 'workers:stop'
-  after :finished, 'deploy:cleanup'
 
   # after :restart, :clear_cache do
   #   on roles(:web), in: :groups, limit: 3, wait: 10 do
