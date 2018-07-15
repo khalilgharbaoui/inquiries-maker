@@ -29,6 +29,7 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 # emails
 gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
+gem 'telebot', :git => 'https://github.com/khalilgharbaoui/telebot.git'
 
 
 group :development, :test do

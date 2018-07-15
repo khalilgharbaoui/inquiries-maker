@@ -61,9 +61,14 @@ class MovingInquiry < ApplicationRecord
   { with: /\d+/, message: I18n.t('.must_contain_a_home_number') }
 
   before_save PhoneNumberWrapper.new
-  after_save :schedule_inquiry_delivery
+  after_commit :schedule_inquiry_delivery, on: :create
+  after_commit :send_telegram_notification, on: :create
 
   def schedule_inquiry_delivery
     InquiryDeliveryJob.perform_later(self)
+  end
+
+  def send_telegram_notification
+    TelegramNotifier.new(self)
   end
 end
