@@ -1,12 +1,4 @@
 class MovuTransceiver
-require 'uri'
-require 'net/http'
-require 'openssl'
-require 'active_support/all'
-require 'json'
-require 'date'
-require 'json-prettyprint'
-require 'telegram_notifier'
 
   def initialize(inquiry)
     @inquiry = inquiry
