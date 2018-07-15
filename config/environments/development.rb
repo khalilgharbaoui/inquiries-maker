@@ -55,16 +55,16 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # uos server configuration
-  config.action_mailer.smtp_settings = {
-    address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
-    port: 587,
-    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
-    authentication: :login,
-    enable_starttls_auto: false,
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
-    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
+  #   port: 587,
+  #   domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
+  #   authentication: :login,
+  #   enable_starttls_auto: false,
+  #   user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
+  #   password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
+  #   openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
+  # }
 
   # gmail smtp configuration
   # config.action_mailer.smtp_settings = {
@@ -78,7 +78,7 @@ Rails.application.configure do
   # }
 
   # mailcatcher configuration
-  # config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
 
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?
