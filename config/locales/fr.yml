@@ -1,7 +1,7 @@
 fr:
-  thank_you_moving: "thank-you"
-  thank_you_cleaning: "thank-you-cleaning"
-  thank_you_combined: "thank-you-combined"
+  thank_you_moving: "merci"
+  thank_you_cleaning: "merci-nettoyage"
+  thank_you_combined: "merci-combination"
   only_swiss_mobiles: "Seulement les numéros mobiles suisses"
   must_contain_a_home_number: "doit contenir un numéro de domicile!"
   date_must_be_in_the_following_format: format YYYY-MM-DD
