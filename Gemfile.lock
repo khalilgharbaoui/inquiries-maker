@@ -1,3 +1,12 @@
+GIT
+  remote: https://github.com/khalilgharbaoui/telebot.git
+  revision: be52dabcfd22ffcafb71ddc0467f0892bd59481a
+  specs:
+    telebot (0.1.1)
+      faraday
+      faraday_middleware
+      virtus
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -410,10 +419,6 @@ GEM
       sshkit (~> 1.12)
     sshkit-sudo (0.1.0)
       sshkit (~> 1.8)
-    telebot (0.1.1)
-      faraday
-      faraday_middleware
-      virtus
     temple (0.8.0)
     terminal-notifier-guard (1.7.0)
     thor (0.20.0)
@@ -516,7 +521,7 @@ DEPENDENCIES
   spring
   spring-commands-rspec
   spring-watcher-listen (~> 2.0.0)
-  telebot
+  telebot!
   terminal-notifier-guard
   turbolinks (~> 5)
   tzinfo-data
