@@ -5,9 +5,14 @@ class ReceivedInquiryResponse < ApplicationRecord
   belongs_to :cleaning_inquiry, optional: true
   belongs_to :combined_inquiry, optional: true
   before_save ResponseBodyWrapper.new
-  after_save :schedule_client_emails
+  after_commit :schedule_client_emails, on: :create
+  after_commit :send_telegram_notification, on: :create
 
   private
+
+  def send_telegram_notification
+    TelegramNotifier.new(self)
+  end
 
   def schedule_client_emails
     _reflections.each do |inquiry, _|

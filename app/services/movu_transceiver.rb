@@ -1,11 +1,4 @@
 class MovuTransceiver
-require 'uri'
-require 'net/http'
-require 'openssl'
-require 'active_support/all'
-require 'json'
-require 'date'
-require 'json-prettyprint'
 
   def initialize(inquiry)
     @inquiry = inquiry
@@ -35,7 +28,6 @@ require 'json-prettyprint'
   def received
     #if response header is 200 meaning the server on the other side received my lead successfully. go ahead and save the response in my database. and with an association to the lead it self.
     if @response.code == "200"
-
       # TODO: ResponseFilter should filter and create object like:
       # ReceivedMovingInquiryResponse
       # ReceivedCleaningIquiryResponse
@@ -63,7 +55,6 @@ require 'json-prettyprint'
   def statistics(response, inquiry)
     # puts "Headers: "
     # puts JSON::PrettyPrint.prettify(response.to_json) if response
-
     puts "Status:"
     puts "Code: " + response.code  if response.code      # => '200'
     puts "Message: "+ response.message  if response.message  # => 'OK'
