@@ -106,7 +106,8 @@ namespace :workers do
   task :stop do
     on roles(:app) do
       execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=production')"
-      execute :kill, "-9 $(pgrep -f 'rake')"
+      execute :kill, "-9 $(pgrep -f 'rake workers')"
+      execute :pgrep "-f 'rake workers'"
     end
   end
 
