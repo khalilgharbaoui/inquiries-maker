@@ -95,8 +95,10 @@ namespace :workers do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
+            execute :pgrep, "-f 'rake workers'"
             SSHKit.config.command_map.prefix[:rake].unshift("nohup")
             execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
+            execute :pgrep, "-f 'rake workers'"
         end
       end
     end
@@ -107,7 +109,7 @@ namespace :workers do
     on roles(:app) do
       execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=production')"
       execute :kill, "-9 $(pgrep -f 'rake workers')"
-      execute :pgrep "-f 'rake workers'"
+      execute :pgrep, "-f 'rake workers'"
     end
   end
 
@@ -115,6 +117,7 @@ namespace :workers do
   task :logs do
     on roles(:app) do
       within release_path do
+        execute :pgrep, "-f 'rake workers'"
         execute :tail, "-f #{deploy_to}rake.out"
       end
     end
