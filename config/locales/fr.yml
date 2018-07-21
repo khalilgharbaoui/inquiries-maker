@@ -47,7 +47,7 @@ fr:
       client_postal_code: Code Postal
       client_city: Ville
       cleaning_date: Date de nettoyage
-      submit: Demandez des offres de déménagement!
+      submit: Demandez des offres de nettoyage!
   combined_inquiries:
     create:
       inquiry_was_successfully_created: ✅ Merci, S'il vous plaît vérifier votre e-mail! ✅ 👍 📩
@@ -69,7 +69,7 @@ fr:
       moving_city: Nouvel Ville
       cleaning_date: Date de nettoyage
       moving_date: Date de déménagement
-      submit: Demandez des offres de déménagement!
+      submit: Demandez des offres!
   client_mailer:
       client:
         inquiry:
