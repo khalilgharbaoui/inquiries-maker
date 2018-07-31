@@ -21,3 +21,5 @@ html
       == yield
     - if current_page?(action: :new || :edit)
       script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCriMly4dUzmacQBKe00_0jt_oeFSHM0vo&libraries=places&callback=googleMapInitialize"]
+    - if current_page?(action: :new)
+      script[async defer type="text/javascript" src="//heatmaps.umzug-offerte-schweiz.com/tracker.min.js"]
