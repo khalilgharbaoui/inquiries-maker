@@ -99,8 +99,8 @@ namespace :workers do
           execute :sleep, "2"
           execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
           execute :sleep, "2"
-          execute :sleep, "Starting workers....❕"
-          execute :echo, "2"
+          execute :echo, "Starting workers....❕"
+          execute :sleep, "2"
           SSHKit.config.command_map.prefix[:rake].unshift("nohup")
           execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
           execute :sleep, "2"
