@@ -95,10 +95,17 @@ namespace :workers do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-            execute :pgrep, "-f 'rake workers'"
-            SSHKit.config.command_map.prefix[:rake].unshift("nohup")
-            execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
-            execute :pgrep, "-f 'rake workers'"
+          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+          execute :sleep, "2"
+          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
+          execute :sleep, "2"
+          execute :sleep, "Starting workers....❕"
+          execute :echo, "2"
+          SSHKit.config.command_map.prefix[:rake].unshift("nohup")
+          execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
+          execute :sleep, "2"
+          execute :sleep, "2"
+          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
         end
       end
     end
@@ -107,9 +114,12 @@ namespace :workers do
   desc "Kill workers by PID"
   task :stop do
     on roles(:app) do
-      execute :kill, "-9 $(pgrep -f 'rake workers:run RAILS_ENV=production')"
-      execute :kill, "-9 $(pgrep -f 'rake workers')"
-      execute :pgrep, "-f 'rake workers'"
+      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+      execute :sleep, "2"
+      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
+      execute :sleep, "2"
+      execute :sleep, "2"
+      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
     end
   end
 
