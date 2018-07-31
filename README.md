@@ -21,6 +21,7 @@ This application requires:
 Getting Started
 ---------------
 ### TODO:
+- Improve readme [ ]
 - Web server for development? [passenger]
 - Web server for production? [passenger]
 - Database used in development? [mysql]
@@ -109,6 +110,24 @@ Example of a simple HTML iframe.
                        max-width:100%;
                      " allowfullscreen="">
 </iframe>
+```
+##### This comes on the client side and injects metadata into the iframe
+
+```HTML
+<script type="text/javascript" src="https://www.l2.io/ip.js?var=userip"></script>
+<script>
+var receiver = document.getElementById('iFrameResizer0').contentWindow;
+
+setInterval(function(){
+  receiver.postMessage({
+    "hostname": window.location.hostname,
+    "path": window.location.pathname,
+    "referrer": document.referrer,
+    "ip": userip // from "https://www.l2.io/ip.js?var=userip"
+  }, '*');
+}, 1300);
+
+</script>
 ```
 
 Example of ReactJS snippet:
