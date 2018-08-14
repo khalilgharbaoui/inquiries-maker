@@ -121,13 +121,12 @@ namespace :workers do
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
     end
   end
+  desc "show workers PIDs..."
   task :ids do
     on roles(:app) do
-      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
-      execute :sleep, "2"
-      execute :ps, "aux | grep workers"
       execute :sleep, "2"
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+      execute :sleep, "1"
     end
   end
 
