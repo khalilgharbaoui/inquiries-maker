@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.1'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-gem 'rails', '~> 5.2.0'
+gem 'rails', '~> 5.2.1'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -15,8 +15,8 @@ gem 'jquery-rails'
 gem 'pg'
 gem 'slim-rails'
 gem 'redcarpet'
-gem 'valid_email2'
-gem 'phonelib'
+gem 'valid_email2', '~> 2.3.0'
+gem 'phonelib', '~> 0.6.24'
 gem 'validates_zipcode'
 gem 'jquery-ui-rails'
 gem 'rails-i18n'
@@ -39,7 +39,7 @@ group :development, :test do
   gem 'pry-rescue'
   gem 'rspec-rails'
   gem 'rspec_boolean'
-  gem 'rubocop'
+  gem 'rubocop', '~> 0.58.2'
   # gem 'nyan-cat-formatter'
   # gem 'fuubar'
   gem 'binding_of_caller'
@@ -55,7 +55,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails-console'
   gem 'capistrano-rvm'
-  gem 'capistrano-rake', require: false
+  gem 'capistrano-rake', '~> 0.2.0', require: false
   gem 'capistrano-sudo', require: false
 
   gem 'guard-bundler'
