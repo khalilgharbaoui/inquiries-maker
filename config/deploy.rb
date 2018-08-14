@@ -13,7 +13,6 @@ set :format, :pretty
 set :log_level, :debug
 # set :pty, true
 set :bundle_jobs, 16
-
 set :keep_releases, 1
 
 # Defaults to nil (no asset cleanup is performed)
