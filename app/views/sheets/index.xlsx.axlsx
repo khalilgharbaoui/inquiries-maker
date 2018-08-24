@@ -1,0 +1,53 @@
+inquiries ||= @inquiries
+wb = xlsx_package.workbook
+wb.styles do |style|
+
+  header_cell = header_cell(style, bg_color = nil)
+  header_cell_with_dates = header_cell_with_dates(style, bg_color = nil)
+  highlight_cell = highlight_cell(style, bg_color = nil)
+  highlight_cell_left = highlight_cell_left(style, bg_color = nil)
+  date_cell = date_cell(style, bg_color = nil)
+
+  wb.add_worksheet(name: "UOS Lead List") do |sheet|
+    sheet.add_row ["Umzug Offerte Schweiz Leads"], sz: 12, style: highlight_cell
+    sheet.merge_cells("A1:E1")
+
+    inquiries.group_by { |lead| lead.quarter }.reverse_each do |q, quarter|
+      sheet.add_row [
+        "","#{q}",
+        "From: #{quarter.max.created_at.to_s(:swiss_date_format)}",
+        "Until: #{quarter.min.created_at.to_s(:swiss_date_format)}",
+        ""
+      ], style: header_cell_with_dates
+      sheet.add_row [
+        "#", "LEAD SENDING DATE", "   LEAD TYPE   ", "  LEAD NUMBER  ",
+        "CLIENT NAME            "
+      ], style: header_cell
+      sheet.column_widths 1
+
+      quarter.group_by { |lead| lead.response_body['original_kind'] }
+      .reverse_each do |_, group|
+        group.sort_by(&:created_at).each_with_index do |inquiry, i|
+          color = cycle("EEEEEE", "FFFFFF")
+          sheet.add_row [
+            i+1,
+            inquiry.created_at,
+            "   #{inquiry.response_body['original_kind'].upcase}",
+            "   #{inquiry.response_body['id']}   ",
+            "   #{inquiry.response_body['client_salutation'].titleize} " \
+            "#{inquiry.response_body['client_first_name']} " \
+            "#{inquiry.response_body['client_last_name']}"
+          ], style: [
+            highlight_cell(style, color),
+            date_cell(style, color),
+            highlight_cell(style, color),
+            highlight_cell(style, color),
+            highlight_cell_left(style, color)
+          ]
+        end
+        sheet.add_row [""]
+      end
+      sheet.add_row [""]
+    end
+  end
+end
