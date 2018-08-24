@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_142237) do
+ActiveRecord::Schema.define(version: 2018_08_23_213240) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 2018_07_10_142237) do
     t.jsonb "response_body", default: {}, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "quarter"
     t.index ["cleaning_inquiry_id"], name: "index_received_inquiry_responses_on_cleaning_inquiry_id"
     t.index ["combined_inquiry_id"], name: "index_received_inquiry_responses_on_combined_inquiry_id"
     t.index ["moving_inquiry_id"], name: "index_received_inquiry_responses_on_moving_inquiry_id"
