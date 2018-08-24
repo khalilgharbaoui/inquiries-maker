@@ -7,6 +7,17 @@ GIT
       faraday_middleware
       virtus
 
+GIT
+  remote: https://github.com/randym/axlsx.git
+  revision: c8ac844572b25fda358cc01d2104720c4c42f450
+  ref: c8ac844
+  specs:
+    axlsx (2.1.0.pre)
+      htmlentities (~> 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (>= 1.6.6)
+      rubyzip (>= 1.2.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -66,6 +77,9 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
+    axlsx_rails (0.5.2)
+      actionpack (>= 3.1)
+      axlsx (>= 2.0.1)
     bcrypt (3.1.12)
     bcrypt (3.1.12-java)
     bcrypt (3.1.12-x64-mingw32)
@@ -471,6 +485,8 @@ PLATFORMS
   x86-mswin32
 
 DEPENDENCIES
+  axlsx!
+  axlsx_rails (>= 0.5.1)
   better_errors
   binding_of_caller
   bootsnap (>= 1.1.0)
@@ -516,6 +532,7 @@ DEPENDENCIES
   rspec-rails
   rspec_boolean
   rubocop (~> 0.58.2)
+  rubyzip (>= 1.2.1)
   sass-rails (~> 5.0)
   seed_dump
   selenium-webdriver
