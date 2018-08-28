@@ -1,0 +1,15 @@
+html
+  head
+    meta[charset="utf-8"]
+    meta content=("charset=UTF-8")
+    = stylesheet_link_tag wicked_pdf_asset_base64("pdf/default")
+    = stylesheet_link_tag wicked_pdf_asset_base64("pdf/invoice")
+    = javascript_include_tag wicked_pdf_asset_base64("number_pages")
+  body[onload="number_pages"]
+    .container
+      #header
+        / logo image
+        .logo
+          img src="#{Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) + Rails.application.credentials.dig(Rails.env.to_sym, :uos_logo_path)}"
+      #content
+        = yield
