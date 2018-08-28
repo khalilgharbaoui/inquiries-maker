@@ -1,7 +1,7 @@
 module RescheduleInquiryDelivery
   def reschedule_inquiry
     InquiryDeliveryJob.perform_later(inquiry)
-    flash[:notice] = "✅Inquiry rescheduled!"
+    flash[:notice] = "✅Inquiry delivery rescheduled!"
     redirect_to :action => 'index'
   end
 
