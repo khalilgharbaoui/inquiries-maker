@@ -16,7 +16,7 @@ class ReceivedInquiryResponse < ApplicationRecord
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts "#{Time.now} ##{self.id} ✅"
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts("#{Time.now} ##{self.id} ✅")
   end
 
   def schedule_client_emails
