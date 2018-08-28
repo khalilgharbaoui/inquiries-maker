@@ -25,7 +25,7 @@ Rails.application.routes.draw do
   get 'sheets(/:quarter)', to: 'sheets#show', as: 'sheet'
   get 'invoices', to: 'invoices#index'
   get 'invoices(/:quarter)', to: 'invoices#show', as: 'invoice'
-  get 'reschedule_invoice_delivery/:quarter', to: 'invoices#reschedule_invoice', as: 'reschedule_invoice'
+  get 'reschedule_invoice_delivery(/:quarter)', to: 'invoices#reschedule_invoice', as: 'reschedule_invoice'
 
 
   get '*path', to: redirect("/#{I18n.locale}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false
