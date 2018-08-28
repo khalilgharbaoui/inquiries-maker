@@ -76,4 +76,12 @@ module ApplicationHelper
       return response.response_body.transform_keys!(&:to_sym)
     end
   end
+
+  def from_date(inquiries)
+    inquiries.sort_by{:created_at}.first.created_at
+  end
+
+  def until_date(inquiries)
+    inquiries.sort_by{:created_at}.last.created_at
+  end
 end
