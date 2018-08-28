@@ -1,0 +1,14 @@
+- inquiries ||= @inquiries
+/ backgound image
+.invoice-background
+  img src="#{wicked_pdf_asset_base64("invoice-background.png")}"
+
+/ pdf type
+.cls_002 style="left:435.90px;top:55.30px" 
+  span.cls_002 INVOICE
+  
+= render partial: 'invoices/invoice_date_and_number', locals: {inquiries: inquiries}
+= render partial: 'invoices/invoice_sender'
+= render partial: 'invoices/invoice_reciever'
+= render partial: 'invoices/invoice_details', locals: {inquiries: inquiries}
+= render partial: 'invoices/footer', locals: {inquiries: inquiries}
