@@ -5,21 +5,18 @@ html
     title
       = content_for?(:title) ? yield(:title) : 'Inquiries Maker'
     meta name="description" content="#{content_for?(:description) ? yield(:description) : 'Inquiries Maker'}"
-    - if current_page?(action: :new || :edit)
+    - unless user_signed_in?
       link[rel="dns-prefetch" href="//maps.googleapis.com/"]
-    == stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
-    == javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
-    == csrf_meta_tags
+    = stylesheet_link_tag "application", :media => 'all', 'data-turbolinks-track' => 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track' => 'reload'
+    = csrf_meta_tags
   body
     header
-      == render 'layouts/navigation' if user_signed_in?
-    / .container-fluid
-    /   .row.flex-xl-nowrap
-    main[role="main" class=""]
-      / .container
-      == render 'layouts/messages'
-      == yield
-    - if current_page?(action: :new || :edit)
-      script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"]
-    - if current_page?(action: :new)
+      - if user_signed_in?
+        = render 'layouts/navigation' 
+    main[role="main" class="#{user_signed_in? ? 'container' : ''}"]
+      = render 'layouts/messages'
+      = yield
+    - unless user_signed_in?
+      script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"] 
       script[async defer type="text/javascript" src="//heatmaps.umzug-offerte-schweiz.com/tracker.min.js"]

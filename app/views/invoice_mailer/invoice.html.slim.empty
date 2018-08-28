@@ -1,0 +1,38 @@
+/ container
+/   row.header
+/     columns
+/       spacer size="16"
+/       h1.text-center = @uos
+/   row
+/     columns
+/       spacer size="32"
+/       center
+/         img src="#{@uos_url}#{@uos_logo_path}" alt="#{@uos}"/
+/       spacer size="16"
+/       h2.text-center
+/         = t('.complete_your_inquiry.title', inquiry: @inquiry_name)
+/       spacer size="16"
+/       p.text-left.greeting
+/         = markdown t('.complete_your_inquiry.email_body.greeting', client_salutation: @client_salutation, client_last_name: @inquiry.client_last_name, client_first_name: @inquiry.client_first_name)
+/       p.text-left.main
+/         = markdown t('.complete_your_inquiry.email_body.main.thank_you')
+/         = markdown t('.complete_your_inquiry.email_body.main.not_complete', inquiry: @inquiry_name)
+/       br
+/       button.blue.large.expand href="#{@continue_url}" = t('.complete_your_inquiry.email_body.button', inquiry: @inquiry_name)
+/       br
+/       p.text-left.partner_notice
+/         = markdown t('.complete_your_inquiry.email_body.partner_notice', partner_name: @partner)
+/       br
+/       p.text-center.footer
+/         = markdown t('.complete_your_inquiry.email_body.foot')
+/       br
+/       br
+/       button.blue.large.expand href="#{@continue_url}" = t('.complete_your_inquiry.email_body.button', inquiry: @inquiry_name)
+/       br = markdown t('.greetings')
+/       br = @uos
+/       br = @uos_url
+
+/       hr/
+/       hr/
+/       hr/
+/       img width="1px" height="1px" src="https://www.google-analytics.com/collect?v=1&tid=#{@ga_ua}&cid=#{@ticket}&uid=#{@ticket}&t=event&ec=umzug%20response%20email&ea=response%20email%20opened&el=UR|%20#{@ticket}%20|#{@inquiry_conclusion_date}|%20#{@inquiry_creation_date}%20|#{@inquiry_creation_time}&ev=0&cs=#{@uos_url}&cm=email&cn=response%20emails%20tracking&cm2=1&cd1=#{@ticket}&cd2=#{@inquiry_conclusion_date}&cd3=#{@inquiry_creation_date}%20#{@inquiry_creation_time}" /

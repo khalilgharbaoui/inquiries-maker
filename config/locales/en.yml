@@ -1,4 +1,16 @@
 en:
+  invoices:
+    show:
+      pdf:
+        details:
+          moving: Umzug Leads
+          cleaning: Reinigung Leads
+          combined: Umzug und Reiningung (2-in-1)
+        footer:
+          payment_notice_en:
+            "Please wire the total amount with the invoice number as reference, within 7 days to the account below:"
+          payment_notice_de:
+            "Bitte überweisen den Gesamtbetrag innerhalb von 7 Tagen mit “%{invoice_nr}” als Referenz, auf folgendes Konto:"
   thank_you_moving: "thank-you"
   thank_you_cleaning: "thank-you-cleaning"
   thank_you_combined: "thank-you-combined"
