@@ -1,0 +1,13 @@
+/ invoice footer
+.cls_007 style="left:66.00px;top:489.90px" 
+  span.cls_007 = t('invoices.show.pdf.footer.payment_notice_en')
+.cls_008 style="left:66.00px;top:507.00px" 
+  span.cls_008 = t('invoices.show.pdf.footer.payment_notice_de', invoice_nr: invoice_nr(inquiries))
+.cls_003 style="left:66.00px;top:531.10px" 
+  span.cls_003 IBAN: #{detail("uos_iban")}
+.cls_004 style="left:257.90px;top:530.10px" 
+  span.cls_004 Kontoinhaber: #{detail("uos_contact")}
+.cls_009 style="left:66.00px;top:541.00px" 
+  span.cls_009 KONTO: #{detail("uos_bank")}
+.cls_009 style="left:257.90px;top:541.00px" 
+  span.cls_009 Adresse: #{detail("uos_bank_adres")}

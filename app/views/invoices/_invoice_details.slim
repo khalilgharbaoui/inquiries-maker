@@ -1,0 +1,22 @@
+/ invoice details table
+.cls_003 style="left:65.30px;top:265.20px" 
+  span.cls_003 Description:
+.cls_003 style="left:210px;top:265.20px" 
+  span.cls_003 #
+.cls_003 style="left:283.80px;top:265.20px" 
+  span.cls_003 Price per lead
+.cls_003 style="left:471.90px;top:265.20px" 
+  span.cls_003 AMOUNT
+
+- details(inquiries).each_with_index do |batch, i|
+  .cls_004 style="left:65.30px;top:#{top(i)}px"
+    span.cls_004 = inquiry_type(batch)
+  .cls_004 style="left:210px;top:#{top(i)}px"
+    span.cls_004 = batch[:quantity]
+  .cls_004 style="left:283.80px;top:#{top(i)}px"
+    span.cls_004 CHF #{price(batch)}
+  .cls_004 style="left:471.90px;top:#{top(i)}px"
+    span.cls_004 CHF #{sub_total(batch)}
+    
+= render partial: "invoices/total_price", locals: {inquiries: inquiries}
+
