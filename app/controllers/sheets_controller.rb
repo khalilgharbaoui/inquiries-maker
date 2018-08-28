@@ -9,8 +9,8 @@ class SheetsController < ApplicationController
     end
     response.headers['Content-Disposition'] = 'inline'
     render xlsx: @inquiries, disposition: 'inline',
-           filename: "uos-leads-list#{'-' + params[:quarter].gsub(" ","-") if params[:quarter]}.xlsx",
-           xlsx_created_at: 1.days.ago,
+           filename: "uos-leads-list#{'-' + params[:quarter].tr(' ','-') if params[:quarter]}.xlsx",
+           xlsx_created_at: 1.day.ago,
            xlsx_author: "Umzug Offerte Schweiz",
            template: 'sheets/show'
   end
