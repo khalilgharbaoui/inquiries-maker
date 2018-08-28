@@ -27,6 +27,6 @@ class InvoicesController < ApplicationController
 
   private
   def file_name(inquiries)
-    helpers.detail('uos').gsub(' ','-') + '-Invoice-' + inquiries.first.quarter.gsub(' ', '-')
+    helpers.detail('uos').tr(' ','-') + '-Invoice-' + inquiries.first.quarter.tr(' ', '-')
   end
 end
