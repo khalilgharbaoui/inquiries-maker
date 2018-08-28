@@ -30,9 +30,13 @@ gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
 gem 'telebot', :git => 'https://github.com/khalilgharbaoui/telebot.git'
+# Excel sheets generation
 gem 'rubyzip', '>= 1.2.1'
 gem 'axlsx', git: 'https://github.com/randym/axlsx.git', ref: 'c8ac844'
 gem 'axlsx_rails', '>= 0.5.1'
+# Pdf Generation
+gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
 
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

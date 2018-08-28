@@ -4,6 +4,8 @@
 class CombinedInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
 
+  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :combined_price
+                                           ).to_s.freeze
   CH = Phonelib.default_country
   enum client_property_size: {
     size_1: 'size_1', size_2: 'size_2', size_3: 'size_3', size_4: 'size_4',
