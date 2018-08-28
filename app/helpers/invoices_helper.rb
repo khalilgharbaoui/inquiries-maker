@@ -6,7 +6,7 @@ module InvoicesHelper
   # end
 
   def link_to_reschedule_invoice(quarter)
-    link_to  "Reschedule! 📧", {:action => "reschedule_invoice", quarter: quarter, locale: nil}
+    link_to 'Reschedule! 📧', action: 'reschedule_invoice', quarter: quarter, locale: nil
   end
 
   def details(inquiries)
