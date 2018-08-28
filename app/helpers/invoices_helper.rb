@@ -5,9 +5,6 @@ module InvoicesHelper
   #   find_received_inquiry_response_body(inquiry).first || link_to_reschedule(inquiry)
   # end
 
-  def link_to_reschedule_invoice(quarter)
-    link_to 'Reschedule! 📧', action: 'reschedule_invoice', quarter: quarter, locale: nil
-  end
 
   def details(inquiries)
     inquiries.group_by{|batch| batch.response_body['original_kind']}
