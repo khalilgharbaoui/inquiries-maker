@@ -54,7 +54,8 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = %i[subdomain uuid remote_ip]
+  config.log_tags = %i[subdomain remote_ip]
+  # config.log_tags = %i[subdomain uuid remote_ip]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store

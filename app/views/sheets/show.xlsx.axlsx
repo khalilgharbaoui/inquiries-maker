@@ -12,7 +12,7 @@ wb.styles do |style|
     sheet.add_row ["Umzug Offerte Schweiz Leads"], sz: 12, style: highlight_cell
     sheet.merge_cells("A1:E1")
 
-    inquiries.group_by { |lead| lead.quarter }.sort_by{:quarter}.each do |quarter, q_group|
+    inquiries.group_by{|lead| lead.quarter }.reverse_each do |quarter, q_group|
       sheet.add_row [
         "","#{quarter}",
         "From: #{from_date(q_group).to_s(:swiss_date_format)}",
@@ -25,8 +25,8 @@ wb.styles do |style|
       ], style: header_cell
       sheet.column_widths 1
 
-      q_group.group_by{ |lead| lead.response_body['original_kind'] }.reverse_each do |_, ok_group|
-        ok_group.sort_by{:created_at}.reverse_each.each_with_index do |inquiry, i|
+      q_group.group_by{ |lead| lead.response_body['original_kind'] }.each do |_, ok_group|
+        ok_group.sort_by{:created_at}.each_with_index do |inquiry, i|
           color = cycle("EEEEEE", "FFFFFF")
           sheet.add_row [
             i+1,

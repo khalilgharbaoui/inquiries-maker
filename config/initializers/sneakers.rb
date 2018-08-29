@@ -2,14 +2,14 @@ require 'sneakers'
 require 'sneakers/metrics/logging_metrics'
 amqp = Rails.application.credentials.dig(
       Rails.env.to_sym, :rabbitmq_amqp_uri)
-Sneakers.configure  :heartbeat => 5,
+Sneakers.configure  :heartbeat => 3,
                     amqp: amqp,
                     :vhost => '/',
                     :exchange => 'sneakers',
                     :exchange_type => :direct,
                     prefetch: 5,      # Grab 10 jobs together. Betterspeed.
                     threads: 5,      # Threadpool size (good to match prefetch)
-                    timeout_job_after: 30.seconds,   # Maximal seconds to wait for job
+                    timeout_job_after: 60.seconds,   # Maximal seconds to wait for job
                     start_worker_delay: 1, # Delay between thread startup
                     workers: 1, # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?

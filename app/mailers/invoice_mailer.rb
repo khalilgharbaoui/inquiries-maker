@@ -16,7 +16,7 @@ class InvoiceMailer < ApplicationMailer
           handlers: [:axlsx],
           formats: [:xlsx],
           template: "sheets/show",
-          locals: { inquiries: inquiries.reverse_each }
+          locals: { inquiries: inquiries }
         }
       )
     )
@@ -29,7 +29,7 @@ class InvoiceMailer < ApplicationMailer
           handlers: [:slim],
           formats: [:pdf],
           template: "invoices/show",
-          locals: { inquiries: inquiries.reverse_each } #bug!
+          locals: { inquiries: inquiries }
         }
       ),{
         page_size: 'A4',
