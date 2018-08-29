@@ -2,14 +2,16 @@ html
   head
     meta[charset="utf-8"]
     meta content=("charset=UTF-8")
-    / = wicked_pdf_stylesheet_link_tag("pdf/default")
-    / = wicked_pdf_stylesheet_link_tag("pdf/invoice") 
-    / = wicked_pdf_javascript_include_tag("pdf/number_pages")
+    style
+      |  *{font-family:Arial,serif;color:rgb(0, 0, 0);font-style:normal;font-weight:normal;text-decoration:none}div{position:absolute}img,span{position:fixed;width:100%}.container{left:0;margin-left:0;top:0;width:100%;height:100%;border-style:none;overflow:hidden}.logo{left:56px;top:56px;}.logo img{height:57px;width:144px;z-index:999}
+    style
+      |  .invoice-background{left:0;top:-1px;}.invoice-background img{height:842px;width:595px}div.cls_002,span.cls_002{font-size:23.8px;color:rgb(147, 147, 147);font-weight:bold}div.cls_003,span.cls_003{font-size:7.7px;font-weight:bold}div.cls_004,span.cls_004{font-size:8.6px}div.cls_005,span.cls_005{font-size:11.9px;font-weight:bold}div.cls_006,span.cls_006{font-size:10.2px;font-weight:bold}div.cls_007,span.cls_007{font-size:7.7px;font-weight:bold;font-style:italic}div.cls_008,span.cls_008{font-size:7.7px;color:rgb(24, 24, 24);font-weight:bold;font-style:italic}div.cls_009,span.cls_009{font-size:7.7px}
+    javascript:
+      function number_pages() {var vars={}; var x=document.location.search.substring(1).split('&'); for(var i in x) {var z=x[i].split('=',2);vars[z[0]] = decodeURIComponent(z[1]);} var x=['frompage','topage','page','webpage','section','subsection','subsubsection']; for(var i in x){var y = document.getElementsByClassName(x[i]);for(var j=0;j<y.length;++j)y[j].textContent=vars[x[i]];}}
   body[onload="number_pages"]
     .container
       #header
-        / logo image
         .logo
-          / = wicked_pdf_image_tag "#{Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) + Rails.application.credentials.dig(Rails.env.to_sym, :uos_logo_path)}"
+          = wicked_pdf_image_tag "#{Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) + Rails.application.credentials.dig(Rails.env.to_sym, :uos_logo_path)}"
       #content
         = yield
