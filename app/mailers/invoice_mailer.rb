@@ -16,7 +16,7 @@ class InvoiceMailer < ApplicationMailer
           handlers: [:axlsx],
           formats: [:xlsx],
           template: "sheets/show",
-          locals: { inquiries: inquiries }
+          locals: { inquiries: inquiries.reverse_each }
         }
       )
     )
