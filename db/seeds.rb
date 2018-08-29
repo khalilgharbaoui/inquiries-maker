@@ -7,19 +7,19 @@ if Rails.env == "development"
   5.times do |i|
     i = i+ 3 * rand(999)
     FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first, created_at: "201#{(7..8).to_a.sample.to_s}-#{(1..12).to_a.sample.to_s}-13 16:13:50")
-    sleep 5
+    sleep 0
   end
 
   5.times do |i|
     i = i+ 3 * rand(999)
     FactoryBot.create(:cleaning_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first, created_at: "201#{(7..8).to_a.sample.to_s}-#{(1..12).to_a.sample.to_s}-13 16:13:50")
-    sleep 5
+    sleep 0
   end
 
   5.times do |i|
     i = i+ 3 * rand(999)
     FactoryBot.create(:combined_inquiry, client_email: "person#{i}@fake.com", client_property_size: ["size_1", "size_2", "size_3", "size_4", "size_5", "size_6", "size_7", "size_8"].shuffle.first, created_at: "201#{(7..8).to_a.sample.to_s}-#{(1..12).to_a.sample.to_s}-13 16:13:50")
-    sleep 5
+    sleep 0
   end
 end
 # # ActiveRecord::Base.transaction do

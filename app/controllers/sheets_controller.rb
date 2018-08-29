@@ -8,7 +8,9 @@ class SheetsController < ApplicationController
            filename: "uos-leads-list#{'-' + params[:quarter].tr(' ','-') if params[:quarter]}.xlsx",
            xlsx_created_at: 1.day.ago,
            xlsx_author: "Umzug Offerte Schweiz",
-           template: 'sheets/show'
+           template: 'sheets/show',
+           handlers: [ :axlsx ]
+
   end
 
   private
