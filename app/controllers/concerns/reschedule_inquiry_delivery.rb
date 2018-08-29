@@ -1,8 +1,13 @@
 module RescheduleInquiryDelivery
   def reschedule_inquiry
-    InquiryDeliveryJob.perform_later(inquiry)
+    schedule_inquiry_delivery_job
     flash[:notice] = "✅Inquiry delivery rescheduled!"
-    redirect_to :action => 'index'
+    redirect_to action: 'index'
+  end
+
+  def schedule_inquiry_delivery_job
+    msg = {inquiry_name: inquiry.class.name, inquiry_id: inquiry.id}.to_json
+    InquiryDeliveryWorker.enqueue(msg)
   end
 
   private
