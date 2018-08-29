@@ -1,16 +1,17 @@
+# frozen_string_literal: true
+
 # Puma can serve each request in a thread from an internal thread pool.
 # The `threads` method setting takes two numbers: a minimum and maximum.
 # Any libraries that use thread pools should be configured to match
 # the maximum value specified for Puma. Default is set to 5 threads for minimum
 # and maximum; this matches the default thread size of Active Record.
 #
-threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+threads_count = ENV.fetch('RAILS_MAX_THREADS') { 5 }
 threads threads_count, threads_count
 
 # Specifies the `environment` that Puma will run in.
 
-#
-environment "production"
+environment 'production'
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.
 #
 # port ENV.fetch("PORT") { 8000 }
@@ -18,18 +19,15 @@ environment "production"
 key = '/app/config/certs/ssl.key'
 crt = '/app/config/certs/ssl.crt'
 
-ssl_bind '0.0.0.0', '8000', {
-  key: key,
-  cert: crt,
-  verify_mode: 'none'
-}
+ssl_bind '0.0.0.0', '8000',
+         key: key,
+         cert: crt,
+         verify_mode: 'none'
 
 # bind "ssl://0.0.0.0:8000\
 # ?key=#{Rails.root.join('config', 'certs', 'ssl.key').to_s}\
 # &cert=#{Rails.root.join('config', 'certs', 'ssl.crt').to_s}\
 # &verify_mode=none"
-
-
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
@@ -37,7 +35,7 @@ ssl_bind '0.0.0.0', '8000', {
 # Workers do not work on JRuby or Windows (both of which do not support
 # processes).
 #
-workers ENV.fetch("WEB_CONCURRENCY") { 1 }
+workers ENV.fetch('WEB_CONCURRENCY') { 1 }
 
 # Use the `preload_app!` method when specifying a `workers` number.
 # This directive tells Puma to first boot the application and load code
@@ -45,7 +43,6 @@ workers ENV.fetch("WEB_CONCURRENCY") { 1 }
 # process behavior so workers use less memory.
 #
 preload_app!
-
 
 # Allow puma to be restarted by `rails restart` command.
 plugin :tmp_restart

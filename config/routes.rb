@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     root to: 'moving_inquiries#new'
     devise_for :users, controllers: {
       sessions: 'users/sessions',
-      registrations: 'users/registrations',
+      registrations: 'users/registrations'
     }
     post 'moving_inquiries/new', to: 'moving_inquiries#create', as: 'create_moving_inquiry'
     post 'cleaning_inquiries/new', to: 'cleaning_inquiries#create', as: 'create_cleaning_inquiry'
@@ -26,7 +26,6 @@ Rails.application.routes.draw do
   get 'invoices', to: 'invoices#index'
   get 'invoices(/:quarter)', to: 'invoices#show', as: 'invoice'
   get 'reschedule_invoice_delivery(/:quarter)', to: 'invoices#reschedule_invoice', as: 'reschedule_invoice'
-
 
   get '*path', to: redirect("/#{I18n.locale}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false
   get '*locale/*action/*path', to: redirect("/#{I18n.locale}/%{action}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false

@@ -12,11 +12,11 @@ class ReceivedInquiryResponse < ApplicationRecord
   private
 
   def set_quarter
-      self.quarter = "Q#{Date.parse(created_at.to_s).quarter} #{Date.parse(created_at.to_s).year}"
+    self.quarter = "Q#{Date.parse(created_at.to_s).quarter} #{Date.parse(created_at.to_s).year}"
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts("#{Time.now} ##{self.id} ✅")
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("#{Time.now} ##{id} ✅")
   end
 
   def schedule_client_emails
