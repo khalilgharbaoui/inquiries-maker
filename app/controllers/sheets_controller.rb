@@ -3,8 +3,8 @@ class SheetsController < ApplicationController
 
   def show
     @inquiries = received_inquiry_responces(params[:quarter])
-    response.headers['Content-Disposition'] = 'inline'
-    render xlsx: @inquiries, disposition: 'inline',
+    # response.headers['Content-Disposition'] = 'inline'
+    render xlsx: @inquiries, disposition: 'attachment',
            filename: "uos-leads-list#{'-' + params[:quarter].tr(' ','-') if params[:quarter]}.xlsx",
            xlsx_created_at: 1.day.ago,
            xlsx_author: "Umzug Offerte Schweiz",
@@ -14,10 +14,6 @@ class SheetsController < ApplicationController
   private
 
   def received_inquiry_responces(params)
-    if params
-        ReceivedInquiryResponse.order("id DESC").where('quarter = ?', params)
-    else
-        ReceivedInquiryResponse.order("id DESC")
-    end
+    params ? ReceivedInquiryResponse.where('quarter = ?', params) : ReceivedInquiryResponse.all
   end
 end
