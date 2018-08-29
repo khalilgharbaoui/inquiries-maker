@@ -24,8 +24,7 @@ class InvoiceMailer < ApplicationMailer
     pdf = WickedPdf.new.pdf_from_string(
       render_to_string(
         {
-          pdf: "test",
-          layout: "pdf.html.slim",
+          layout: false,
           handlers: [:slim],
           formats: [:pdf],
           template: "invoices/show",

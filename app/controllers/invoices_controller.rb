@@ -10,7 +10,7 @@ class InvoicesController < ApplicationController
 
     render pdf: file_name(@inquiries),
       template: "invoices/show.pdf",
-      layout: "pdf.html.slim",
+      layout: false,
       page_size: 'A4',
       encoding: 'UTF-8',
       dpi: '300',
