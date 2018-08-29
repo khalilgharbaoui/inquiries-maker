@@ -1,6 +1,6 @@
 module ParentThankYouPageUrlMaker
   def parent_thank_you_page_url
-      return "#{url}/#{locale}/#{t(thank_you_path)}/"
+    return "#{url}/#{locale}/#{t(thank_you_path)}/"
   end
 
 private
