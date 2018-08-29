@@ -67,18 +67,18 @@ Rails.application.configure do
   # }
 
   #gmail smtp configuration
-  config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    # domain: Rails.application.secrets.domain_name,
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_password)
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address: "smtp.gmail.com",
+  #   port: 587,
+  #   # domain: Rails.application.secrets.domain_name,
+  #   authentication: "plain",
+  #   enable_starttls_auto: true,
+  #   user_name: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username),
+  #   password: Rails.application.credentials.dig(Rails.env.to_sym, :gmail_password)
+  # }
 
   # mailcatcher configuration
-  # config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
+  config.action_mailer.smtp_settings = { address: "localhost", port: 1025 }
 
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?

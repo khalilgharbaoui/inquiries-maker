@@ -1,12 +1,17 @@
 require 'sneakers'
 require 'sneakers/metrics/logging_metrics'
+require 'sneakers/handlers/maxretry'
 amqp = Rails.application.credentials.dig(
       Rails.env.to_sym, :rabbitmq_amqp_uri)
-Sneakers.configure  :heartbeat => 3,
+Sneakers.configure  heartbeat: 3,
                     amqp: amqp,
-                    :vhost => '/',
-                    :exchange => 'sneakers',
-                    :exchange_type => :direct,
+                    vhost: '/',
+                    exchange: 'sneakers',
+                    exchange_type: :direct,
+                    retry_exchange: 'activejob-retry',
+                    retry_backoff_exchange: 'activejob-backoff',
+                    retry_error_exchange: 'activejob-error',
+                    retry_requeue_exchange: 'activejob-retry-requeue',
                     prefetch: 5,      # Grab 10 jobs together. Betterspeed.
                     threads: 5,      # Threadpool size (good to match prefetch)
                     timeout_job_after: 60.seconds,   # Maximal seconds to wait for job
@@ -15,9 +20,12 @@ Sneakers.configure  :heartbeat => 3,
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
                     metrics: Sneakers::Metrics::LoggingMetrics.new,
-                    daemonize: false       # Send to background
+                    daemonize: false,      # Send to background
                     # log: 'sneakers.log',     # Log file
                     # pid_path: 'sneakers.pid' # Pid file
+                    handler: Sneakers::Handlers::Maxretry
+
+
 
 # Sneakers.configure({
 #

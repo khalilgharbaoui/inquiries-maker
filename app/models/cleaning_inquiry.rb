@@ -62,7 +62,8 @@ class CleaningInquiry < ApplicationRecord
   after_commit :send_telegram_notification, on: :create
 
   def schedule_inquiry_delivery
-    InquiryDeliveryJob.perform_later(self)
+    msg = {inquiry_name: self.class.name, inquiry_id: self.id}.to_json
+    InquiryDeliveryWorker.enqueue(msg)
   end
 
   def send_telegram_notification
