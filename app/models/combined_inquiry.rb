@@ -71,6 +71,6 @@ class CombinedInquiry < ApplicationRecord
   end
 
   def send_telegram_notification
-    TelegramNotifier.new(self)
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts("#{Time.now} ##{self.id} ✅")
   end
 end
