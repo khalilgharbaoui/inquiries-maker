@@ -4,8 +4,7 @@
 class CombinedInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
 
-  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :combined_price
-                                           ).to_s.freeze
+  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :combined_price).to_s.freeze
   CH = Phonelib.default_country
   enum client_property_size: {
     size_1: 'size_1', size_2: 'size_2', size_3: 'size_3', size_4: 'size_4',
@@ -15,7 +14,7 @@ class CombinedInquiry < ApplicationRecord
   validates :locale, :is_moving_request, :is_cleaning_request,
             :client_salutation, :client_first_name, :client_last_name,
             :client_email, :client_mobile, :client_postal_code, :client_city,
-            :moving_postal_code, :moving_city, :moving_date,:cleaning_date,
+            :moving_postal_code, :moving_city, :moving_date, :cleaning_date,
             :client_property_size, :client_street_and_number,
             :moving_street_and_number, exclusion: { in: [nil] }
 
@@ -67,11 +66,11 @@ class CombinedInquiry < ApplicationRecord
   after_commit :send_telegram_notification, on: :create
 
   def schedule_inquiry_delivery
-    msg = {inquiry_name: self.class.name, inquiry_id: self.id}.to_json
+    msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
     InquiryDeliveryWorker.enqueue(msg)
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts("#{Time.now} ##{self.id} ✅")
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("#{Time.now} ##{id} ✅")
   end
 end

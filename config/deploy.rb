@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 # lock to capistrano version
-lock "~> 3.11.0"
-set :ssh_options, forward_agent: true, keys: ["config/deploy_id_rsa"] if File.exist?("config/deploy_id_rsa")
+lock '~> 3.11.0'
+set :ssh_options, forward_agent: true, keys: ['config/deploy_id_rsa'] if File.exist?('config/deploy_id_rsa')
 # Include this if you want to be able to set up different deployment stages (i.e. beta, stage, etc.)
 # require 'capistrano/ext/multistage'
 set :application, 'inquiries-maker'
@@ -29,7 +31,7 @@ set :migration_servers, -> { primary(fetch(:migration_role)) }
 set :conditionally_migrate, true
 
 # Defaults to [:web]
-set :assets_roles, [:web, :app]
+set :assets_roles, %i[web app]
 
 # Defaults to 'assets'
 # This should match config.assets.prefix in your rails config/application.rb
@@ -43,9 +45,9 @@ set :assets_manifests, ['app/assets/config/manifest.js']
 set :rails_assets_groups, :assets
 
 # If you need to touch public/images, public/javascripts, and public/stylesheets on each deploy
-set :normalize_asset_timestamps, %w{public/images public/javascripts public/stylesheets}
+set :normalize_asset_timestamps, %w[public/images public/javascripts public/stylesheets]
 
-append :linked_files, "config/master.key", "config/database.yml", "config/certs/ssl.key", "config/certs/ssl.crt"
+append :linked_files, 'config/master.key', 'config/database.yml', 'config/certs/ssl.key', 'config/certs/ssl.crt'
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
@@ -89,48 +91,48 @@ namespace :deploy do
 end
 
 namespace :workers do
-  desc "Start workers..."
+  desc 'Start workers...'
   task :start do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
           execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
-          execute :sleep, "2"
+          execute :sleep, '2'
           execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
-          execute :sleep, "2"
-          execute :echo, "Starting workers....❕"
-          execute :sleep, "2"
-          SSHKit.config.command_map.prefix[:rake].unshift("nohup")
+          execute :sleep, '2'
+          execute :echo, 'Starting workers....❕'
+          execute :sleep, '2'
+          SSHKit.config.command_map.prefix[:rake].unshift('nohup')
           execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
-          execute :sleep, "2"
-          execute :sleep, "2"
+          execute :sleep, '2'
+          execute :sleep, '2'
           execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
         end
       end
     end
   end
 
-  desc "Kill workers by PID"
+  desc 'Kill workers by PID'
   task :stop do
     on roles(:app) do
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
-      execute :sleep, "2"
+      execute :sleep, '2'
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
-      execute :sleep, "2"
-      execute :sleep, "2"
+      execute :sleep, '2'
+      execute :sleep, '2'
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
     end
   end
-  desc "show workers PIDs..."
+  desc 'show workers PIDs...'
   task :ids do
     on roles(:app) do
-      execute :sleep, "2"
+      execute :sleep, '2'
       execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
-      execute :sleep, "1"
+      execute :sleep, '1'
     end
   end
 
-  desc "show workers logs..."
+  desc 'show workers logs...'
   task :logs do
     on roles(:app) do
       within release_path do
@@ -142,46 +144,46 @@ namespace :workers do
 end
 
 namespace :broker do
-  desc "Start RabbitMQ server..."
+  desc 'Start RabbitMQ server...'
   task :start do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, "rabbitmq-server start"
+      sudo! :service, 'rabbitmq-server start'
     end
   end
 
-  desc "Stop RabbitMQ server..."
+  desc 'Stop RabbitMQ server...'
   task :stop do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, "rabbitmq-server stop"
+      sudo! :service, 'rabbitmq-server stop'
     end
   end
 
-  desc "Restart RabbitMQ server..."
+  desc 'Restart RabbitMQ server...'
   task :restart do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, "rabbitmq-server restart"
+      sudo! :service, 'rabbitmq-server restart'
     end
   end
 
-  desc "RabbitMQ server status..."
+  desc 'RabbitMQ server status...'
   task :status do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, "rabbitmq-server status | cat"
+      sudo! :service, 'rabbitmq-server status | cat'
     end
   end
 end
 
 namespace :services do
-  desc "Check status of all running services"
+  desc 'Check status of all running services'
   task :status do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, "--status-all"
+      sudo! :service, '--status-all'
     end
   end
 end
 
 namespace :logs do
-  desc "Ouput the tail from remote log"
+  desc 'Ouput the tail from remote log'
   task :tail do
     on roles(:app) do
       within current_path do
@@ -190,20 +192,20 @@ namespace :logs do
     end
   end
 
-  desc "Ouputs the full remote log"
+  desc 'Ouputs the full remote log'
   task :full do
     on roles(:app) do
       within current_path do
-        puts(capture :cat, "log/#{fetch(:rails_env) || 'production'}.log")
+        puts(capture(:cat, "log/#{fetch(:rails_env) || 'production'}.log"))
       end
     end
   end
 
-  desc "Ouput the last 100 lines of tail from remote log"
+  desc 'Ouput the last 100 lines of tail from remote log'
   task :last do
     on roles(:app) do
       within current_path do
-        puts(capture :tail, "-n 100 log/#{fetch(:rails_env) || 'production'}.log")
+        puts(capture(:tail, "-n 100 log/#{fetch(:rails_env) || 'production'}.log"))
       end
     end
   end

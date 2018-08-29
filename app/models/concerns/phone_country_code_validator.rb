@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PhoneCountryCodeValidator < ActiveModel::Validator
   def validate(record)
     options[:fields].any? do |field|

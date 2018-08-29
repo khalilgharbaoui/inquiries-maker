@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # custom date and time and datetime formats
 
 Date::DATE_FORMATS[:swiss_date_format] = '%d.%m.%Y'

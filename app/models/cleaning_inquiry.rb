@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 class CleaningInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
 
-  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :cleaning_price
-                                           ).to_s.freeze
+  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :cleaning_price).to_s.freeze
   CH = Phonelib.default_country
   enum client_property_size: {
     size_1: 'size_1', size_2: 'size_2', size_3: 'size_3', size_4: 'size_4',
@@ -62,11 +63,11 @@ class CleaningInquiry < ApplicationRecord
   after_commit :send_telegram_notification, on: :create
 
   def schedule_inquiry_delivery
-    msg = {inquiry_name: self.class.name, inquiry_id: self.id}.to_json
+    msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
     InquiryDeliveryWorker.enqueue(msg)
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : $stderr.puts("#{Time.now} ##{self.id} ✅")
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("#{Time.now} ##{id} ✅")
   end
 end
