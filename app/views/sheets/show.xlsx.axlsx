@@ -26,7 +26,6 @@ wb.styles do |style|
       sheet.column_widths 1
 
       q_group.group_by{ |lead| lead.response_body['original_kind'] }.each do |_, ok_group|
-      binding.pry
         ok_group.sort_by{:created_at}.each_with_index do |inquiry, i|
           color = cycle("EEEEEE", "FFFFFF")
           sheet.add_row [
