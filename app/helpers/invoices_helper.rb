@@ -1,22 +1,22 @@
-module InvoicesHelper
+# frozen_string_literal: true
 
+module InvoicesHelper
   # def invoice_received?(quarter)
   # TODO: create functionality to see email opens for invoice
   #   find_received_inquiry_response_body(inquiry).first || link_to_reschedule(inquiry)
   # end
 
-
   def details(inquiries)
-    inquiries.group_by{|batch| batch.response_body['original_kind']}
-             .map{|arr| {type: arr[0], quantity: arr[1].count}}
+    inquiries.group_by { |batch| batch.response_body['original_kind'] }
+             .map { |arr| { type: arr[0], quantity: arr[1].count } }
   end
 
   def price(hash)
-    sprintf "%.2f", inquiry_price(hash).round(2)
+    format '%.2f', inquiry_price(hash).round(2)
   end
 
   def sub_total(hash)
-    sprintf "%.2f", inquiries_price(hash).round(2)
+    format '%.2f', inquiries_price(hash).round(2)
   end
 
   def total(inquiries)
@@ -24,11 +24,11 @@ module InvoicesHelper
     details(inquiries).each do |hash|
       prices << inquiries_price(hash)
     end
-    sprintf "%.2f", prices.sum.round(2)
+    format '%.2f', prices.sum.round(2)
   end
 
   def top(i)
-   284 + i * 12
+    284 + i * 12
   end
 
   def inquiry_type(batch)
@@ -58,7 +58,7 @@ module InvoicesHelper
   private
 
   def inquiry_price(hash)
-    BigDecimal.new (hash[:type].to_s + 'Inquiry').camelcase.constantize::PRICE
+    BigDecimal (hash[:type].to_s + 'Inquiry').camelcase.constantize::PRICE
   end
 
   def inquiries_price(hash)
