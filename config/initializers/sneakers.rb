@@ -6,7 +6,7 @@ require 'sneakers/handlers/maxretry'
 amqp = Rails.application.credentials.dig(
   Rails.env.to_sym, :rabbitmq_amqp_uri
 )
-Sneakers.configure  heartbeat: 3,
+Sneakers.configure  heartbeat: 5,
                     amqp: amqp,
                     vhost: '/',
                     exchange: 'sneakers',
@@ -15,11 +15,11 @@ Sneakers.configure  heartbeat: 3,
                     retry_backoff_exchange: 'activejob-backoff',
                     retry_error_exchange: 'activejob-error',
                     retry_requeue_exchange: 'activejob-retry-requeue',
-                    prefetch: 5, # Grab 10 jobs together. Betterspeed.
+                    prefetch: 10, # Grab 10 jobs together. Betterspeed.
                     threads: 5, # Threadpool size (good to match prefetch)
                     timeout_job_after: 60.seconds, # Maximal seconds to wait for job
                     start_worker_delay: 1, # Delay between thread startup
-                    workers: 1, # Number of per-cpu processes to run
+                    workers: 2, # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
                     metrics: Sneakers::Metrics::LoggingMetrics.new,
@@ -54,3 +54,22 @@ Sneakers.configure  heartbeat: 3,
 # })
 
 Sneakers.logger.level = Logger::INFO
+
+# Preload all jobs defined for the application
+Dir.glob(File.expand_path("app/jobs/*_job.rb", Rails.root)).each do |job_file|
+  require job_file
+end
+
+# Then create a list of queues names based on the defined jobs
+queues = ApplicationJob.descendants.map(&:queue_name).uniq
+
+# Finally, dynamically create a worker class for each queue name, very much
+# as you do in #331, but including the Sneakers::Worker module again, to force
+# Sneakers to add the new class to its classes array
+queues.each do |queue_name|
+  Object.const_set("#{queue_name}_worker".classify,
+    Class.new(ActiveJob::QueueAdapters::SneakersAdapter::JobWrapper) do
+      include Sneakers::Worker
+      from_queue queue_name
+    end)
+end
