@@ -31,7 +31,9 @@ after_failure:
 before_deploy:
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:stop"
 deploy:
-- "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
+  provider: script
+  script: "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
+  on_branche: master
 after_deploy:
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:start"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:ids"
