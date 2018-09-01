@@ -13,7 +13,7 @@ set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
 set :log_level, :debug
-set :pty, true
+# set :pty, true
 set :bundle_jobs, 16
 set :keep_releases, 1
 
@@ -77,7 +77,7 @@ namespace :deploy do
 
   # after :started, 'workers:stop'
 
-  before :finishing, 'workers:stop'
+  # before :finishing, 'workers:stop'
   before :finishing, 'deploy:cleanup'
 
   # after :restart, :clear_cache do
@@ -96,9 +96,7 @@ namespace :workers do
     on roles(:app), in: :groups, limit: 3, wait: 10 do
       within release_path do
         with rails_env: fetch(:rails_env) do
-          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
-          execute :sleep, '2'
-          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
+          execute :ps, "-ef | awk '/[r]ake workers:run/{print $2}'" # get pids
           execute :sleep, '2'
           execute :echo, 'Starting workers....❕'
           execute :sleep, '2'
@@ -106,7 +104,7 @@ namespace :workers do
           execute :rake, "workers:run RAILS_ENV=production --trace > #{deploy_to}rake.out 2>&1 &"
           execute :sleep, '2'
           execute :sleep, '2'
-          execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+          execute :ps, "-ef | awk '/[r]ake workers:run/{print $2}'" # get pids
         end
       end
     end
@@ -115,19 +113,21 @@ namespace :workers do
   desc 'Kill workers by PID'
   task :stop do
     on roles(:app) do
-      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+      execute :ps, "-ef | awk '/[r]ake workers:run/{print $2}'" # get pids
       execute :sleep, '2'
-      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'| xargs kill -9"
+      execute :ps, " -ef | awk '/[r]ake workers:run/{print $2}' | xargs kill -9"
       execute :sleep, '2'
       execute :sleep, '2'
-      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+      execute :ps, "-ef | awk '/[r]ake workers:run/{print $2}'" # get pids
+      execute :echo, 'Workers died....❕'
+
     end
   end
   desc 'show workers PIDs...'
   task :ids do
     on roles(:app) do
       execute :sleep, '2'
-      execute :ps, "xu | grep 'ruby/2.5.0/bin/rake workers:run RAILS_ENV=production' | grep -v grep | awk '{ print $2 }'"
+      execute :ps, "-ef | awk '/[r]ake workers:run/{print $2}'" # get pids
       execute :sleep, '1'
     end
   end
