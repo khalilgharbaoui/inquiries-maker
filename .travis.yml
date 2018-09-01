@@ -26,17 +26,12 @@ script:
 - ssh-add config/deploy_id_rsa
 after_success:
 - echo "Ready to deploy! ✅"
-after_failure:
-- echo "Can not deploy! ❌"
-before_deploy:
+- "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:stop"
-deploy:
-  provider: script
-  script: bundle exec cap production deploy
-  on_branche: master
-after_deploy:
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:start"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:ids"
+after_failure:
+- echo "Can not deploy! ❌"
 after_script:
 - "All done! 🍫"
 env:
