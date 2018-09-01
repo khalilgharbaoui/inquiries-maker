@@ -13,7 +13,7 @@ set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
 set :log_level, :debug
-# set :pty, true
+set :pty, true
 set :bundle_jobs, 16
 set :keep_releases, 1
 
