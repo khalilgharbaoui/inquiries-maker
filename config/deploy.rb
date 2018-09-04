@@ -7,7 +7,6 @@ set :ssh_options, forward_agent: true, keys: ['config/deploy_id_rsa'] if File.ex
 # require 'capistrano/ext/multistage'
 set :application, 'inquiries-maker'
 set :rails_env, 'production'
-set :rvm_ruby_version, '2.5.1'
 set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/home/inquiries-maker/web/app/'
