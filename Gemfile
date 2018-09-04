@@ -60,7 +60,8 @@ group :development do
   gem 'capistrano-passenger'
   gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails-console'
-  gem 'capistrano-rvm'
+  # gem 'capistrano-rvm'
+  gem 'capistrano-rbenv'
   gem 'capistrano-rake', '~> 0.2.0', require: false
   gem 'capistrano-sudo', require: false
 

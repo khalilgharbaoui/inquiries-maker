@@ -7,7 +7,8 @@ require "capistrano/scm/git"
 require 'capistrano/passenger'
 require 'capistrano/rails'
 require 'capistrano/rake'
-require 'capistrano/rvm'
+# require 'capistrano/rvm'
+require 'capistrano/rbenv'
 require 'capistrano/sudo'
 require 'capistrano/bundler'
 
@@ -25,8 +26,8 @@ require 'capistrano/bundler'
 #   https://github.com/capistrano/rails/tree/master/assets
 #   https://github.com/capistrano/rails/tree/master/migrations
 #
-set :rvm_type, :user
-set :rvm_ruby_version, '2.5.1'
+set :rbenv_type, :user
+set :rbenv_ruby, '2.5.1'
 
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
