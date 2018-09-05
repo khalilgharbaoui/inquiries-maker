@@ -84,28 +84,28 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   # uos server configuration
-  config.action_mailer.smtp_settings = {
-    address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
-    port: 587,
-    domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
-    authentication: :plain,
-    enable_starttls_auto: true,
-    user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
-    password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
-    openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
-  }
-
-  # sendgrid configuration
   # config.action_mailer.smtp_settings = {
-  #    :user_name => 'apikey',
-  #    :password => Rails.application.credentials.dig(Rails.env.to_sym, :sendgrid_password),
-  #    :domain => Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
-  #    :address => 'smtp.sendgrid.net',
-  #    :port => 587,
-  #    :authentication => :plain,
-  #    :enable_starttls_auto => true
+  #   address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
+  #   port: 587,
+  #   domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
+  #   authentication: :login,
+  #   enable_starttls_auto: false,
+  #   user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
+  #   password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
+  #   openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   # }
 
+
+  # sendgrid configuration
+  config.action_mailer.smtp_settings = {
+     :user_name => 'apikey',
+     :password => Rails.application.credentials.dig(Rails.env.to_sym, :sendgrid_password),
+     :domain => Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
+     :address => 'smtp.sendgrid.net',
+     :port => 587,
+     :authentication => :plain,
+     :enable_starttls_auto => true
+  }
   config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = false
 
