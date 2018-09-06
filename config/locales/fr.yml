@@ -1,4 +1,7 @@
 fr:
+  client_salutations:
+     mr: M.
+     ms: Mme
   invoices:
     show:
       pdf:
@@ -113,6 +116,12 @@ fr:
                 \ pour chaque demande. Pour cette raison, une autre demande serait inutilement\
                 \ injuste pour les autres soci\xE9t\xE9s.__\n"
         greetings: Sincères salutations,
+  invoice_mailer:
+    invoice:
+      email_body:
+        greeting: Hi %{reciever_name},
+        main: In this e-mail you will find the Invoice PDF and Leads List of %{quarter}.
+        regards: Greetings and Best regards,
   activerecord:
     attributes:
       moving_inquiry:

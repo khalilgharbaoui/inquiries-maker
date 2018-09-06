@@ -1,9 +1,12 @@
-<%= "Hi #{reciever_name}," %>
+ <%- inquiries ||= @inquiries -%>
 
-<%= "In this e-mail you will find the Invoice PDF and Leads List of #{quarter(inquiries)}." %>
+ <%= t 'invoice_mailer.invoice.email_body.greeting', reciever_name: reciever_name %>
 
-<%= 'Greetings and Best regards,' %>
+ <%= t 'invoice_mailer.invoice.email_body.main', quarter: quarter(inquiries) %>
 
-<%= "#{detail('uos_contact').split(' ').last.humanize}" %>
-<%= "#{detail('uos')} "%>
-<%= "#{detail('uos_email')}" %>
+ <%= t 'invoice_mailer.invoice.email_body.regards' %>
+
+ <%= detail('uos_contact').split(' ').last.humanize %>
+
+ <%= detail('uos') %>
+ <%= detail('uos_email') %>
