@@ -32,4 +32,10 @@ module SheetsHelper
                                 border: Axlsx::STYLE_THIN_BORDER,
                                 alignment: { horizontal: :center, :vertical => :center })
   end
+
+  def real_client_salutation(inquiry)
+    inquiry_type = inquiry.response_body['original_kind'] + '_inquiry'
+    inquiry_locale = inquiry.send(inquiry_type).locale.to_sym
+    I18n.t("client_salutations.#{inquiry.response_body['client_salutation']}", locale: inquiry_locale)
+  end
 end
