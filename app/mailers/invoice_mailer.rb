@@ -4,10 +4,13 @@ class InvoiceMailer < ApplicationMailer
   include InvoicesHelper
   helper :sheets
   helper :invoices
-  helper :markdown
   helper :application
+  helper :markdown
 
   def invoice(inquiries)
+
+    @inquiries = inquiries
+
     xlsx = Base64.encode64(
       render_to_string(
         layout: false,
@@ -48,21 +51,19 @@ class InvoiceMailer < ApplicationMailer
     }
 
     # I18n.with_locale(nil) do
-    sender = Rails.application.credentials.dig(Rails.env.to_sym, :sender_email)
     reciever = (Rails.application.credentials.dig(Rails.env.to_sym, :partner_reciever_email).split(' ')[0]).to_s + " <#{Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username)}>"
+    sender =
+    cc = Rails.application.credentials.dig(Rails.env.to_sym, :invoices_watcher)
     mail to: reciever,
-         # bcc: "admin@#{detail("uos_url").split('//').last}",
+         from: sender,
+         cc: cc,
+         subject: "UOS Invoice #{quarter(inquiries)}",
          'Reply-To': sender,
          'Importance': 'High',
          'Sensitivity': 'private',
          'Language': 'EN',
-         'Sender': sender,
-         from: sender,
-         subject: "UOS Invoice #{quarter(inquiries)}" do |format|
-      # format.html
-      format.text do
-        render locals: { inquiries: inquiries }
-      end
+         'Sender': sender do |format|
+        format.text # { render locals: { inquiries: inquiries }}
     end
     # end
   end

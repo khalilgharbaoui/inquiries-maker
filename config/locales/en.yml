@@ -1,4 +1,7 @@
 en:
+  client_salutations:
+     mr: Mr
+     ms: Ms
   invoices:
     show:
       pdf:
@@ -113,6 +116,12 @@ en:
               you make, and based on that it would be most unfair for some of them and totally
               unnecessary for others.__"
       greetings: Sincerely,
+  invoice_mailer:
+    invoice:
+      email_body:
+        greeting: Hi %{reciever_name},
+        main: In this e-mail you will find the Invoice PDF and Leads List of %{quarter}.
+        regards: Greetings and Best regards,
   activerecord:
     attributes:
       moving_inquiry:
