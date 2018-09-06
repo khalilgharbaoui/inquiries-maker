@@ -78,6 +78,7 @@ group :development do
   gem 'rb-inotify', require: false
   gem 'spring-commands-rspec'
   gem 'seed_dump'
+  gem 'rails_email_preview', '~> 2.0.6'
 end
 
 group :test do

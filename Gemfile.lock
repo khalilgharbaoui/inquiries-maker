@@ -332,6 +332,11 @@ GEM
     rails-i18n (5.1.1)
       i18n (>= 0.7, < 2)
       railties (>= 5.0, < 6)
+    rails_email_preview (2.0.6)
+      rails (>= 4.2)
+      request_store
+      sass
+      turbolinks
     rails_layout (1.0.42)
     rails_locale_detection (2.3.0)
       http_accept_language (~> 2.0.5)
@@ -350,6 +355,8 @@ GEM
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
+    request_store (1.4.1)
+      rack (>= 1.4)
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
@@ -531,6 +538,7 @@ DEPENDENCIES
   puma (~> 3.11)
   rails (~> 5.2.1)
   rails-i18n
+  rails_email_preview (~> 2.0.6)
   rails_layout
   rails_locale_detection
   rb-fchange
