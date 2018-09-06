@@ -1,4 +1,4 @@
-require 'rails_email_preview'
+require 'rails_email_preview' if Rails.env == "development"
 
 #= REP hooks and config
 #RailsEmailPreview.setup do |config|
@@ -34,5 +34,7 @@ Rails.application.config.to_prepare do
   # RailsEmailPreview.locale = :de
 
   # Auto-load preview classes from:
-  RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
+  if Rails.env == "development"
+    RailsEmailPreview.preview_classes = RailsEmailPreview.find_preview_classes('app/mailer_previews')
+  end
 end
