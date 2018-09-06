@@ -33,9 +33,9 @@ wb.styles do |style|
             inquiry.created_at.to_s(:swiss_date_format),
             "   #{inquiry.response_body['original_kind'].upcase}",
             "   #{inquiry.response_body['id']}   ",
-            "   #{inquiry.response_body['client_salutation'].titleize} " \
-            "#{inquiry.response_body['client_first_name']} " \
-            "#{inquiry.response_body['client_last_name']}"
+            "   #{real_client_salutation(inquiry)} " \
+            "#{inquiry.response_body['client_first_name'].humanize} " \
+            "#{inquiry.response_body['client_last_name'].upcase}"
           ], style: [
             highlight_cell(style, color),
             date_cell(style, color),
