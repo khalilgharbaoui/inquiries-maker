@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  mount RailsEmailPreview::Engine, at: 'emails' if Rails.env == 'development'
   scope ':locale', locale: /#{I18n.available_locales.join("|")}/ do
     root to: 'moving_inquiries#new'
     devise_for :users, controllers: {
