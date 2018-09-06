@@ -118,6 +118,7 @@ en:
       greetings: Sincerely,
   invoice_mailer:
     invoice:
+      subject: "UOS Invoice %{quarter}"
       email_body:
         greeting: Hi %{reciever_name},
         main: In this e-mail you will find the Invoice PDF and Leads List of %{quarter}.

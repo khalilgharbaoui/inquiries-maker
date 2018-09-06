@@ -52,13 +52,13 @@ class InvoiceMailer < ApplicationMailer
 
     # I18n.with_locale(nil) do
     reciever = (Rails.application.credentials.dig(Rails.env.to_sym, :partner_reciever_email).split(' ')[0]).to_s + " <#{Rails.application.credentials.dig(Rails.env.to_sym, :gmail_username)}>"
-    sender = Rails.application.credentials.dig(Rails.env.to_sym, :uos_email)
+    sender = Rails.application.credentials.dig(Rails.env.to_sym, :uos) + " <#{Rails.application.credentials.dig(Rails.env.to_sym, :uos_email)}>"
     cc = Rails.application.credentials.dig(Rails.env.to_sym, :invoices_watcher)
 
     mail to: reciever,
          from: sender,
          cc: cc,
-         subject: "UOS Invoice #{quarter(inquiries)}",
+         subject: t('invoice_mailer.invoice.subject', quarter: quarter(inquiries), locale: :en),
          'Reply-To': sender,
          'Importance': 'High',
          'Sensitivity': 'private',
