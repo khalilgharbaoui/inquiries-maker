@@ -17,5 +17,4 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
         td = link_to "Excel", sheet_path(:xlsx,{quarter: quarter, locale: nil})
         td = link_to "PDF", invoice_path(:pdf,{quarter: quarter, locale: nil})
         td = link_to "HTML 👁", invoice_path(:pdf,{quarter: quarter, debug: true, locale: nil})
-        td = link_to 'Reschedule! 📧', reschedule_invoice_path({quarter: quarter, locale: nil})
-
+        td = link_to 'Reschedule! 📧', reschedule_invoice_path({quarter: quarter, locale: nil}), data: {confirm: 'Are you sure?'}
