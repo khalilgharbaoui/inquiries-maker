@@ -34,5 +34,7 @@ set :rbenv_ruby, '2.5.1'
 # require 'capistrano/rails/assets'
 # require 'capistrano/rails/migrations'
 
+# Loads custom tasks helpers from `lib/capistrano/' if you have any defined.
+Dir.glob('lib/capistrano/*.rb').each { |r| import r }
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

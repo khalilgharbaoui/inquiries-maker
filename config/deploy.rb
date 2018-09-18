@@ -7,7 +7,9 @@ set :ssh_options, forward_agent: true, keys: ['config/deploy_id_rsa'] if File.ex
 # require 'capistrano/ext/multistage'
 set :application, 'inquiries-maker'
 set :rails_env, 'production'
+set :full_app_name, "#{fetch(:application)}_#{fetch(:rails_env)}"
 set :repo_url, 'git@github.com:khalilgharbaoui/inquiries-maker.git'
+set :config_files,  %w(monit)
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 set :deploy_to, '/home/inquiries-maker/web/app/'
 set :format, :pretty
@@ -50,7 +52,23 @@ append :linked_files, 'config/master.key', 'config/database.yml', 'config/certs/
 
 append :linked_dirs, 'log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', '.bundle', 'public/system', 'public/uploads'
 
+set(:symlinks, [
+  {
+    source: 'monit',
+    link:   "/etc/monit/conf.d/#{fetch(:full_app_name)}.conf"
+  }
+])
+
 set :passenger_restart_with_touch, true
+
+namespace :monit do
+  desc "Restart monit daemon monitoring"
+  task :restart do
+    on roles(:app) do
+      sudo "/etc/init.d/monit restart"
+    end
+  end
+end
 
 namespace :deploy do
   desc 'Restart application'
@@ -87,6 +105,7 @@ namespace :deploy do
   #     end
   #   end
   # end
+  after 'deploy:setup_config', 'monit:restart'
 end
 
 namespace :workers do
@@ -145,28 +164,29 @@ end
 namespace :broker do
   desc 'Start RabbitMQ server...'
   task :start do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, 'rabbitmq-server start'
+    on roles(:app), in: :groups, limit: 3, wait: 11 do
+      sudo! :service, "rabbitmq-server start"
+      # sudo! :rabbitmqctl, "status"
     end
   end
 
   desc 'Stop RabbitMQ server...'
   task :stop do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
-      sudo! :service, 'rabbitmq-server stop'
+    on roles(:app), in: :groups, limit: 3, wait: 11 do
+      sudo! :service, "rabbitmq-server stop"
     end
   end
 
   desc 'Restart RabbitMQ server...'
   task :restart do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
+    on roles(:app), in: :groups, limit: 3, wait: 11 do
       sudo! :service, 'rabbitmq-server restart'
     end
   end
 
   desc 'RabbitMQ server status...'
   task :status do
-    on roles(:app), in: :groups, limit: 3, wait: 10 do
+    on roles(:app), in: :groups, limit: 3, wait: 11 do
       sudo! :service, 'rabbitmq-server status | cat'
     end
   end

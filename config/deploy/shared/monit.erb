@@ -1,0 +1,61 @@
+# Nginx
+check process nginx with pidfile /var/run/nginx.pid
+  start program = "/bin/systemctl start nginx"
+  stop program = "/bin/systemctl stop nginx "
+  if children > 250 then restart
+  if 5 restarts within 5 cycles then timeout
+
+# Apache
+check process apache2 with pidfile /run/apache2/apache2.pid
+    start program = "/bin/systemctl start apache2" with timeout 60 seconds
+    stop program  = "/bin/systemctl stop apache2"
+    restart program = "/bin/systemctl restart apache2" with timeout 120 seconds
+
+# PostgreSQL
+check process postgresql with pidfile /var/run/postgresql/9.5-main.pid
+  start program = "/bin/systemctl start postgresql"
+  stop program = "/bin/systemctl stop postgresql"
+  if failed host localhost port 5432 protocol pgsql then restart
+  if 5 restarts within 5 cycles then timeout
+
+# MySQL
+check process mysql with pidfile /run/mysqld/mysqld.pid
+  start program = "/bin/systemctl start mysql" with timeout 60 seconds
+  stop program  = "/bin/systemctl stop mysql"
+  if failed unixsocket /var/run/mysqld/mysqld.sock then restart
+
+# fail2ban
+check process fail2ban with pidfile /var/run/fail2ban/fail2ban.pid
+    group services
+    start program = "/etc/init.d/fail2ban force-start"
+    stop  program = "/etc/init.d/fail2ban stop || :"
+    if failed unixsocket /var/run/fail2ban/fail2ban.sock then restart
+    if 5 restarts within 5 cycles then timeout
+
+check file fail2ban_log with path /var/log/fail2ban.log
+    if match "ERROR|WARNING" then exec "/usr/local/bin/monit2telegram"
+
+# # iptables
+# check program iptables with path "/etc/init.d/iptables status"
+#     if status != 0 then exec "/usr/local/bin/monit2telegram"
+
+# Sidekiq
+# check process <%= fetch(:application) %>_sidekiq_worker
+#   with pidfile <%= fetch(:sidekiq_pid_path) %>.pid
+#   start program = "/etc/init.d/sidekiq_<%= fetch(:application) %>_<%= fetch(:rails_env) %> start"
+#   stop program = "/etc/init.d/sidekiq_<%= fetch(:application) %>_<%= fetch(:rails_env) %> stop"
+#
+# Redis
+# check process redis
+  # with matching 'redis-server'
+  # start program = "/bin/systemctl start redis"
+  # stop program = "/bin/systemctl stop redis"
+  # if failed host 127.0.0.1 port 6379 then restart
+  # if 5 restarts within 5 cycles then timeout
+  #
+
+# # Websites
+# check host <%= fetch(:website_url) %> with address <%= fetch(:website_url) %>
+#   if failed
+#     icmp type echo count 5 with timeout 15 seconds
+#   then alert
