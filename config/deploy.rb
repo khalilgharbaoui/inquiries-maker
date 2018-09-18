@@ -70,6 +70,15 @@ namespace :monit do
   end
 end
 
+namespace :notify do
+  desc "Send Telegram Notification"
+  task :telegram do
+    on roles(:app) do
+      execute :sendtelegram, `-c /etc/telegramrc -m "Deploy done! #{$TRAVIS_JOB_ID}"`
+    end
+  end
+end
+
 namespace :deploy do
   desc 'Restart application'
   task :restart do
