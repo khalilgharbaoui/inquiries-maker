@@ -74,7 +74,7 @@ namespace :notify do
   desc "Send Telegram Notification"
   task :telegram do
     on roles(:app) do
-      execute :sendtelegram, `-c /etc/telegramrc -m "Deploy done! #{$TRAVIS_JOB_ID}"`
+      execute :sendtelegram, '-c /etc/telegramrc -m "Deploy done! {$TRAVIS_JOB_ID}"'
     end
   end
 end
