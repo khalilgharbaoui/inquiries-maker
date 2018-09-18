@@ -30,10 +30,10 @@ after_success:
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:stop"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:start"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:ids"
-- "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production notify:telegram"
 after_failure:
 - echo "Can not deploy! ❌"
 after_script:
+- bundle exec cap production notify:telegram"
 - "All done! 💚"
 env:
   global:
