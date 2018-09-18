@@ -24,9 +24,9 @@ script:
 - chmod 600 config/deploy_id_rsa
 - eval "$(ssh-agent -s)"
 - ssh-add config/deploy_id_rsa
+- "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
 after_success:
 - echo "Ready to deploy! ✅"
-- "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production deploy"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:stop"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:start"
 - "[[ $TRAVIS_BRANCH = 'master' ]] && bundle exec cap production workers:ids"
