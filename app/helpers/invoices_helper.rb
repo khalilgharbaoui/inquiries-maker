@@ -39,6 +39,25 @@ module InvoicesHelper
     "##{from_date(inquiries).strftime('%m%Y')}-#{until_date(inquiries).strftime('%m%Y')}"
   end
 
+  def invoice_date(inquiries)
+    invoice = inquiries.first.invoice
+    invoice.present? ? invoice.created_at.to_s(:swiss_date_format) : Date.today.to_s(:swiss_date_format)
+  end
+
+  def invoice_mutation_date(inquiries)
+    invoice = inquiries.first.invoice
+    if invoice.present?
+      date = if invoice.created_at == invoice.updated_at
+       invoice.created_at.to_s(:swiss_date_format)
+      else
+        invoice.updated_at.to_s(:swiss_date_format)
+      end
+      date
+    else
+      'none!'
+    end
+  end
+
   def detail(string)
     Rails.application.credentials.dig(Rails.env.to_sym, :"#{string}").to_s
   end
