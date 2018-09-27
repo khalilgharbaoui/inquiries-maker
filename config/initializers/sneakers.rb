@@ -16,17 +16,19 @@ Sneakers.configure  heartbeat: 5,
                     retry_error_exchange: 'activejob-error',
                     retry_requeue_exchange: 'activejob-retry-requeue',
                     prefetch: 10, # Grab 10 jobs together. Betterspeed.
-                    threads: 5, # Threadpool size (good to match prefetch)
+                    threads: 10, # Threadpool size (good to match prefetch)
                     timeout_job_after: 60.seconds, # Maximal seconds to wait for job
                     start_worker_delay: 1, # Delay between thread startup
-                    workers: 2, # Number of per-cpu processes to run
+                    workers: 1, # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
                     metrics: Sneakers::Metrics::LoggingMetrics.new,
                     daemonize: false, # Send to background
                     # log: 'sneakers.log',     # Log file
                     # pid_path: 'sneakers.pid' # Pid file
-                    handler: Sneakers::Handlers::Maxretry
+                    handler: Sneakers::Handlers::Maxretry,
+                    ack: true               # Must we acknowledge?
+
 
 # Sneakers.configure({
 #
