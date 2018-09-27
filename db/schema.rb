@@ -69,7 +69,7 @@ ActiveRecord::Schema.define(version: 2018_09_19_010339) do
 
   create_table "invoices", force: :cascade do |t|
     t.string "quarter"
-    t.integer "send_count", default: 1, null: false
+    t.integer "send_count", default: 0, null: false
     t.string "representation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
