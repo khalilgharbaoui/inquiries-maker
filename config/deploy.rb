@@ -200,7 +200,7 @@ namespace :broker do
     end
   end
   desc 'RabbitMQ queue overview...'
-  task :status do
+  task :queues do
     on roles(:app), in: :groups, limit: 3, wait: 11 do
       sudo! :watch, 'rabbitmqadmin list queues name messages messages_ready messages_unacknowledged'
     end
