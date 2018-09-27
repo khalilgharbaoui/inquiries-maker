@@ -6,6 +6,11 @@ class MovuTransceiver
     @response = nil
   end
 
+  def preform
+    post
+    received
+  end
+
   def post
     exclusions = %i[id created_at updated_at origin hostname path referrer ip]
     credentials = {
