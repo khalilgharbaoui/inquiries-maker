@@ -65,6 +65,8 @@ class CombinedInquiry < ApplicationRecord
   after_commit :schedule_inquiry_delivery, on: :create
   after_commit :send_telegram_notification, on: :create
 
+  private
+
   def schedule_inquiry_delivery
     msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
     InquiryDeliveryWorker.enqueue(msg)
