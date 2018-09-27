@@ -25,7 +25,11 @@ class MovingInquiriesController < ApplicationController
     respond_to do |format|
       if @moving_inquiry.save
         flash[:notice] = t(".inquiry_was_successfully_created")
-        format.html { render partial: "shared/local_thank_you_page", locals: {url: parent_thank_you_page_url} }
+        if Rails.env.to_sym == :production
+          format.html { render partial: "shared/local_thank_you_page", locals: {url: parent_thank_you_page_url} }
+        else
+          format.html { render :new }
+        end
       else
         format.html { render :new }
       end
