@@ -199,6 +199,12 @@ namespace :broker do
       sudo! :service, 'rabbitmq-server status | cat'
     end
   end
+  desc 'RabbitMQ queue overview...'
+  task :status do
+    on roles(:app), in: :groups, limit: 3, wait: 11 do
+      sudo! :watch, 'rabbitmqadmin list queues name messages messages_ready messages_unacknowledged'
+    end
+  end
 end
 
 namespace :services do
