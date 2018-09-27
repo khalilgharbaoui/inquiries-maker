@@ -13,6 +13,7 @@ module InquiriesMaker
     config.active_job.queue_adapter = :sneakers
     # ActiveJob using sneakers using sidekiq
     # config.active_job.queue_adapter = :sidekiq
+    config.autoload_paths << Rails.root.join('lib')
 
     config.generators do |g|
       g.test_framework :rspec,
@@ -37,7 +38,6 @@ module InquiriesMaker
     config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
     config.i18n.available_locales = %i[de fr en]
-
     # allow the entire app to be embedded in an iframe
     # config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
   end
