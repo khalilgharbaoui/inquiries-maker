@@ -4,8 +4,8 @@ class MovuTransceiver
   def initialize(inquiry)
     @inquiry = inquiry
     @response = nil
-    @api_url = Rails.application.credentials.dig(Rails.env.to_sym, :partner_url) +
-               Rails.application.credentials.dig(Rails.env.to_sym, :partner_api_path)
+    @api_url = Cre.dig(:partner_url) +
+               Cre.dig(:partner_api_path)
   end
 
   def preform

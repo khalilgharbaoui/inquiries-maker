@@ -80,18 +80,18 @@ Rails.application.configure do
   config.active_support.deprecation = :notify
 
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname) }
+  config.action_mailer.default_url_options = { host: Cre.dig(:uos_hostname) }
   config.action_mailer.delivery_method = :smtp
 
   # uos server configuration
   # config.action_mailer.smtp_settings = {
-  #   address: Rails.application.credentials.dig(Rails.env.to_sym, :uos_smtp),
+  #   address: Cre.dig(:uos_smtp),
   #   port: 587,
-  #   domain: Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
+  #   domain: Cre.dig(:uos_hostname),
   #   authentication: :login,
   #   enable_starttls_auto: false,
-  #   user_name: Rails.application.credentials.dig(Rails.env.to_sym, :uos_email),
-  #   password: Rails.application.credentials.dig(Rails.env.to_sym, :uos_password),
+  #   user_name: Cre.dig(:uos_email),
+  #   password: Cre.dig(:uos_password),
   #   openssl_verify_mode: OpenSSL::SSL::VERIFY_NONE
   # }
 
@@ -99,8 +99,8 @@ Rails.application.configure do
   # sendgrid configuration
   config.action_mailer.smtp_settings = {
      :user_name => 'apikey',
-     :password => Rails.application.credentials.dig(Rails.env.to_sym, :sendgrid_password),
-     :domain => Rails.application.credentials.dig(Rails.env.to_sym, :uos_hostname),
+     :password => Cre.dig(:sendgrid_password),
+     :domain => Cre.dig(:uos_hostname),
      :address => 'smtp.sendgrid.net',
      :port => 587,
      :authentication => :plain,

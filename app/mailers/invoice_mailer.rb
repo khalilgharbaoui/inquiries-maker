@@ -51,9 +51,9 @@ class InvoiceMailer < ApplicationMailer
     }
 
     # I18n.with_locale(nil) do
-    reciever = (Rails.application.credentials.dig(Rails.env.to_sym, :partner_reciever_email))
-    sender = Rails.application.credentials.dig(Rails.env.to_sym, :sender_email)
-    cc = Rails.application.credentials.dig(Rails.env.to_sym, :invoices_watcher)
+    reciever = Cre.dig(:partner_reciever_email)
+    sender = Cre.dig(:sender_email)
+    cc = Cre.dig(:invoices_watcher)
 
     mail to: reciever,
          from: sender,

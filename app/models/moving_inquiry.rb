@@ -4,7 +4,7 @@
 class MovingInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
 
-  PRICE = Rails.application.credentials.dig(Rails.env.to_sym, :moving_price).to_s.freeze
+  PRICE = Cre.dig(:moving_price).to_s.freeze
   CH = Phonelib.default_country
   enum client_property_size: {
     size_1: 'size_1', size_2: 'size_2', size_3: 'size_3', size_4: 'size_4',

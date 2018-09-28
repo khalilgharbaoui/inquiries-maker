@@ -13,6 +13,6 @@ html
       #header
         / logo image
         .logo
-          = wicked_pdf_image_tag "#{Rails.application.credentials.dig(Rails.env.to_sym, :uos_url) + Rails.application.credentials.dig(Rails.env.to_sym, :uos_logo_path)}"
+          = wicked_pdf_image_tag "#{Cre.dig(:uos_url) + Cre.dig(:uos_logo_path)}"
       #content
         = yield

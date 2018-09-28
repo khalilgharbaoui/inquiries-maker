@@ -32,7 +32,7 @@ class MovuJsonBuilder
   def credentials
     {
       origin: 'thirdparty_partner',
-      partner_token: Rails.application.credentials.dig(Rails.env.to_sym, :partner_token)
+      partner_token: Cre.dig(:partner_token)
     }
   end
 end
