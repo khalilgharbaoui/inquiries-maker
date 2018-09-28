@@ -5,7 +5,7 @@ class ReceivedInquiryResponse < ApplicationRecord
   belongs_to :cleaning_inquiry, optional: true
   belongs_to :combined_inquiry, optional: true
   belongs_to :invoice, class_name: 'Invoice', foreign_key: 'quarter',
-                       primary_key: 'quarter', optional: true
+                       primary_key: 'quarter', optional: true, inverse_of: :inquiries
   before_save ResponseBodyWrapper.new
   before_create :set_quarter
   # after_commit :schedule_client_emails, on: :create
