@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 namespace :workers do
-  desc 'Wait 8 seconds and start the workers'
+  desc 'Wait 3 seconds and start the workers'
   task run: :environment do
     ActiveRecord::Base.logger = nil
-    5.times do
+    3.times do
       warn "[PID: #{Process.pid}] run rabit run...🐰 #{Time.now}"
-      sleep 2
+      sleep 1
     end
     Rake::Task['sneakers:run'].invoke
   end
