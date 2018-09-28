@@ -21,18 +21,8 @@ class CleaningInquiriesController < ApplicationController
 
   def create
     @cleaning_inquiry = CleaningInquiry.new(cleaning_inquiry_params)
-
     respond_to do |format|
-      if @cleaning_inquiry.save
-        flash[:notice] = t(".inquiry_was_successfully_created")
-        if Rails.env.to_sym == :production
-          format.html { render partial: "shared/local_thank_you_page", locals: {url: parent_thank_you_page_url} }
-        else
-          format.html { render :new }
-        end
-      else
-        format.html { render :new }
-      end
+      @cleaning_inquiry.save ? flash_and_redirect(format) : format.html { render :new }
     end
   end
 
@@ -54,6 +44,15 @@ class CleaningInquiriesController < ApplicationController
   end
 
   private
+
+  def flash_and_redirect(format)
+    flash[:notice] = t('.inquiry_was_successfully_created')
+    if Rails.env.to_sym == :production
+      format.html { render partial: 'shared/local_thank_you_page', locals: { url: parent_thank_you_page_url } }
+    else
+      format.html { render :new }
+    end
+  end
 
   def allow_iframe_requests!
     response.headers.delete('X-Frame-Options')
