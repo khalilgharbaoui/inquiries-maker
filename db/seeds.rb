@@ -8,19 +8,19 @@ if Rails.env.development?
   require 'factory_bot_rails'
   5.times do |i|
     i += 3 * rand(999)
-    FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample, created_at: "201#{(7..8).to_a.sample}-#{(1..12).to_a.sample}-13 16:13:50")
+    FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
     sleep 0
   end
 
   5.times do |i|
     i += 3 * rand(999)
-    FactoryBot.create(:cleaning_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample, created_at: "201#{(7..8).to_a.sample}-#{(1..12).to_a.sample}-13 16:13:50")
+    FactoryBot.create(:cleaning_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
     sleep 0
   end
 
   5.times do |i|
     i += 3 * rand(999)
-    FactoryBot.create(:combined_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample, created_at: "201#{(7..8).to_a.sample}-#{(1..12).to_a.sample}-13 16:13:50")
+    FactoryBot.create(:combined_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
     sleep 0
   end
 end
