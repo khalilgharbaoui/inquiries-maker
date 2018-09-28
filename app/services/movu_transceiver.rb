@@ -22,9 +22,9 @@ class MovuTransceiver
   end
 
   def receive_response
-      ReceivedInquiryResponse.create!(
-            :"#{@inquiry.class.name.underscore}_id" =>  @inquiry.id,
-            :response_body => @response.body
-          )
-    end
+    ReceivedInquiryResponse.create!(
+      :"#{@inquiry.class.name.underscore}_id" =>  @inquiry.id,
+      :response_body => @response.body
+    )
+  end
 end
