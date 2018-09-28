@@ -6,15 +6,15 @@ class InquiryDeliveryWorker
              handler: Sneakers::Handlers::Maxretry,
              retry_routing_key: 'inquiries',
              arguments: { 'x-dead-letter-exchange': 'activejob-retry' },
-             timeout_job_after: 60.seconds,
+             timeout_job_after: 60.seconds, # Maximal seconds to wait for job
              ack: true
 
   def work(msg)
-    warn "❕#{msg} 🔮"
+    warn "🔮 #{msg} 🔮"
     deliver_inquiry(msg)
-    warn '❕Transceived ✅'
+    warn '✅ Transceived Inquiry❕'
     deliver_client_email(msg)
-    warn '❕Client email sent ✅'
+    warn '✅ Deliverd Email❕'
     ack!
   rescue
     reject!
@@ -36,9 +36,7 @@ class InquiryDeliveryWorker
   end
 
   def inquiry(msg)
-    JSON.parse(msg)['inquiry_name']
-      .classify
-      .safe_constantize
-      .find(JSON.parse(msg)['inquiry_id'])
+    inquiry_type = JSON.parse(msg)['inquiry_name'].constantize
+    inquiry_type.find(JSON.parse(msg)['inquiry_id'])
   end
 end
