@@ -3,8 +3,8 @@
 class TelegramNotifier
   def initialize(object)
     @message = "*#{object.class.name}:*\n```json\n#{JSON.pretty_generate(object.as_json)}\n```"
-    @bot = Telebot::Client.new(Rails.application.credentials.dig(Rails.env.to_sym, :telegram_token))
-    @uid = Rails.application.credentials.dig(Rails.env.to_sym, :telegram_user_id)
+    @bot = Telebot::Client.new(Cre.dig(:telegram_token))
+    @uid = Cre.dig(:telegram_user_id)
     send_message
   end
 

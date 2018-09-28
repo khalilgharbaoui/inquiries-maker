@@ -11,19 +11,19 @@ class ClientMailer < ApplicationMailer
       @inquiry = inquiry
       @inquiry_name = t(".inquiry.#{inquiry.class.name.underscore.downcase}")
       @client_salutation = t("#{@inquiry.class.name.pluralize.underscore}.form.client_salutations.#{inquiry.client_salutation}")
-      @partner = Rails.application.credentials.dig(Rails.env.to_sym, :partner_name)
-      @partner_support_email = Rails.application.credentials.dig(Rails.env.to_sym, :partner_support_email)
-      @uos = Rails.application.credentials.dig(Rails.env.to_sym, :uos)
-      @uos_logo_path = Rails.application.credentials.dig(Rails.env.to_sym, :uos_logo_path)
-      @uos_url = Rails.application.credentials.dig(Rails.env.to_sym, :uos_url)
-      @uos_email = Rails.application.credentials.dig(Rails.env.to_sym, :uos_email)
+      @partner = Cre.dig(:partner_name)
+      @partner_support_email = Cre.dig(:partner_support_email)
+      @uos = Cre.dig(:uos)
+      @uos_logo_path = Cre.dig(:uos_logo_path)
+      @uos_url = Cre.dig(:uos_url)
+      @uos_email = Cre.dig(:uos_email)
       @inquiry_creation_date = inquiry_creation_date(inquiry) # DD.MM.YYYY
       @inquiry_creation_time = inquiry_creation_time(inquiry)
       @inquiry_conclusion_date = inquiry_conclusion_date(inquiry) # DD.MM.YYYY
       @ticket = ticket(response_body)
-      @ga_ua = Rails.application.credentials.dig(Rails.env.to_sym, :ga_ua)
+      @ga_ua = Cre.dig(:ga_ua)
 
-      sender = Rails.application.credentials.dig(Rails.env.to_sym, :sender_email)
+      sender = Cre.dig(:sender_email)
 
       mail to: "#{inquiry.client_last_name} #{inquiry.client_first_name}\
       <#{inquiry.client_email}>",
