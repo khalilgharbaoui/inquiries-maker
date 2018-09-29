@@ -24,7 +24,7 @@ class InquiryDeliveryWorker
 
   def deliver_inquiry(msg)
     inquiry = inquiry(msg)
-    MovuTransceiver.new(inquiry).preform
+    MovuTransceiver.transceive(inquiry)
   end
 
   def deliver_client_email(msg)
