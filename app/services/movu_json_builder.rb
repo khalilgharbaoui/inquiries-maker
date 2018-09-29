@@ -1,16 +1,18 @@
 class MovuJsonBuilder
+  attr_reader :inquiry
+
   def initialize(inquiry)
     @inquiry = inquiry
   end
 
-  def call
-    build_json
+  def self.build(inquiry)
+    new(inquiry).send(:build)
   end
 
   private
 
-  def build_json
-    @inquiry.as_json(except: exclusions).merge(inclusions).to_json
+  def build
+    inquiry.as_json(except: exclusions).merge(inclusions).to_json
   end
 
   def inclusions
