@@ -8,7 +8,6 @@ class ReceivedInquiryResponse < ApplicationRecord
                        primary_key: 'quarter', optional: true, inverse_of: :inquiries
   before_save ResponseBodyWrapper.new
   before_create :set_quarter
-  # after_commit :schedule_client_emails, on: :create
   after_commit :send_telegram_notification, on: :create
 
   private
@@ -18,16 +17,6 @@ class ReceivedInquiryResponse < ApplicationRecord
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("#{Time.now} ##{id} ✅")
+    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("ℹ️  #{self.class.name} => ##{id}")
   end
-
-  # def schedule_client_emails
-  #   _reflections.each do |inquiry, _|
-  #     next unless send(:"#{inquiry}_id?")
-  #     ClientMailer.client(
-  #       response_body.transform_keys!(&:to_sym),
-  #       send(:"#{inquiry}")
-  #     ).deliver
-  #   end
-  # end
 end
