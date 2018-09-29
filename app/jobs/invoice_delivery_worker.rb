@@ -18,7 +18,8 @@ class InvoiceDeliveryWorker
     worker_trace "SENT <#{inquiries.first.quarter}>"
     warn "#{inquiries.count} in invoice #{inquiries.first.quarter} sent & saved!✅"
     ack!
-  rescue
+  rescue Exception => e
+    warn "🛑 #{([e.inspect]+e.backtrace).join($/)}"
     reject!
   end
 
