@@ -13,6 +13,7 @@ class InquiryDeliveryWorker
     inquiry = inquiry(msg)
     warn "🔮 #{inquiry.class.name} => #{inquiry.id} ❕"
     response = MovuTransceiver.transceive(inquiry)
+    # ResponseLogger.log(response)
     warn "🔵 Transceived #{inquiry.class.name} => #{inquiry.id}❕"
     save_received_response(response, inquiry)
     warn "🆗 Saved Received #{inquiry.class.name} Response => #{inquiry.id}❕"
