@@ -4,35 +4,38 @@
 # to a API endpoint URL,While carrying a JSON payload in the request body.
 # Its outcome is an HTTP response object with headers, response_body etc...
 class HttpRequester
+  attr_reader :json, :uri
+  attr_accessor :http, :response, :request
+
   def initialize(json, url)
     @json = json
     @uri = URI.parse(url)
   end
 
   def self.post(json, url)
-    new(json, url).send(:post)
+    new(json, url).send(:http_response)
   end
 
   private
 
-  def post
-    response = http_object.request(http_post_object) # make the post request
-    warn "💡 #{response.code} => #{response.message}"
+  def http_response
+    self.response = http_object.request(post_request) # make the post request
+    response.body.force_encoding('utf-8') # force utf-8 because Net::HTTP SUCKS!
     return response
   end
 
   def http_object
-    http = Net::HTTP.new(@uri.host, @uri.port)
+    self.http = Net::HTTP.new(uri.host, uri.port)
     http.use_ssl = true
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
-    http
+    return http
   end
 
-  def http_post_object
-    request = Net::HTTP::Post.new(@uri.request_uri)
+  def post_request
+    self.request = Net::HTTP::Post.new(uri.request_uri)
     request['accept'] = 'application/json'
     request['content-type'] = 'application/json'
-    request.body = @json
-    request
+    request.body = json.force_encoding('utf-8')
+    return request
   end
 end
