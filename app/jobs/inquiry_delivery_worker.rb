@@ -10,28 +10,33 @@ class InquiryDeliveryWorker
              ack: true
 
   def work(msg)
-    warn "🔮 #{msg} 🔮"
-    deliver_inquiry(msg)
-    warn '✅ Transceived Inquiry❕'
-    deliver_client_email(msg)
-    warn '✅ Deliverd Email❕'
+    inquiry = inquiry(msg)
+    warn "🔮 #{inquiry.class.name} => #{inquiry.id} ❕"
+    response = MovuTransceiver.transceive(inquiry)
+    warn "🔵 Transceived #{inquiry.class.name} => #{inquiry.id}❕"
+    save_received_response(response, inquiry)
+    warn "🆗 Saved Received #{inquiry.class.name} Response => #{inquiry.id}❕"
+    send_client_email(inquiry)
+    warn "✅ Sent #{inquiry.class.name} Client Email => #{inquiry.id}❕"
     ack!
-  rescue
+  rescue Exception => e
+    warn "🛑 #{([e.inspect]+e.backtrace).join($/)}"
     reject!
   end
 
   private
 
-  def deliver_inquiry(msg)
-    inquiry = inquiry(msg)
-    MovuTransceiver.transceive(inquiry)
+  def save_received_response(response, inquiry)
+      ReceivedInquiryResponse.create!(
+        :"#{inquiry.class.name.underscore}_id" =>  inquiry.id,
+        :response_body => response.body
+      )
   end
 
-  def deliver_client_email(msg)
-    response = inquiry(msg).received_inquiry_response
+  def send_client_email(inquiry)
     ClientMailer.client(
-      response.response_body.transform_keys!(&:to_sym),
-      inquiry(msg)
+      inquiry.received_inquiry_response.response_body.transform_keys!(&:to_sym),
+      inquiry
     ).deliver
   end
 
