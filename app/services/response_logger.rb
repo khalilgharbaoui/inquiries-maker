@@ -19,10 +19,10 @@ class ResponseLogger
   end
 
   def status
-    warn 'STATUS:'
-    warn "CODE: #{response.code}" if response.code # => '200'
-    warn "MESSAGE: #{response.message}" if response.message # => 'OK'
-    warn "CLASS NAME: #{response.class.name}" if response.class.name # => 'HTTPOK'
+    warn '💡 STATUS:'
+    warn "💡 CODE: #{response.code}" if response.code # => '200'
+    warn "💡 MESSAGE: #{response.message}" if response.message # => 'OK'
+    warn "💡 CLASS NAME: #{response.class.name}" if response.class.name # => 'HTTPOK'
   end
 
   # def headers
@@ -31,8 +31,8 @@ class ResponseLogger
   # end
 
   def response_body
-    warn 'RESPONSE BODY: '
+    warn '💡 RESPONSE BODY: ' if response.body
     warn JSON::PrettyPrint.prettify(response.body).to_s if response.body
-    warn '⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️'
+    warn '⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️ ⚠️' if response.body
   end
 end
