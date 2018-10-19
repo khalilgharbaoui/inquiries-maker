@@ -38,6 +38,11 @@ module InquiriesMaker
     config.i18n.default_locale = :de
     config.i18n.enforce_available_locales = true
     config.i18n.available_locales = %i[de fr en]
+    config.filter_parameters << :password
+    Raven.configure do |config|
+      config.dsn = Cre.dig(:sentry_raven_url)
+    end
+
     # allow the entire app to be embedded in an iframe
     # config.action_dispatch.default_headers.merge!({'X-Frame-Options' => 'ALLOWALL'})
   end
