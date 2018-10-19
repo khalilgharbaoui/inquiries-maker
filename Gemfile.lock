@@ -413,6 +413,8 @@ GEM
     selenium-webdriver (3.14.0)
       childprocess (~> 0.5)
       rubyzip (~> 1.2)
+    sentry-raven (2.7.4)
+      faraday (>= 0.7.6, < 1.0)
     serverengine (2.0.6)
       sigdump (~> 0.2.2)
     shellany (0.0.1)
@@ -555,6 +557,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   seed_dump
   selenium-webdriver
+  sentry-raven
   slim-rails
   sneakers (~> 2.7.0)
   spring

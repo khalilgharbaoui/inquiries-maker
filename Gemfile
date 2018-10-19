@@ -88,3 +88,4 @@ group :test do
   gem 'chromedriver-helper'
   gem 'database_cleaner'
 end
+gem 'sentry-raven'
