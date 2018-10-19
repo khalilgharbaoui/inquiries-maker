@@ -5,7 +5,7 @@ module ApplicationHelper
   end
 
   def link_to_reschedule(inquiry)
-    link_to  "❌ Reschedule!?", {:action => "reschedule_inquiry", id: inquiry.id, locale: inquiry.locale}
+    link_to "❌ Reschedule!?", {:action => "reschedule_inquiry", id: inquiry.id, locale: inquiry.locale}
   end
 
   def general_lang_switcher
