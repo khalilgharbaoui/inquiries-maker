@@ -41,6 +41,10 @@ module InquiriesMaker
     config.filter_parameters << :password
     Raven.configure do |config|
       config.dsn = Cre.dig(:sentry_raven_url)
+      config.async = lambda { |event|
+        SentryJob.perform_later(event)
+      }
+      config.logger = Raven::Logger.new(STDOUT)
     end
 
     # allow the entire app to be embedded in an iframe
