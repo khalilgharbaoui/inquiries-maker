@@ -1,5 +1,38 @@
 # frozen_string_literal: true
 
+# == Schema Information
+#
+# Table name: combined_inquiries
+#
+#  id                       :bigint(8)        not null, primary key
+#  cleaning_date            :date
+#  client_city              :string
+#  client_email             :string
+#  client_first_name        :string
+#  client_last_name         :string
+#  client_mobile            :string
+#  client_postal_code       :string
+#  client_property_size     :string
+#  client_salutation        :string
+#  client_street_and_number :string
+#  hostname                 :string
+#  ip                       :string
+#  is_cleaning_request      :boolean          default(TRUE), not null
+#  is_moving_request        :boolean          default(TRUE), not null
+#  locale                   :string           default("de"), not null
+#  moving_city              :string
+#  moving_date              :date
+#  moving_postal_code       :string
+#  moving_street_and_number :string
+#  origin                   :string
+#  partner_token            :string
+#  path                     :string
+#  referrer                 :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
+#
+
+
 # Responsible for validating CombinedInquiry and scheduling InquiryDeliverJob after creation.
 class CombinedInquiry < ApplicationRecord
   has_one :received_inquiry_response, dependent: :destroy
