@@ -81,7 +81,7 @@ group :development do
   gem 'seed_dump'
   gem 'rails_email_preview', '~> 2.0.6'
   gem 'meta_request'
-  gem 'rack-mini-profiler'
+  gem 'rack-mini-profiler', require: false
   # For memory profiling
   gem 'memory_profiler'
   # For call-stack profiling flamegraphs
