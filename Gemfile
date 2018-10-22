@@ -97,3 +97,4 @@ group :test do
   gem 'database_cleaner'
 end
 gem 'sentry-raven'
+gem 'bugsnag'
