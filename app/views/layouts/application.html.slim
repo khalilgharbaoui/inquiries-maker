@@ -13,10 +13,10 @@ html
   body
     header
       - if user_signed_in?
-        = render 'layouts/navigation' 
+        = render 'layouts/navigation'
     main[role="main" class="#{user_signed_in? ? 'container' : ''}"]
       = render 'layouts/messages'
       = yield
     - unless user_signed_in?
-      script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"] 
-      script[async defer type="text/javascript" src="//heatmaps.umzug-offerte-schweiz.com/tracker.min.js"]
+      script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"]
+      /script[async defer type="text/javascript" src="//heatmaps.umzug-offerte-schweiz.com/tracker.min.js"]
