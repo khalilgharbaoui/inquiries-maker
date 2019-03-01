@@ -1,0 +1,3 @@
+---
+# The authentication token for the application.
+authentication: <%= Cre.dig(:skylight_authentication_token) %>
