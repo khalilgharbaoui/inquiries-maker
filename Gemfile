@@ -97,6 +97,5 @@ group :test do
   gem 'database_cleaner'
 end
 gem 'sentry-raven'
-gem 'bugsnag'
 # rails performance reporting
 gem 'skylight'
