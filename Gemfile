@@ -88,6 +88,8 @@ group :development do
   gem 'flamegraph'
   gem 'stackprof'
   gem 'annotate', git: 'https://github.com/ctran/annotate_models.git'
+  # rails performance reporting
+  gem 'skylight'
 end
 
 group :test do
