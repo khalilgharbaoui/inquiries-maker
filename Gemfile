@@ -39,8 +39,10 @@ gem 'rubyzip', '>= 1.2.1'
 # Pdf Generation
 gem 'cre', '~>0.1.3'
 gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
-gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
-gem 'rails_db', '2.0.4'
+# gem 'wkhtmltopdf-binary-edge', '~> 0.12.2.1'
+gem 'wkhtmltopdf-binary-edge', '~> 0.12.5.0'
+
+
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'factory_bot_rails'
