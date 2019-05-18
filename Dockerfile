@@ -16,8 +16,8 @@ ADD . /app
 
 # Install bundler and run bundle install to install the gems from
 # the Gemfile
-RUN gem update --system
-RUN gem install bundler --no-document
+RUN gem update --system --quiet --silent
+RUN gem install bundler -v "~>2.0.1" --no-document
 RUN cd /app \
   && bundle install --jobs 16 --without=development,test development test
 
