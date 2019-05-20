@@ -21,12 +21,17 @@ class InvoicesController < ApplicationController
       margin: { :left => "3mm",:right => "3mm", :top => "0mm", :bottom => "0mm" },
       print_media_type:               false,
       disable_smart_shrinking:        true,
-      zoom: 1,
+      zoom: zoom_level,
       show_as_html: params.key?('debug') # allow debugging based on url param
   end
 
   private
   def file_name(inquiries)
     helpers.detail('uos').tr(' ','-') + '-Invoice-' + inquiries.first.quarter.tr(' ', '-')
+  end
+
+  def zoom_level
+    # Ugly but the only workaround for now when using Alpine Linux
+    RUBY_PLATFORM.match?(/linux-musl/) ? 1.3 : 1
   end
 end
