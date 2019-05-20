@@ -15,8 +15,8 @@ Ruby on Rails
 
 This application requires:
 
-- Ruby 2.5.1
-- Rails 5.2.0
+- Ruby 2.5.5
+- Rails 5.2.3
 
 Getting Started
 ---------------

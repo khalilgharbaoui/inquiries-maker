@@ -2,7 +2,7 @@ sudo: false
 dist: trusty
 language: ruby
 rvm:
-- 2.5.1
+- 2.5.5
 addons:
   postgresql: '9.6'
 cache:

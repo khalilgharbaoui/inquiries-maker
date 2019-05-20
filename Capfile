@@ -27,7 +27,7 @@ require 'capistrano/bundler'
 #   https://github.com/capistrano/rails/tree/master/migrations
 #
 set :rbenv_type, :user
-set :rbenv_ruby, '2.5.1'
+set :rbenv_ruby, '2.5.5'
 
 # require 'capistrano/rbenv'
 # require 'capistrano/chruby'
