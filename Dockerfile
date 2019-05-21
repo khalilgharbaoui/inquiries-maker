@@ -14,7 +14,6 @@ ARG RAILS_MASTER_KEY
 RUN apk --update add --virtual build-dependencies build-base ruby-dev postgresql-dev postgresql-client libc-dev linux-headers git nodejs yarn tzdata bash && rm -rf /var/cache/lists/*_*
 
 # Install dependencies for wkhtmltopdf
-# Install the packages required for wkhtmltopdf to work:
 RUN apk add --update --no-cache --wait 10 \
   libstdc++ \
   libx11 \
@@ -29,6 +28,17 @@ RUN apk add --update --no-cache --wait 10 \
   ttf-freefont \
   ttf-liberation \
   ttf-ubuntu-font-family
+&& apk add --update --no-cache --virtual .build-deps \
+  msttcorefonts-installer \
+\
+# Install microsoft fonts
+&& update-ms-fonts \
+&& fc-cache -f \
+\
+# Clean up when done
+&& rm -rf /tmp/* \
+&& apk del .build-deps \
+&& rm -rf /var/cache/lists/*_*
 
 # Add the Gemfile and Gemfile.lock from our app
 ADD Gemfile /app/
