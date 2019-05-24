@@ -3,7 +3,7 @@
 require 'sneakers'
 require 'sneakers/metrics/logging_metrics'
 require 'sneakers/handlers/maxretry'
-amqp = Rails.application.credentials.dig(
+amqp = ENV['RABBITMQ_AMQP_URI'] || Rails.application.credentials.dig(
   Rails.env.to_sym, :rabbitmq_amqp_uri
 )
 Sneakers.configure  heartbeat: 5,
@@ -27,8 +27,7 @@ Sneakers.configure  heartbeat: 5,
                     # log: 'sneakers.log',     # Log file
                     # pid_path: 'sneakers.pid' # Pid file
                     handler: Sneakers::Handlers::Maxretry,
-                    ack: true               # Must we acknowledge?
-
+                    ack: true # Must we acknowledge?
 
 # Sneakers.configure({
 #
@@ -58,7 +57,7 @@ Sneakers.configure  heartbeat: 5,
 Sneakers.logger.level = Logger::INFO
 
 # Preload all jobs defined for the application
-Dir.glob(File.expand_path("app/jobs/*_job.rb", Rails.root)).each do |job_file|
+Dir.glob(File.expand_path('app/jobs/*_job.rb', Rails.root)).each do |job_file|
   require job_file
 end
 
@@ -70,8 +69,8 @@ queues = ApplicationJob.descendants.map(&:queue_name).uniq
 # Sneakers to add the new class to its classes array
 queues.each do |queue_name|
   Object.const_set("#{queue_name}_worker".classify,
-    Class.new(ActiveJob::QueueAdapters::SneakersAdapter::JobWrapper) do
-      include Sneakers::Worker
-      from_queue queue_name
-    end)
+                   Class.new(ActiveJob::QueueAdapters::SneakersAdapter::JobWrapper) do
+                     include Sneakers::Worker
+                     from_queue queue_name
+                   end)
 end
