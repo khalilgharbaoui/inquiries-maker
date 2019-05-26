@@ -28,6 +28,13 @@ Rails.application.routes.draw do
   get 'invoices(/:quarter)', to: 'invoices#show', as: 'invoice'
   get 'reschedule_invoice_delivery(/:quarter)', to: 'invoices#reschedule_invoice', as: 'reschedule_invoice'
 
+  # ⚠️ This causes:
+  # DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated
+  # and will be removed in Rails 6.0.
+  # (called from block in <top (required)> at /Users/khalil/code/Private/inquiries-maker/config/routes.rb:32)
+  #
+  # Possible solution:
+  # https://til.hashrocket.com/posts/52ecba1aeb-deprecated-dynamic-actions
   get '*path', to: redirect("/#{I18n.locale}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false
   get '*locale/*action/*path', to: redirect("/#{I18n.locale}/%{action}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false
   get '/*locale/*action/*path', to: redirect("/#{I18n.locale}/%{action}/%{path}", status: 302), constraints: { path: /(?!(#{I18n.available_locales.join("|")})\/).*/ }, format: false
