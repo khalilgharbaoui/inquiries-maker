@@ -1,5 +1,4 @@
 - inquiries ||= @inquiries
-- logo_url ||= @logo_url
 html
   head
     meta[charset="utf-8"]
@@ -15,7 +14,7 @@ html
       #header
         / logo image
         .logo
-          = wicked_pdf_image_tag(logo_url)
+          img src=wicked_pdf_asset_base64('pdf/invoice-logo.png')
       #content
         / backgound image
         .invoice-background
