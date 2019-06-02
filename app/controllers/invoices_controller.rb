@@ -10,7 +10,6 @@ class InvoicesController < ApplicationController
 
   def show
     @inquiries = ReceivedInquiryResponse.where('quarter = ?', params[:quarter])
-    @logo_url = 'https://umzug-offerte-schweiz.com/wp-content/uploads/2015/12/umzug-offerte-schweiz-logo-2016.png'
     render pdf: file_name(@inquiries),
            template: 'invoices/show.pdf',
            layout: false,
