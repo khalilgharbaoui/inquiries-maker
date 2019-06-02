@@ -9,3 +9,4 @@ tmp/*
 config/master.key
 config/certs/ssl.crt
 config/certs/ssl.key
+admin_inquiries_maker_production.sql
