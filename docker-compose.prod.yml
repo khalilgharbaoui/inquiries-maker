@@ -1,0 +1,66 @@
+version: '3'
+
+services:
+  db:
+    restart: always
+    image: postgres:alpine
+    volumes:
+      - ${POSTGRES_VOLUME}:/var/lib/postgresql/data
+      - ./data/postgresql/backups:/var/lib/postgresql/data/backups
+
+  broker:
+    restart: always
+    image: rabbitmq:management-alpine
+    hostname: ${RABBITMQ_HOSTNAME}
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./data/rabbitmq:/var/lib/rabbitmq/mnesia/rabbit@umzug-offerte-schweiz.com:cached
+    environment:
+      RABBITMQ_ERLANG_COOKIE: ${RABBITMQ_ERLANG_COOKIE}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
+      RABBITMQ_DEFAULT_VHOST: /
+      VIRTUAL_PORT: 15672
+      VIRTUAL_HOST: ${RABBITMQ_DOMAINS}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      LETSENCRYPT_HOST: ${RABBITMQ_DOMAINS}
+    depends_on:
+      - db
+
+  worker:
+    restart: always
+    image: kaygeee/inquiries-maker:latest
+    command: ["rake", "workers:run"]
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RABBITMQ_AMQP_URI: ${RABBITMQ_AMQP_URI}
+    depends_on:
+      - broker
+      - db
+
+  web:
+    restart: always
+    image: kaygeee/inquiries-maker:latest
+    #command:   ["puma", "-e", "production"]
+    command: ["bundle", "exec", "rackup -s puma -p 8000 --host 0.0.0.0"]
+    ports:
+      # HOST:CONTAINER
+      - 8000:8000
+    environment:
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+      RABBITMQ_AMQP_URI: ${RABBITMQ_AMQP_URI}
+      VIRTUAL_HOST: ${DOMAINS}
+      LETSENCRYPT_HOST: ${DOMAINS}
+      LETSENCRYPT_EMAIL: ${LETSENCRYPT_EMAIL}
+      SSL_CERTIFICATE: ${SSL_CERTIFICATE}
+      SSL_KEY: ${SSL_KEY}
+    depends_on:
+      - db
+      - broker
+      - worker
+networks:
+    default:
+       external:
+         name: ${NETWORK}
