@@ -24,8 +24,7 @@ class InvoicesController < ApplicationController
            print_media_type: false,
            disable_smart_shrinking: true,
            zoom: zoom_level,
-           show_as_html: params.key?('debug'),
-           progress: proc { |output| puts output }# allow debugging based on url param
+           show_as_html: params.key?('debug') # allow debugging based on url param
   end
 
   private
