@@ -37,7 +37,7 @@ class InvoiceMailer < ApplicationMailer
       margin: { left: '3mm', right: '3mm', top: '0mm', bottom: '0mm' },
       print_media_type:               false,
       disable_smart_shrinking:        true,
-      zoom: 1
+      zoom: zoom_level
     )
 
     attachments["uos-leads_list-#{filename(inquiries)}.xlsx"] = {
@@ -51,9 +51,9 @@ class InvoiceMailer < ApplicationMailer
     }
 
     # I18n.with_locale(nil) do
-    reciever = Cre.dig(:partner_reciever_email)
+    reciever = Cre.dig(:invoices_receiver)
     sender = Cre.dig(:sender_email)
-    cc = Cre.dig(:invoices_watcher)
+    cc = [Cre.dig(:invoices_watcher), Cre.dig(:partner_reciever_email)]
 
     mail to: reciever,
          from: sender,
