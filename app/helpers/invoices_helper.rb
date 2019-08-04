@@ -74,6 +74,13 @@ module InvoicesHelper
     quarter(inquiries).parameterize
   end
 
+  def zoom_level
+    # Ugly but the only workaround for now when using Alpine Linux
+    return 1.3 unless RUBY_PLATFORM.match?(/linux-musl/)
+
+    RUBY_PLATFORM.match?(/linux-musl/) ? 1.3 : 1
+  end
+
   private
 
   def inquiry_price(hash)
