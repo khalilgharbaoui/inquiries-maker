@@ -3,7 +3,7 @@
 version: '3'
 services:
   db:
-    image: postgres:alpine
+    image: postgres:11-alpine
     volumes:
       - "~/web/inquiries-maker/data/:/var/lib/postgresql/data"
     # We're mounting this folder so we can backup/restore database dumps from our app folder.
