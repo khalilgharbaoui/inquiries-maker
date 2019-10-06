@@ -66,12 +66,6 @@ module InvoicesHelper
     end
   end
 
-  def invoice_open_dates(quarter)
-    subject = "UOS Invoice #{quarter}"
-    dates = Ahoy::Message.where(subject: subject).map(&:opened_at).compact
-    dates.map! { |date| date.to_s(:swiss_date_format_with_time) }
-  end
-
   def detail(string)
     Cre.dig(string.to_sym).to_s
   end
