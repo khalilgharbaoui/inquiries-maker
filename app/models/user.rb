@@ -28,7 +28,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :omniauthable, :recoverable,
   devise :database_authenticatable, :trackable, :validatable, :rememberable, :timeoutable, :registerable
-  has_many :messages, class_name: 'Ahoy::Message', as: :user
+  has_many :messages, class_name: 'Ahoy::Message', as: :user, dependent: :destroy, inverse_of: :user
 
   def account_active?
     # blocked_at.nil?
