@@ -1,10 +1,20 @@
-/notting to be seen here don't cheat!🧐
-//TODO: BUTTON to UMZUG
-//TODO: BUTTON to REINIGUNG
-//TODO: BUTTON to COMBINED
+.container
+  br
+  .row
+    .col-md-8.offset-md-2
+      center 
+        h1= t('combined_inquiries.form.submit')
+  br
+  .row
+    .col-md-6.offset-md-3.moving
+      = link_to t('client_mailer.client.inquiry.moving_inquiry'), new_moving_inquiry_path, class: 'btn btn-primary btn-lg btn-block shadow'
+  br
+  .row
+    .col-md-6.offset-md-3.cleaning
+      = link_to t('client_mailer.client.inquiry.cleaning_inquiry'), new_cleaning_inquiry_path, class: 'btn btn-secondary btn-lg btn-block shadow'
+  br
+  .row      
+    .col-md-6.offset-md-3.combined
+      = link_to t('client_mailer.client.inquiry.combined_inquiry'), new_combined_inquiry_path, class: 'btn btn-success btn-lg btn-block shadow'
 
-= link_to t('.moving'), new_moving_inquiry_path, class: "btn btn-primary btn-lg"
-br
-= link_to t('.cleaning'), new_cleaning_inquiry_path, class: "btn btn-secondary btn-lg"
-br
-= link_to t('.combined'), new_combined_inquiry_path, class: "btn btn-success btn-lg"
+

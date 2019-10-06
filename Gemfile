@@ -31,6 +31,8 @@ gem 'validates_zipcode'
 # emails
 gem 'inky-rb', require: 'inky'
 gem 'premailer-rails'
+gem 'ahoy_email', '~> 1.1.0'
+# telegram
 gem 'telebot', github: 'khalilgharbaoui/telebot'
 # Excel sheets generation
 gem 'axlsx', github: 'randym/axlsx', ref: 'c8ac844'
@@ -40,6 +42,9 @@ gem 'rubyzip', '>= 1.2.1'
 gem 'cre', '~>0.1.3'
 gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
 gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
+# Chart Generation
+gem 'chartkick'
+gem 'groupdate'
 
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

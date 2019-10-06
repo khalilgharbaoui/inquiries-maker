@@ -14,7 +14,7 @@ html
     header
       - if user_signed_in?
         = render 'layouts/navigation'
-    main[role="main" class="#{user_signed_in? ? 'container' : ''}"]
+    main[role="main" class="#{user_signed_in? ? 'container-fluid' : ''}"]
       = render 'layouts/messages'
       = yield
     - unless user_signed_in?

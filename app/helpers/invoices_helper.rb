@@ -27,6 +27,14 @@ module InvoicesHelper
     format '%.2f', prices.sum.round(2)
   end
 
+  def count_and_subtotal(hash_element)
+    hash_element[:quantity].to_s + ' / ' + 'CHF' + sub_total(hash_element).to_s
+  end
+
+  def count_and_total(collection)
+    collection.count.to_s + ' / ' + 'CHF' + total(collection).to_s
+  end
+
   def top(i)
     284 + i * 12
   end
@@ -48,22 +56,28 @@ module InvoicesHelper
     invoice = inquiries.first.invoice
     if invoice.present?
       date = if invoice.created_at == invoice.updated_at
-       invoice.created_at.to_s(:swiss_date_format)
-      else
-        invoice.updated_at.to_s(:swiss_date_format)
-      end
+               invoice.created_at.to_s(:swiss_date_format_with_time)
+             else
+               invoice.updated_at.to_s(:swiss_date_format_with_time)
+             end
       date
     else
       'none!'
     end
   end
 
+  def invoice_open_dates(quarter)
+    subject = "UOS Invoice #{quarter}"
+    dates = Ahoy::Message.where(subject: subject).map(&:opened_at).compact
+    dates.map! { |date| date.to_s(:swiss_date_format_with_time) }
+  end
+
   def detail(string)
-    Rails.application.credentials.dig(Rails.env.to_sym, :"#{string}").to_s
+    Cre.dig(string.to_sym).to_s
   end
 
   def reciever_name
-    detail('partner_reciever_email').split(' ')[0]
+    Cre.dig(:partner_reciever_email).split(' ')[0]
   end
 
   def quarter(inquiries)
@@ -83,11 +97,11 @@ module InvoicesHelper
 
   private
 
-  def inquiry_price(hash)
-    BigDecimal (hash[:type].to_s + 'Inquiry').camelcase.constantize::PRICE
+  def inquiry_price(arg)
+    BigDecimal((arg[:type].to_s + 'Inquiry').camelcase.constantize::PRICE)
   end
 
-  def inquiries_price(hash)
-    hash[:quantity] * inquiry_price(hash)
+  def inquiries_price(h)
+    h[:quantity] * inquiry_price(h)
   end
 end
