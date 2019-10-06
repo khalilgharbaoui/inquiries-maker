@@ -30,6 +30,12 @@ class User < ApplicationRecord
   devise :database_authenticatable, :trackable, :validatable, :rememberable, :timeoutable, :registerable
   has_many :messages, class_name: 'Ahoy::Message', as: :user, dependent: :destroy, inverse_of: :user
 
+  def self.invoice_open_dates(quarter)
+    subject = "UOS Invoice #{quarter}"
+    dates = Ahoy::Message.where(subject: subject).map(&:opened_at).compact
+    dates.map! { |date| date.to_s(:swiss_date_format_with_time) }
+  end
+
   def account_active?
     # blocked_at.nil?
     # TODO: add column blocked_at to database and replace
