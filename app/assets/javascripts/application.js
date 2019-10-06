@@ -17,6 +17,8 @@
 //= require bootstrap-sprockets
 //= require_tree .
 //= require jquery-ui
+//= require chartkick
+//= require Chart.bundle
 
   window.googleMapInitialize = function(){
       // Advanced usage with google options
