@@ -1,28 +1,39 @@
-H1 Invoices  
+H1 Invoices
+
+= line_chart ReceivedInquiryResponse.group_by_month(:created_at).count
 
 table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
   thead.thead-dark
     tr
       th scope="col"
+      - @inquiries.group_by(&:quarter).reverse_each do |_, group|
+        - details(group).reverse.each do |el|
+          th = el[:type]
+      th Total
       th From:
       th Untill:
       th Send Count:
       th Fist Send:
       th Mutation date:
+      th Opened On:
       th scope="col"
       th scope="col"
       th scope="col"
       th scope="col"
   tbody
-    - @inquiries.group_by { |inquiry| inquiry.quarter }.reverse_each do |quarter, group|
+    - @inquiries.group_by(&:quarter).reverse_each do |quarter, group|
       tr
         th #{quarter}
+        - details(group).reverse.each do |el|
+          th scope="row" = count_and_subtotal(el)
+        th scope="row" = count_and_total(group)
         th scope="row" = until_date(group).to_s(:swiss_date_format)
         th scope="row" = from_date(group).to_s(:swiss_date_format)
         th scope="row" = group.first.try(&:invoice).try(&:send_count) || 'none!'
-        th scope="row" = group.first.try(&:invoice).try(&:created_at) || 'none!'
+        th scope="row" = group.first.try(&:invoice).try(&:created_at).to_s(:swiss_date_format_with_time) || 'none!'
         th scope="row" = invoice_mutation_date(group)
-        td = link_to "Excel", sheet_path(:xlsx,{quarter: quarter, locale: nil})
-        td = link_to "PDF", invoice_path(:pdf,{quarter: quarter, locale: nil})
+        th scope="row" = invoice_open_dates(quarter)
+        td = link_to "Excel", sheet_path(:xlsx, {quarter: quarter, locale: nil})
+        td = link_to "PDF", invoice_path(:pdf, {quarter: quarter, locale: nil})
         td = link_to "HTML 👁", invoice_path(:pdf,{quarter: quarter, debug: true, locale: nil})
         td = link_to 'Reschedule! 📧', reschedule_invoice_path({quarter: quarter, locale: nil}), data: {confirm: 'Are you sure?'}

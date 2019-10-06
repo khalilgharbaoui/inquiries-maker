@@ -10,10 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_19_010339) do
+ActiveRecord::Schema.define(version: 2019_10_05_183707) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ahoy_messages", force: :cascade do |t|
+    t.string "user_type"
+    t.bigint "user_id"
+    t.text "to"
+    t.string "mailer"
+    t.text "subject"
+    t.datetime "sent_at"
+    t.string "token"
+    t.datetime "opened_at"
+    t.datetime "clicked_at"
+    t.index ["token"], name: "index_ahoy_messages_on_token"
+    t.index ["user_type", "user_id"], name: "index_ahoy_messages_on_user_type_and_user_id"
+  end
 
   create_table "cleaning_inquiries", force: :cascade do |t|
     t.string "partner_token"

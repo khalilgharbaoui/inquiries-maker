@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class InvoiceMailer < ApplicationMailer
+  track open: true, click: false
   include InvoicesHelper
   helper :sheets
   helper :invoices
@@ -8,8 +9,13 @@ class InvoiceMailer < ApplicationMailer
   helper :markdown
 
   def invoice(inquiries)
-
-    @inquiries = inquiries
+    @quarter = quarter(inquiries)
+    @reciever_name = reciever_name
+    @uos = Cre.dig(:uos)
+    @uos_logo_path = Cre.dig(:uos_logo_path)
+    @uos_contact = Cre.dig(:uos_contact).split(' ').last.humanize
+    @uos_url = Cre.dig(:uos_url)
+    @uos_email = Cre.dig(:uos_email)
 
     xlsx = Base64.encode64(
       render_to_string(
@@ -35,8 +41,8 @@ class InvoiceMailer < ApplicationMailer
       page_height: '297mm',
       page_width: '210mm',
       margin: { left: '3mm', right: '3mm', top: '0mm', bottom: '0mm' },
-      print_media_type:               false,
-      disable_smart_shrinking:        true,
+      print_media_type: false,
+      disable_smart_shrinking: true,
       zoom: zoom_level
     )
 
@@ -58,13 +64,14 @@ class InvoiceMailer < ApplicationMailer
     mail to: reciever,
          from: sender,
          cc: cc,
-         subject: t('invoice_mailer.invoice.subject', quarter: quarter(inquiries), locale: :en),
-         'Reply-To': sender,
-         'Importance': 'High',
-         'Sensitivity': 'private',
-         'Language': 'EN',
-         'Sender': sender do |format|
-        format.text # { render locals: { inquiries: inquiries }}
+         subject: t('invoice_mailer.invoice.subject', quarter: @quarter, locale: :en),
+         reply_to: sender,
+         importance: 'High',
+         sensitivity: 'private',
+         language: 'EN',
+         sender: sender do |format|
+      format.html
+      format.text # { render locals: { inquiries: inquiries }}
     end
     # end
   end

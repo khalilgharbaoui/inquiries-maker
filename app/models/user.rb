@@ -24,9 +24,23 @@
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #
 
-
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable, :registerable,:recoverable,:rememberable
+  # :confirmable, :lockable, :omniauthable, :recoverable,
   devise :database_authenticatable, :trackable, :validatable, :rememberable, :timeoutable, :registerable
+  has_many :messages, class_name: 'Ahoy::Message', as: :user
+
+  def account_active?
+    # blocked_at.nil?
+    # TODO: add column blocked_at to database and replace
+    self == User.first
+  end
+
+  def active_for_authentication?
+    super && account_active?
+  end
+
+  def inactive_message
+    account_active? ? super : :locked
+  end
 end

@@ -9,7 +9,9 @@ class ClientMailerPreview
   private
 
   def inquiry
-    MovingInquiry.first
+    example = MovingInquiry.first
+    example.locale = I18n.locale
+    example
   end
 
   def response_body
