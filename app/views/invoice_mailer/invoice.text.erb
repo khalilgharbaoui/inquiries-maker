@@ -1,12 +1,10 @@
- <%- inquiries ||= @inquiries -%>
+ <%= strip_tags markdown(t('invoice_mailer.invoice.email_body.greeting', reciever_name: @reciever_name)) %>
 
- <%= t 'invoice_mailer.invoice.email_body.greeting', reciever_name: reciever_name %>
+ <%= strip_tags markdown(t('invoice_mailer.invoice.email_body.main', quarter: @quarter)) %>
 
- <%= t 'invoice_mailer.invoice.email_body.main', quarter: quarter(inquiries) %>
+ <%= strip_tags markdown(t('invoice_mailer.invoice.email_body.regards')) %>
 
- <%= t 'invoice_mailer.invoice.email_body.regards' %>
+ <%= @uos_contact %>
 
- <%= detail('uos_contact').split(' ').last.humanize %>
-
- <%= detail('uos') %>
- <%= detail('uos_email') %>
+ <%= @uos %>
+ <%= @uos_email %>

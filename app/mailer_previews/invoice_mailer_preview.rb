@@ -9,6 +9,8 @@ class InvoiceMailerPreview
   private
 
   def inquiries
-    ReceivedInquiryResponse.where('quarter = ?', 'Q3 2018')
+    responses_grouped_by_quarter = ReceivedInquiryResponse.all.group_by(&:quarter)
+    last_quarter = ReceivedInquiryResponse.last.quarter
+    responses_grouped_by_quarter[last_quarter]
   end
 end

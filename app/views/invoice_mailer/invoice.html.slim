@@ -1,0 +1,25 @@
+container
+  row.header
+    columns
+      spacer size="16"
+      h1.text-center = t('invoice_mailer.invoice.subject', quarter: @quarter, locale: :en)
+  row
+    columns
+      spacer size="32"
+      center
+        img src="#{@uos_url}#{@uos_logo_path}" alt="#{@uos}"/
+      spacer size="16"
+      p.text-left.greeting
+        = markdown t('invoice_mailer.invoice.email_body.greeting', reciever_name: @reciever_name)
+      p.text-left.main
+        = markdown t('invoice_mailer.invoice.email_body.main', quarter: @quarter)
+        = markdown t('invoice_mailer.invoice.email_body.regards')
+      br
+      p.text-left.main
+        = @uos_contact
+      br
+      p.text-left.main
+        = @uos
+      p.text-left.main
+        = @uos_email
+      br

@@ -12,7 +12,6 @@
 #  updated_at     :datetime         not null
 #
 
-
 class Invoice < ApplicationRecord
   has_many :inquiries, class_name: 'ReceivedInquiryResponse',
                        primary_key: 'quarter', foreign_key: 'quarter',
