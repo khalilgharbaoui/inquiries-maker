@@ -7,14 +7,14 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     tr
       th scope='col'
       - @inquiries.group_by(&:quarter).reverse_each do |_, group|
-        - details(group).reverse.each do |el|
+        - details(group).reverse_each do |el|
           th scope='col' = el[:type]
       th scope='col' Total
       th scope='col' From:
       th scope='col' Untill:
       th scope='col' Send Count:
       th scope='col' Fist Send:
-      th scope='col'Mutation date:
+      th scope='col' Mutation date:
       th scope='col' Opened On:
       th scope='col'
       th scope='col'
