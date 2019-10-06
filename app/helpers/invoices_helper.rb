@@ -52,6 +52,25 @@ module InvoicesHelper
     invoice.present? ? invoice.created_at.to_s(:swiss_date_format) : Date.today.to_s(:swiss_date_format)
   end
 
+  def invoice_first_send_date(inquiries)
+    invoice = inquiries.lazy.first.invoice
+    if invoice.present?
+      date = invoice&.created_at&.to_s(:swiss_date_format_with_time)
+      date
+    else
+      'none!'
+    end
+  end
+
+  def invoice_send_count(inquiries)
+    invoice = inquiries.lazy.first.invoice
+    if invoice.present?
+      invoice.send_count
+    else
+      'none!'
+    end
+  end
+
   def invoice_mutation_date(inquiries)
     invoice = inquiries.first.invoice
     if invoice.present?

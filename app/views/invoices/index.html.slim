@@ -1,6 +1,6 @@
 H1 Invoices
 
-= line_chart ReceivedInquiryResponse.group_by_month(:created_at).count
+= line_chart ReceivedInquiryResponse.group_by_day(:created_at).count
 
 table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
   thead.thead-dark
@@ -24,13 +24,13 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     - @inquiries.group_by(&:quarter).reverse_each do |quarter, group|
       tr
         td #{quarter}
-        - details(group).reverse.each do |el|
+        - details(group).reverse_each do |el|
           td scope='row' = count_and_subtotal(el)
         td scope='row' = count_and_total(group)
         td scope='row' = until_date(group).to_s(:swiss_date_format)
         td scope='row' = from_date(group).to_s(:swiss_date_format)
-        td scope='row' = group.first.try(&:invoice).try(&:send_count) || 'none!'
-        td scope='row' = group.first.try(&:invoice).try(&:created_at).to_s(:swiss_date_format_with_time) || 'none!'
+        td scope='row' = invoice_send_count(group)
+        td scope='row' = invoice_first_send_date(group)
         td scope='row' = invoice_mutation_date(group)
         td scope='row' = User.invoice_open_dates(quarter)
         td = link_to 'Excel', sheet_path(:xlsx, quarter: quarter, locale: nil)
