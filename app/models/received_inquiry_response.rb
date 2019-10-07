@@ -27,16 +27,17 @@
 #  fk_rails_...  (moving_inquiry_id => moving_inquiries.id)
 #
 
-
 class ReceivedInquiryResponse < ApplicationRecord
+  before_save ResponseBodyWrapper.new
+  before_create :set_quarter
   belongs_to :moving_inquiry, optional: true
   belongs_to :cleaning_inquiry, optional: true
   belongs_to :combined_inquiry, optional: true
   belongs_to :invoice, class_name: 'Invoice', foreign_key: 'quarter',
                        primary_key: 'quarter', optional: true, inverse_of: :inquiries
-  before_save ResponseBodyWrapper.new
-  before_create :set_quarter
   after_commit :send_telegram_notification, on: :create
+
+  scope :kind_per_quarter, ->(quarter, kind) { where(quarter: quarter).where('response_body @> ?', { "kind": kind.to_s }.to_json) }
 
   private
 

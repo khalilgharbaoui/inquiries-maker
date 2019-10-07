@@ -1,17 +1,17 @@
 H1 Invoices
 
-= line_chart ReceivedInquiryResponse.group_by_day(:created_at).count
+= line_chart ReceivedInquiryResponse.group_by_month(:created_at).count
 
 table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
   thead.thead-dark
     tr
       th scope='col'
-      - @inquiries.group_by(&:quarter).reverse_each do |_, group|
-        - details(group).reverse_each do |el|
-          th scope='col' = el[:type]
+      th scope='col' Moving
+      th scope='col' Cleaning
+      th scope='col' Combined
       th scope='col' Total
       th scope='col' From:
-      th scope='col' Untill:
+      th scope='col' Until:
       th scope='col' Send Count:
       th scope='col' Fist Send:
       th scope='col' Mutation date:
@@ -24,8 +24,10 @@ table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
     - @inquiries.group_by(&:quarter).reverse_each do |quarter, group|
       tr
         td #{quarter}
-        - details(group).reverse_each do |el|
-          td scope='row' = count_and_subtotal(el)
+        /TODO: refactor this out!
+        td scope='row' = count_and_subtotal(details(ReceivedInquiryResponse.kind_per_quarter(quarter, 'moving'))[0])
+        td scope='row' = count_and_subtotal(details(ReceivedInquiryResponse.kind_per_quarter(quarter, 'cleaning'))[0])
+        td scope='row' = count_and_subtotal(details(ReceivedInquiryResponse.kind_per_quarter(quarter, 'combined'))[0])
         td scope='row' = count_and_total(group)
         td scope='row' = until_date(group).to_s(:swiss_date_format)
         td scope='row' = from_date(group).to_s(:swiss_date_format)

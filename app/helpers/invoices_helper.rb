@@ -28,6 +28,8 @@ module InvoicesHelper
   end
 
   def count_and_subtotal(hash_element)
+    return '---' if hash_element.nil?
+
     hash_element[:quantity].to_s + ' / ' + 'CHF' + sub_total(hash_element).to_s
   end
 
@@ -78,7 +80,7 @@ module InvoicesHelper
                invoice.created_at.to_s(:swiss_date_format_with_time)
              else
                invoice.updated_at.to_s(:swiss_date_format_with_time)
-             end
+      end
       date
     else
       'none!'
