@@ -1,9 +1,9 @@
-FROM ruby:2.5.5-alpine3.9
+FROM ruby:2.5.8-alpine3.11
 MAINTAINER Khalil Gharbaoui <kaygeee@gmail.com>
 # Set environment variables and their default values
 # These can be overridden when we run the container
 ENV RAILS_ENV=production
-ENV BUNDLER_VERSION 2.0.1
+ENV BUNDLER_VERSION 2.1.4
 ENV LANG C.UTF-8
 ENV RAILS_LOG_TO_STDOUT=true
 ENV RAILS_SERVE_STATIC_FILES=true
@@ -48,7 +48,7 @@ ADD . /app
 
 # Install bundler and run bundle install to install the gems from the Gemfile
 RUN gem update --system --quiet
-RUN gem install bundler -v "~>2.0.1" --no-document
+RUN gem install bundler -v "~>2.1.4" --no-document
 RUN cd /app \
   && bundle install --jobs 16 --without=development,test development test
 
