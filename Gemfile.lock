@@ -227,8 +227,6 @@ GEM
       guard (~> 2.1)
       guard-compat (~> 1.1)
       rspec (>= 2.99.0, < 4.0)
-    highcharts-rails (6.0.3)
-      railties (>= 3.1)
     htmlentities (4.3.4)
     http_accept_language (2.0.5)
     i18n (1.6.0)
@@ -571,7 +569,6 @@ DEPENDENCIES
   guard-bundler
   guard-rails
   guard-rspec
-  highcharts-rails
   inky-rb
   jbuilder (~> 2.5)
   jquery-rails
