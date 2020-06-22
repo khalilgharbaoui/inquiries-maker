@@ -6,22 +6,12 @@ if Rails.env.development?
                ])
   require 'faker'
   require 'factory_bot_rails'
-  5.times do |i|
-    i += 3 * rand(999)
-    FactoryBot.create(:moving_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
-    sleep 0
-  end
-
-  5.times do |i|
-    i += 3 * rand(999)
-    FactoryBot.create(:cleaning_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
-    sleep 0
-  end
-
-  5.times do |i|
-    i += 3 * rand(999)
-    FactoryBot.create(:combined_inquiry, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample)
-    sleep 0
+  %i[moving_inquiry cleaning_inquiry combined_inquiry].each do |lead_type|
+    5.times do |i|
+      i += 3 * rand(999)
+      FactoryBot.create(lead_type, client_email: "person#{i}@fake.com", client_property_size: %w[size_1 size_2 size_3 size_4 size_5 size_6 size_7 size_8].sample, created_at: Time.now)
+      sleep 0
+    end
   end
 end
 # # ActiveRecord::Base.transaction do
