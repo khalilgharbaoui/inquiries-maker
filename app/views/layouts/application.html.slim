@@ -14,6 +14,7 @@ html
     header
       - if user_signed_in?
         = render 'layouts/navigation'
+        = javascript_include_tag "https://www.gstatic.com/charts/loader.js"
     main[role="main" class="#{user_signed_in? ? 'container-fluid' : ''}"]
       = render 'layouts/messages'
       = yield

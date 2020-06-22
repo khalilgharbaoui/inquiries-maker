@@ -1,6 +1,9 @@
 H1 Invoices
+- colors = ['rgba(178, 34, 34, 0.6)','rgba(65, 105, 225, 0.6)','rgba(255, 215, 0, 0.6)','rgba(46, 139, 87, 0.6)']
 
-= line_chart ReceivedInquiryResponse.group_by_month(:created_at).count
+= column_chart ReceivedInquiryResponse.monthly_grouped_by_kind_for_chart, title: 'Monthly Performance', colors: colors
+= area_chart ReceivedInquiryResponse.monthly_grouped_by_kind_for_chart(curve: false), legend: {display: false}, colors: colors
+= column_chart ReceivedInquiryResponse.quarterly_grouped_by_kind_for_chart(curve: false), title: 'Quarterly Performance', colors: colors
 
 table.table.table-sm.table-striped.table-hover.table-responsive.table-bordered
   thead.thead-dark
