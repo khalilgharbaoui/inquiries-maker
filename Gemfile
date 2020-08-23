@@ -43,7 +43,7 @@ gem 'cre', '~>0.1.3'
 gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
 gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
 # Chart Generation
-gem 'chartkick'
+gem "chartkick", ">= 3.4.0"
 gem 'groupdate'
 
 group :development, :test do
