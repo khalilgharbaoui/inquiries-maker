@@ -167,7 +167,7 @@ GEM
       rails (~> 5.2)
     css_parser (1.7.1)
       addressable
-    database_cleaner (1.7.0)
+    database_cleaner (1.8.5)
     debug_inspector (0.0.3)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
