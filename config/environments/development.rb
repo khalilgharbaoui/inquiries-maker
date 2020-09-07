@@ -75,15 +75,15 @@ Rails.application.configure do
   # }
   #
   # sendgrid smtp configuration
-  config.action_mailer.smtp_settings = {
-     :user_name => 'apikey',
-     :password => Cre.dig(:sendgrid_password),
-     :domain => Cre.dig(:uos_hostname),
-     :address => 'smtp.sendgrid.net',
-     :port => 587,
-     :authentication => :plain,
-     :enable_starttls_auto => true
-  }
+  # config.action_mailer.smtp_settings = {
+  #    :user_name => 'apikey',
+  #    :password => Cre.dig(:sendgrid_password),
+  #    :domain => Cre.dig(:uos_hostname),
+  #    :address => 'smtp.sendgrid.net',
+  #    :port => 587,
+  #    :authentication => :plain,
+  #    :enable_starttls_auto => true
+  # }
 
   # mailcatcher configuration
   config.action_mailer.smtp_settings = { address: 'localhost', port: 1025 }
