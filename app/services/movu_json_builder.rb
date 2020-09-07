@@ -12,7 +12,9 @@ class MovuJsonBuilder
   private
 
   def build
-    inquiry.as_json(except: exclusions).merge(inclusions).to_json
+    json = { inquiry: inquiry.as_json(except: exclusions).merge(inclusions) }.to_json
+    puts JSON::PrettyPrint.prettify(json)
+    json
   end
 
   def inclusions
