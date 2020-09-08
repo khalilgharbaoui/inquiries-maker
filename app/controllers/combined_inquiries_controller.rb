@@ -8,7 +8,7 @@ class CombinedInquiriesController < ApplicationController
   include RescheduleInquiryDelivery
 
   def index
-    @combined_inquiries = CombinedInquiry.order("id DESC").all if user_signed_in?
+    @combined_inquiries = CombinedInquiry.order("id DESC").all.includes([:received_inquiry_response]) if user_signed_in?
   end
 
   def show; end

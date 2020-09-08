@@ -7,8 +7,10 @@ module InvoicesHelper
   # end
 
   def details(inquiries)
-    inquiries.group_by { |batch| batch.response_body['original_kind'] }
-             .map { |arr| { type: arr[0], quantity: arr[1].count } }
+    groups = inquiries.group_by do |batch|
+      batch.response_body.dig_deep(:original_kind)
+    end
+    groups.map { |arr| { type: arr[0], quantity: arr[1].count } }
   end
 
   def price(hash)
@@ -80,7 +82,7 @@ module InvoicesHelper
                invoice.created_at.to_s(:swiss_date_format_with_time)
              else
                invoice.updated_at.to_s(:swiss_date_format_with_time)
-      end
+             end
       date
     else
       'none!'

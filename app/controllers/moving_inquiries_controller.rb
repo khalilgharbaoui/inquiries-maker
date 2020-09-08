@@ -8,7 +8,7 @@ class MovingInquiriesController < ApplicationController
   include RescheduleInquiryDelivery
 
   def index
-    @moving_inquiries = MovingInquiry.order("id DESC").all if user_signed_in?
+    @moving_inquiries = MovingInquiry.order("id DESC").all.includes([:received_inquiry_response]) if user_signed_in?
   end
 
   def show; end

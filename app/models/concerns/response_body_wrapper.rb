@@ -5,3 +5,4 @@ class ResponseBodyWrapper
     record.response_body = JSON.parse(record.response_body.force_encoding('utf-8'))
   end
 end
+
