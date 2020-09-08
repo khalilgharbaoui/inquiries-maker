@@ -7,7 +7,7 @@ class ClientMailer < ApplicationMailer
 
   def client(response_body, inquiry)
     I18n.with_locale(inquiry.locale) do
-      @continue_url = response_body[:continue_url]
+      @continue_url = response_body.dig(:continue_url)
       @inquiry = inquiry
       @inquiry_name = t(".inquiry.#{inquiry.class.name.underscore.downcase}")
       @client_salutation = t("#{@inquiry.class.name.pluralize.underscore}.form.client_salutations.#{inquiry.client_salutation}")

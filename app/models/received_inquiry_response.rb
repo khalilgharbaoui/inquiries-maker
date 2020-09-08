@@ -37,10 +37,12 @@ class ReceivedInquiryResponse < ApplicationRecord
                        primary_key: 'quarter', optional: true, inverse_of: :inquiries
   after_commit :send_telegram_notification, on: :create
 
-  scope :kind_per_quarter, ->(quarter, kind) { where(quarter: quarter).where('response_body @> ?', { kind: kind.to_s }.to_json) }
+  scope :kind_per_quarter, ->(quarter, kind) {
+    where(quarter: quarter).where('response_body @> ? OR response_body @> ?', { raw_json: { kind: kind.to_s } }.to_json, { kind: kind.to_s }.to_json)
+  }
 
   # TODO: Replace the next 2 lines  with polymorphism
-  scope :with_kind, ->(kind) { where('response_body @> ?', { kind: kind.to_s }.to_json) }
+  scope :with_kind, ->(kind) { where('response_body @> ? OR response_body @> ?', { raw_json: { kind: kind.to_s } }.to_json, { kind: kind.to_s }.to_json) }
   INQUIRY_KINDS = %i[moving cleaning combined].freeze
 
   def self.monthly_grouped_by_kind_for_chart(options = {})

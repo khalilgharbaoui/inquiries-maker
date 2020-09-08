@@ -45,6 +45,7 @@ gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
 # Chart Generation
 gem "chartkick", ">= 3.4.0"
 gem 'groupdate'
+gem 'dig-deep'
 
 group :development, :test do
   # gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

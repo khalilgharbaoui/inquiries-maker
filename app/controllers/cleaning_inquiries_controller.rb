@@ -8,7 +8,7 @@ class CleaningInquiriesController < ApplicationController
   include RescheduleInquiryDelivery
 
   def index
-    @cleaning_inquiries = CleaningInquiry.order("id DESC").all if user_signed_in?
+    @cleaning_inquiries = CleaningInquiry.order('id DESC').all.includes([:received_inquiry_response]) if user_signed_in?
   end
 
   def show; end

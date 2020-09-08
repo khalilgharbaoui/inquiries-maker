@@ -2,10 +2,11 @@
 
 class InvoicesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_admin_locale, only: :index
   include RescheduleInvoiceDelivery
 
   def index
-    @inquiries = ReceivedInquiryResponse.order('id DESC')
+    @inquiries = ReceivedInquiryResponse.order('id DESC').includes(%i[moving_inquiry cleaning_inquiry combined_inquiry])
   end
 
   def show
@@ -28,6 +29,10 @@ class InvoicesController < ApplicationController
   end
 
   private
+
+  def set_admin_locale
+    I18n.locale = :en if current_user
+  end
 
   def file_name(inquiries)
     helpers.detail('uos').tr(' ', '-') + '-Invoice-' + inquiries.first.quarter.tr(' ', '-')

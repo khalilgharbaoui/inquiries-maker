@@ -71,10 +71,8 @@ module ApplicationHelper
   end
 
   def find_received_inquiry_response_body(inquiry)
-    responses = ReceivedInquiryResponse.where(:"#{inquiry.class.name.underscore}_id" => inquiry.id)
-    responses.each do |response|
-      return response.response_body.transform_keys!(&:to_sym)
-    end
+    response = inquiry.received_inquiry_response
+    return response.response_body.transform_keys!(&:to_sym)
   end
 
   def from_date(inquiries)

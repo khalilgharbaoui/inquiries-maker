@@ -25,17 +25,17 @@ wb.styles do |style|
       ], style: header_cell
       sheet.column_widths 1
 
-      q_group.group_by{ |lead| lead.response_body['original_kind'] }.each do |_, ok_group|
+      q_group.group_by{ |lead| lead.response_body.dig_deep(:original_kind) }.each do |_, ok_group|
         ok_group.sort_by{:created_at}.each_with_index do |inquiry, i|
           color = cycle("EEEEEE", "FFFFFF")
           sheet.add_row [
             i+1,
             inquiry.created_at.to_s(:swiss_date_format),
-            "   #{inquiry.response_body['original_kind'].upcase}",
-            "   #{inquiry.response_body['id']}   ",
+            "   #{inquiry.response_body.dig_deep(:original_kind).upcase}",
+            "   #{inquiry.response_body.dig(:id)}   ",
             "   #{real_client_salutation(inquiry)} " \
-            "#{inquiry.response_body['client_first_name'].humanize} " \
-            "#{inquiry.response_body['client_last_name'].upcase}"
+            "#{inquiry.response_body.dig_deep(:client_first_name).humanize} " \
+            "#{inquiry.response_body.dig_deep(:client_last_name).upcase}"
           ], style: [
             highlight_cell(style, color),
             date_cell(style, color),
