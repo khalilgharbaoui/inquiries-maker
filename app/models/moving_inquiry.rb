@@ -31,9 +31,9 @@
 #  updated_at               :datetime         not null
 #
 
-
 # Responsible for validating and scheduling InquiryDeliverJob after creation.
 class MovingInquiry < ApplicationRecord
+  include Notifyable
   has_one :received_inquiry_response, dependent: :destroy
 
   PRICE = Cre.dig(:moving_price).to_s.freeze
@@ -95,16 +95,11 @@ class MovingInquiry < ApplicationRecord
 
   before_save PhoneNumberWrapper.new
   after_commit :schedule_inquiry_delivery, on: :create
-  after_commit :send_telegram_notification, on: :create
 
   private
 
   def schedule_inquiry_delivery
     msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
     InquiryDeliveryWorker.enqueue(msg)
-  end
-
-  def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("ℹ️  #{self.class.name} => ##{id}")
   end
 end

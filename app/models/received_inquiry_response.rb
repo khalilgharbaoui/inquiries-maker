@@ -28,6 +28,8 @@
 #
 
 class ReceivedInquiryResponse < ApplicationRecord
+  include Notifyable
+  
   before_save ResponseBodyWrapper.new
   before_create :set_quarter
   belongs_to :moving_inquiry, optional: true
@@ -35,9 +37,8 @@ class ReceivedInquiryResponse < ApplicationRecord
   belongs_to :combined_inquiry, optional: true
   belongs_to :invoice, class_name: 'Invoice', foreign_key: 'quarter',
                        primary_key: 'quarter', optional: true, inverse_of: :inquiries
-  after_commit :send_telegram_notification, on: :create
 
-  scope :kind_per_quarter, ->(quarter, kind) {
+  scope :kind_per_quarter, lambda { |quarter, kind|
     where(quarter: quarter).where('response_body @> ? OR response_body @> ?', { raw_json: { kind: kind.to_s } }.to_json, { kind: kind.to_s }.to_json)
   }
 
@@ -59,7 +60,7 @@ class ReceivedInquiryResponse < ApplicationRecord
       data = with_kind(kind).group_by_quarter(:created_at, format: '%b %Y').count
       {
         name: kind,
-        data: quarterly_performance(data),
+        data: quarterly_performance(data)
       }.merge!(options)
     end
   end
@@ -80,8 +81,8 @@ class ReceivedInquiryResponse < ApplicationRecord
       }
     }
   end
-  
-  def self.quarters_averages 
+
+  def self.quarters_averages
     months_quarter_average(values_per_quarter)
   end
 
@@ -125,8 +126,8 @@ class ReceivedInquiryResponse < ApplicationRecord
       else
         values_per_quarter[new_key] = [value]
       end
-    end 
-    values_per_quarter  
+    end
+    values_per_quarter
   end
 
   def self.quarterly_performance(quarter_values)
@@ -141,9 +142,5 @@ class ReceivedInquiryResponse < ApplicationRecord
 
   def set_quarter
     self.quarter = "Q#{Date.parse(created_at.to_s).quarter} #{Date.parse(created_at.to_s).year}"
-  end
-
-  def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("ℹ️  #{self.class.name} => ##{id}")
   end
 end
