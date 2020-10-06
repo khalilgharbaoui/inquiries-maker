@@ -19,7 +19,7 @@ Sneakers.configure  heartbeat: 5,
                     threads: 10, # Threadpool size (good to match prefetch)
                     timeout_job_after: 60.seconds, # Maximal seconds to wait for job
                     start_worker_delay: 2, # Delay between thread startup
-                    workers: 2, # Number of per-cpu processes to run
+                    workers: (Rails.env.development? ? 1 : 2), # Number of per-cpu processes to run
                     durable: true,           # Is queue durable?
                     env: Rails.env,          # Environment
                     metrics: Sneakers::Metrics::LoggingMetrics.new,
