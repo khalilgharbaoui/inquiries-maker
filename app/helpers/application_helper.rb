@@ -72,7 +72,7 @@ module ApplicationHelper
 
   def find_received_inquiry_response_body(inquiry)
     response = inquiry.received_inquiry_response
-    response.response_body.transform_keys!(&:to_sym)
+    response&.response_body&.transform_keys!(&:to_sym) || []
   end
 
   def from_date(inquiries)

@@ -22,6 +22,7 @@ class InquiryDeliveryWorker
     ack!
   rescue Exception => e
     warn "🛑 #{([e.inspect]+e.backtrace).join($/)}"
+    Raven.capture_exception(e)
     reject!
   end
 
