@@ -12,7 +12,7 @@ class SameSiteCookies
 
     if set_cookie_header && !(set_cookie_header =~ /SameSite\=/)
 
-      headers['Set-Cookie'] << ';' unless set_cookie_header =~ /;$/
+      headers['Set-Cookie'] << ';' if !(set_cookie_header =~ /;$/)
       headers['Set-Cookie'] << ' SameSite=None'
       headers['Set-Cookie'] << '; Secure' # if env['rack.url_scheme'] == 'https';
 
