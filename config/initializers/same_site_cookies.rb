@@ -15,7 +15,7 @@ class SameSiteCookies
       new_set_cookie_header = set_cookie_header.dup
       new_set_cookie_header << ';' if !(set_cookie_header =~ /;$/)
       new_set_cookie_header << ' SameSite=None'
-      new_set_cookie_header << '; Secure' if # is_ssl?
+      new_set_cookie_header << '; Secure' #if is_ssl?
 
       headers['Set-Cookie'] = new_set_cookie_header
 
