@@ -1,4 +1,4 @@
-# frozen_string_literal: false
+# frozen_string_literal: true
 
 class SameSiteCookies
   def initialize(app)
@@ -11,10 +11,13 @@ class SameSiteCookies
     set_cookie_header = headers['Set-Cookie']
 
     if set_cookie_header && !(set_cookie_header =~ /SameSite\=/)
+      # the set cookie header variable is frozen
+      new_set_cookie_header = set_cookie_header.dup
+      new_set_cookie_header << ';' if !(set_cookie_header =~ /;$/)
+      new_set_cookie_header << ' SameSite=None'
+      new_set_cookie_header << '; Secure' if # is_ssl?
 
-      headers['Set-Cookie'] << ';' if !(set_cookie_header =~ /;$/)
-      headers['Set-Cookie'] << ' SameSite=None'
-      headers['Set-Cookie'] << '; Secure' # if env['rack.url_scheme'] == 'https';
+      headers['Set-Cookie'] = new_set_cookie_header
 
     end
 
