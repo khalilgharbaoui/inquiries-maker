@@ -35,6 +35,7 @@
 # Responsible for validating CombinedInquiry and scheduling InquiryDeliverJob after creation.
 class CombinedInquiry < ApplicationRecord
   include Notifyable
+  include Deliverable
 
   has_one :received_inquiry_response, dependent: :destroy
 
@@ -96,12 +97,4 @@ class CombinedInquiry < ApplicationRecord
   { with: /\d+/, message: I18n.t('.must_contain_a_home_number') }
 
   before_save PhoneNumberWrapper.new
-  after_commit :schedule_inquiry_delivery, on: :create
-
-  private
-
-  def schedule_inquiry_delivery
-    msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
-    InquiryDeliveryWorker.enqueue(msg)
-  end
 end
