@@ -20,9 +20,9 @@ class ResponseLogger
 
   def status
     warn '💡 STATUS:'
-    warn "💡 CODE: #{response.code}" # => '200'
-    warn "💡 MESSAGE: #{response.message}" # => 'OK'
-    warn "💡 CLASS NAME: #{response.class.name}" # => 'HTTPOK'
+    warn "💡 CODE: #{response&.code}" # => '200'
+    warn "💡 MESSAGE: #{response&.message}" # => 'OK'
+    warn "💡 CLASS NAME: #{response&.class.name}" # => 'HTTPOK'
   end
 
   # def headers
