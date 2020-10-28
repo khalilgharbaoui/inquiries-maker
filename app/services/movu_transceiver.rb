@@ -17,16 +17,8 @@ class MovuTransceiver
   private
 
   def send_and_receive
-    if inquiry.client_email == Cre.dig(:gmail_username)
-      TelegramNotifier.new(ResponseLogger.log(inquiry_json))
-      {}
-    else
-      self.response = HttpRequester.post(inquiry_json, api_url)
-      if response.code == '200'
-        response
-      else
-        TelegramNotifier.new(ResponseLogger.log(response))
-      end
-    end
+    self.response = HttpRequester.post(inquiry_json, api_url)
+    response.code == '200' ? response : \
+    TelegramNotifier.new(ResponseLogger.log(response))
   end
 end
