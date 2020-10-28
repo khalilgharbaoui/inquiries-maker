@@ -7,7 +7,7 @@ module RescheduleInquiryDelivery
 
   def schedule_inquiry_delivery_job
     msg = {inquiry_name: inquiry.class.name, inquiry_id: inquiry.id}.to_json
-    InquiryDeliveryWorker.enqueue(msg)
+    InquiryDeliveryWorker.enqueue(msg) unless inquiry.client_email == Cre.dig(:gmail_username)
   end
 
   private

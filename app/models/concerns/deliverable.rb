@@ -7,6 +7,6 @@ module Deliverable
 
   def schedule_inquiry_delivery
     msg = { inquiry_name: self.class.name, inquiry_id: id }.to_json
-    InquiryDeliveryWorker.enqueue(msg)
+    InquiryDeliveryWorker.enqueue(msg) unless client_email == Cre.dig(:gmail_username)
   end
 end
