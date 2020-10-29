@@ -19,5 +19,26 @@ html
       = render 'layouts/messages'
       = yield
     - unless user_signed_in?
-      script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=***REMOVED***&libraries=places&callback=googleMapInitialize"]
-      /script[async defer type="text/javascript" src="//heatmaps.umzug-offerte-schweiz.com/tracker.min.js"]
+      / script[async defer type="text/javascript" src="//maps.googleapis.com/maps/api/js?key=AIzaSyCriMly4dUzmacQBKe00_0jt_oeFSHM0vo&libraries=places&callback=googleMapInitialize"]
+      javascript:
+        UST_CT = [];
+        UST = {
+            s: Date.now(),
+            addTag: function(tag) {
+                UST_CT.push(tag)
+            }
+        };
+        (function() {
+            var ust_s = document.createElement('STYLE');
+            ust_s.id = 'ust_body_style';
+            ust_s.appendChild(document.createTextNode('body {opacity: 0}'));
+            document.head.appendChild(ust_s);
+        })();
+        setTimeout(function() {
+            var el = document.getElementById('ust_body_style');
+            el && el.remove()
+        }, 800);
+
+      script[async defer type="text/javascript" src="//usertrack.umzug-offerte-schweiz.com/server/ab/forms.umzug-offerte-schweiz.com.ab.js?v=3.2.7s"]
+      script[async defer type="text/javascript" src="//usertrack.umzug-offerte-schweiz.com/server/ust.min.js?v=3.2.7"]
+
