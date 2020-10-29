@@ -485,7 +485,7 @@ GEM
       sshkit (~> 1.12)
     sshkit-sudo (0.1.0)
       sshkit (~> 1.8)
-    stackprof (0.2.15)
+    stackprof (0.2.16)
     temple (0.8.0)
     terminal-notifier-guard (1.7.0)
     thor (1.0.1)
