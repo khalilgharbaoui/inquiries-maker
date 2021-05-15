@@ -35,12 +35,15 @@ gem 'ahoy_email', '~> 1.1.0'
 # telegram
 gem 'telebot', github: 'khalilgharbaoui/telebot'
 # Excel sheets generation
-gem 'axlsx', github: 'randym/axlsx', ref: 'c8ac844'
-gem 'axlsx_rails', '>= 0.5.1'
+# gem 'axlsx', github: 'randym/axlsx', ref: 'c8ac844'
+# gem 'axlsx_rails', '>= 0.5.1'
+gem 'caxlsx'
+gem 'caxlsx_rails'
+
 gem 'rubyzip', '>= 1.2.1'
 # Pdf Generation
 gem 'cre', '~>0.1.3'
-gem 'wicked_pdf', github: 'mileszs/wicked_pdf'
+gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
 # Chart Generation
 gem "chartkick", ">= 3.4.0"
@@ -64,15 +67,15 @@ group :development do
   gem 'better_errors'
   gem 'web-console', '>= 3.3.0'
 
-  gem 'capistrano', '~> 3.11', require: false
-  gem 'capistrano-bundler', '~> 1.3'
-  gem 'capistrano-passenger'
-  gem 'capistrano-rails', '~> 1.4', require: false
-  gem 'capistrano-rails-console'
-  # gem 'capistrano-rvm'
-  gem 'capistrano-rake', '~> 0.2.0', require: false
-  gem 'capistrano-rbenv'
-  gem 'capistrano-sudo', require: false
+  # gem 'capistrano', '~> 3.11', require: false
+  # gem 'capistrano-bundler', '~> 1.3'
+  # gem 'capistrano-passenger'
+  # gem 'capistrano-rails', '~> 1.4', require: false
+  # gem 'capistrano-rails-console'
+  # # gem 'capistrano-rvm'
+  # gem 'capistrano-rake', '~> 0.2.0', require: false
+  # gem 'capistrano-rbenv'
+  # gem 'capistrano-sudo', require: false
 
   gem 'guard-bundler'
   gem 'guard-rails'
