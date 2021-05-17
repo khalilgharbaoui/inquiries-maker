@@ -13,11 +13,11 @@ services:
       - db
   worker:
     build:
-    # image: kaygeee/inquiries-maker:latest
       context: .
       dockerfile: dev.Dockerfile
       args:
         RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    # image: kaygeee/inquiries-maker:latest
     command: ["bundle", "exec", "rake", "workers:run"]
     environment:
       RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
@@ -27,7 +27,7 @@ services:
       RABBITMQ_AMQP_URI: amqp://guest:guest@broker:5672
     volumes:
       - .:/app
-      - bundle_path:/bundle # New
+      # - bundle_path:/bundle # New
     depends_on:
       - broker
       - db
@@ -51,7 +51,7 @@ services:
     volumes:
       # HOST:CONTAINER:ro <=read only
       - .:/app
-      - bundle_path:/bundle # New
+      # - bundle_path:/bundle # New
       # - "~/web/inquiries-maker/certs/ssl.key:/app/config/certs/ssl.key"
       # - "~/web/inquiries-maker/certs/ssl.crt:/app/config/certs/ssl.crt"
     depends_on:
