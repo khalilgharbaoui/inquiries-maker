@@ -16,7 +16,7 @@ class TelegramNotifier
     message_chuncks = @message.chars.each_slice(MAX_MESSAGE_LENGTH).map(&:join)
     message_chuncks.each_with_index do |text, i|
       message = "```json\n#{text}\n```"
-      message = message.prepend(@object_class_name) if i == 0
+      message = message.dup.prepend(@object_class_name) if i == 0
       @bot.send_message(
         chat_id: @uid,
         text: message,
