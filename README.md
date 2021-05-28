@@ -1,5 +1,4 @@
 [![Build Status](https://travis-ci.org/khalilgharbaoui/inquiries-maker.svg?branch=master)](https://travis-ci.org/khalilgharbaoui/inquiries-maker)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkhalilgharbaoui%2Finquiries-maker.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkhalilgharbaoui%2Finquiries-maker?ref=badge_shield)
 Inquiries Maker
 ================
 
