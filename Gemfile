@@ -15,7 +15,7 @@ gem 'json-prettyprint'
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'pg'
 gem 'phonelib', '~> 0.6.24'
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.6'
 gem 'rails-i18n'
 gem 'rails_locale_detection'
@@ -109,4 +109,4 @@ group :test do
 end
 gem 'sentry-raven'
 # rails performance reporting
-gem 'skylight'
+gem 'skylight', '= 5.0.1'
