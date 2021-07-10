@@ -40,9 +40,9 @@ gem 'telebot', github: 'khalilgharbaoui/telebot'
 gem 'caxlsx'
 gem 'caxlsx_rails'
 
-gem 'rubyzip', '>= 1.2.1'
+gem 'rubyzip', '~> 2.3.2'
 # Pdf Generation
-gem 'cre', '~>0.1.3'
+gem 'cre', '>=2'
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary-edge-alpine', '~> 0.12.5.0'
 # Chart Generation
