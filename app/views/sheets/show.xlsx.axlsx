@@ -14,8 +14,10 @@ wb.styles do |style|
     inquiries.group_by { |lead| lead.quarter }.reverse_each do |quarter, q_group|
       sheet.add_row [
         '', quarter.to_s,
-        "From: #{from_date(q_group).to_s(:swiss_date_format)}",
-        "Until: #{until_date(q_group).to_s(:swiss_date_format)}",
+        # "From: #{from_date(q_group).to_s(:swiss_date_format)}",
+        # "Until: #{until_date(q_group).to_s(:swiss_date_format)}",
+        '',
+        '',
         ''
       ], style: header_cell_with_dates
       sheet.add_row [

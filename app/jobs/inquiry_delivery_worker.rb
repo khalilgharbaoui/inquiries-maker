@@ -12,6 +12,8 @@ class InquiryDeliveryWorker
   def work(msg)
     inquiry = inquiry(msg)
     warn "🔮 #{inquiry.class.name} => #{inquiry.id} ❕"
+    raise 'Existing Response!' if received_inquiry_response_exists?(inquiry)
+
     response = MovuTransceiver.transceive(inquiry)
     # ResponseLogger.log(response)
     warn "🔵 Transceived #{inquiry.class.name} => #{inquiry.id}❕"
@@ -27,6 +29,10 @@ class InquiryDeliveryWorker
   end
 
   private
+
+  def received_inquiry_response_exists?(inquiry)
+    ReceivedInquiryResponse.where(:"#{inquiry.class.name.underscore}_id" =>  inquiry.id).any?
+  end
 
   def save_received_response(response, inquiry)
       ReceivedInquiryResponse.create!(

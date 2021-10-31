@@ -76,11 +76,11 @@ module ApplicationHelper
   end
 
   def from_date(inquiries)
-    inquiries.min_by { :created_at }.created_at
+    inquiries.min_by{ :created_at }.created_at
   end
 
   def until_date(inquiries)
-    inquiries.max_by { :created_at}.created_at
+    inquiries.max_by{ :created_at }.created_at
   end
 
   def id_from_response_body(response_body)
