@@ -6,6 +6,9 @@ module Notifyable
   end
 
   def send_telegram_notification
-    Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("ℹ️  #{self.class.name} => ##{id}")
+    puts "###################################################################"
+    warn("ℹ️  #{self.class.name} => ##{id}")
+    puts "###################################################################"
+    # Rails.env.to_sym == :production ? TelegramNotifier.new(self) : warn("ℹ️  #{self.class.name} => ##{id}")
   end
 end
